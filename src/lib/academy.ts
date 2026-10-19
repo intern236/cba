@@ -55,8 +55,8 @@ export const academy = {
   contact: {
     // [IG] bio "Free trial: DM/WhatsApp 9560478732" and [PLY] venue telephone agree.
     // Other numbers seen online (ZoomInfo 88262 68236, Facebook 88829 43676) — confirm which to keep.
-    phoneDisplay: "+91 95604 78732",
-    phoneHref: "tel:+919560478732",
+    phoneDisplay: " +91 88262 68236 ",
+    phoneHref: "tel: +91 88262 68236 ",
     // Not shown: the domain has no MX records as of 16 Oct 2026, so the
     // published address cbainfo@celestialsacademy.com cannot receive mail.
     email: null as string | null,

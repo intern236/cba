@@ -6,11 +6,12 @@ import { PathwaySteps } from "@/components/home/pathway-steps";
 // import { Problems } from "@/components/home/problems";
 // import { Parents } from "@/components/home/parents";
 import { CourtSheet } from "@/components/home/court-sheet";
-import { Arena } from "@/components/home/arena";
+// import { Arena } from "@/components/home/arena";
 import { Proof } from "@/components/home/proof";
 import { BookCourt } from "@/components/home/book-court";
 import { Visit } from "@/components/visit";
-
+import { CorporateTournaments } from "@/components/home/Companies";
+import { ProgramsSlider } from "@/components/home/program-slider";
 /**
  * Revision 2 — academy-first journey (client direction, 16 Oct 2026):
  * hero (start right / keep getting better) → where are you starting from? + level finder
@@ -29,16 +30,18 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <CorporateTournaments />
       <StartingPoints />
       <PathwaySteps />
       {/* <TrainingRally /> */}
       {/* <Problems /> */}
       {/* <Parents /> */}
       <CourtSheet />
-      <Arena />
+      <ProgramsSlider />
+      {/* <Arena /> */}
       <Proof />
       <BookCourt />
-      <Visit />
+
     </>
   );
 }

@@ -12,7 +12,15 @@ export function SiteFooter() {
           <div>
             <Link href="/" className="inline-flex items-center gap-3">
               <Mark className="h-11 w-11 text-chalk" />
-              <span className="display text-4xl">Celestial&rsquo;s</span>
+              <span className="leading-none">
+                <span className="display block text-[1.35rem] tracking-[0.01em]">
+                  Celestial&rsquo;s
+                </span>
+
+                <span className="eyebrow mt-0.5 block text-[0.6rem] text-chalk/60">
+                  Badminton Academy
+                </span>
+              </span>
             </Link>
             <p className="mt-5 max-w-[34ch] text-chalk/70">
               A badminton academy for players starting out and players getting better: coaching, seven indoor courts and a recovery stack under one roof in Sector&nbsp;104, Noida.
@@ -34,13 +42,13 @@ export function SiteFooter() {
           </div>
 
           <div>
-            <h2 className="eyebrow text-chalk/50">Hours</h2>
+            {/* <h2 className="eyebrow text-chalk/50">Hours</h2>
             <dl className="mt-4 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 text-chalk/85">
               <dt>Mon, Wed–Sun</dt>
               <dd>5 AM – 11 PM</dd>
               <dt>Tuesday</dt>
               <dd>5 AM – 8 PM</dd>
-            </dl>
+            </dl> */}
             <h2 className="eyebrow mt-8 text-chalk/50">Talk to us</h2>
             <ul className="mt-4 space-y-1.5 text-chalk/85">
               <li>
