@@ -1,4 +1,3 @@
-
 import type { Metadata } from "next";
 import { academy } from "@/lib/academy";
 import { images } from "@/lib/images";
@@ -7,6 +6,7 @@ import { Photo } from "@/components/photo";
 import { Reveal } from "@/components/reveal";
 import { ExternalButton, TextLink } from "@/components/buttons";
 import { Community } from "@/components/home/community";
+import { AchievementsSlider } from "@/components/home/achievements-slider";
 
 export const metadata: Metadata = {
   title: "About Celestial's Badminton Academy",
@@ -336,52 +336,29 @@ export default function AboutPage() {
         className="on-light bg-chalk-2 py-20 sm:py-24 lg:py-28"
       >
         <div className="mx-auto max-w-[1320px] px-5 sm:px-8">
-          <Reveal>
-            <p className="eyebrow text-mat">
-              PROGRESS THAT COUNTS
-            </p>
+          {/* Heading + horizontal slider with arrows at top right */}
+          <AchievementsSlider achievements={achievements}>
+            <Reveal>
+              <p className="eyebrow text-mat">
+                PROGRESS THAT COUNTS
+              </p>
 
-            <h2
-              id="achievements-title"
-              className="display mt-4 max-w-[950px] text-[clamp(2.6rem,5vw,4.8rem)] leading-[1.02] tracking-tight"
-            >
-              Hard work.
-              <br />
-              Results on court.
-            </h2>
-
-            <p className="mt-6 max-w-[720px] text-lg leading-relaxed text-ink-soft">
-              From national rankings and championship medals to state-level
-              titles, our players continue to make progress across age groups
-              and competition categories.
-            </p>
-          </Reveal>
-
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {achievements.map((achievement, index) => (
-              <Reveal
-                key={`${achievement.name}-${achievement.event}`}
-                delay={(index % 3) * 0.05}
-                className="group flex flex-col rounded-[24px] border border-ink/10 bg-chalk p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-mat/40 hover:shadow-lg sm:p-7"
+              <h2
+                id="achievements-title"
+                className="display mt-4 max-w-[950px] text-[clamp(2.6rem,5vw,4.8rem)] leading-[1.02] tracking-tight"
               >
-                <p className="eyebrow inline-flex w-fit rounded-full bg-chalk-2 px-3 py-2 text-mat">
-                  {achievement.date}
-                </p>
+                Hard work.
+                <br />
+                Results on court.
+              </h2>
 
-                <h3 className="display mt-5 text-2xl leading-tight transition-colors duration-300 group-hover:text-mat sm:text-3xl">
-                  {achievement.name}
-                </h3>
-
-                <p className="mt-3 text-lg font-semibold leading-snug text-ink">
-                  {achievement.result}
-                </p>
-
-                <p className="mt-2 text-sm leading-relaxed text-ink-soft">
-                  {achievement.event}
-                </p>
-              </Reveal>
-            ))}
-          </div>
+              <p className="mt-6 max-w-[720px] text-lg leading-relaxed text-ink-soft">
+                From national rankings and championship medals to state-level
+                titles, our players continue to make progress across age groups
+                and competition categories.
+              </p>
+            </Reveal>
+          </AchievementsSlider>
 
           {/* Team Selection */}
           <Reveal
@@ -456,7 +433,6 @@ export default function AboutPage() {
               We have also hosted the Uttar Pradesh State Championship
               tournament and the Malhotra Badminton Cup in May 2025.
             </p>
-
           </Reveal>
         </div>
       </section>
