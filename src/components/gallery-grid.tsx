@@ -7,17 +7,55 @@ import type { Img } from "@/lib/images";
 import { src } from "@/lib/images";
 import { Photo } from "./photo";
 
-/** Masonry gallery with an accessible lightbox (focus trapped to its controls, Esc/arrow keys, focus restored). */
+/**
+ * Gallery with an accessible lightbox (focus trapped to its controls, Esc/arrow keys, focus restored).
+ * Mobile (< md): swipeable scroll-snap slider with arrows. md+: masonry grid.
+ */
 export function GalleryGrid({ items }: { items: Img[] }) {
   const [open, setOpen] = useState<number | null>(null);
   const reduce = useReducedMotion();
   const triggers = useRef<(HTMLButtonElement | null)[]>([]);
+  const sliderTriggers = useRef<(HTMLButtonElement | null)[]>([]);
   const closeBtn = useRef<HTMLButtonElement>(null);
   const dialog = useRef<HTMLDivElement>(null);
 
+  // Slider state (mobile only)
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const [canPrev, setCanPrev] = useState(false);
+  const [canNext, setCanNext] = useState(true);
+
+  const updateArrows = useCallback(() => {
+    const el = sliderRef.current;
+    if (!el) return;
+    setCanPrev(el.scrollLeft > 8);
+    setCanNext(el.scrollLeft + el.clientWidth < el.scrollWidth - 8);
+  }, []);
+
+  useEffect(() => {
+    updateArrows();
+    const el = sliderRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(updateArrows);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [updateArrows]);
+
+  const scrollByCard = (dir: 1 | -1) => {
+    const el = sliderRef.current;
+    const card = el?.firstElementChild as HTMLElement | null;
+    if (!el || !card) return;
+    el.scrollBy({ left: dir * (card.offsetWidth + 16), behavior: "smooth" });
+  };
+
   const close = useCallback(() => {
     setOpen((cur) => {
-      if (cur !== null) setTimeout(() => triggers.current[cur]?.focus(), 0);
+      if (cur !== null) {
+        setTimeout(() => {
+          // Restore focus to whichever trigger is actually visible (slider on mobile, grid on md+)
+          const target = [triggers.current[cur], sliderTriggers.current[cur]].find((el) => el && el.offsetParent !== null);
+          target?.focus();
+        }, 0);
+      }
       return null;
     });
   }, []);
@@ -53,9 +91,104 @@ export function GalleryGrid({ items }: { items: Img[] }) {
 
   const cur = open !== null ? items[open] : null;
 
+  const arrowBase =
+    "absolute top-[38%] z-10 grid size-10 -translate-y-1/2 place-items-center rounded-full " +
+    "border border-ink/10 bg-chalk/80 text-ink shadow-sm backdrop-blur-md " +
+    "transition-all duration-300 ease-out active:scale-90 " +
+    "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2";
+  const arrowShown = "opacity-100 scale-100";
+  const arrowHidden = "pointer-events-none opacity-0 scale-75";
+
   return (
     <>
-      <ul className="columns-1 gap-5 sm:columns-2 lg:columns-3">
+      <style>{`
+        @keyframes gal-nudge {
+          0%, 100% { transform: translateX(0); }
+          50% { transform: translateX(3px); }
+        }
+        @keyframes gal-nudge-left {
+          0%, 100% { transform: translateX(0); }
+          50% { transform: translateX(-3px); }
+        }
+        @keyframes gal-ring {
+          0% { transform: scale(1); opacity: 0.5; }
+          100% { transform: scale(1.7); opacity: 0; }
+        }
+        .gal-nudge { animation: gal-nudge 1.6s ease-in-out infinite; }
+        .gal-nudge-left { animation: gal-nudge-left 1.6s ease-in-out infinite; }
+        .gal-ring { animation: gal-ring 2s ease-out infinite; }
+        @media (prefers-reduced-motion: reduce) {
+          .gal-nudge, .gal-nudge-left, .gal-ring { animation: none; }
+        }
+      `}</style>
+
+      {/* Mobile slider (hidden from md up) */}
+      <div className="relative md:hidden">
+        <div
+          ref={sliderRef}
+          onScroll={updateArrows}
+          className="-mx-5 flex snap-x snap-mandatory items-start gap-4 overflow-x-auto px-5 pb-2 scroll-px-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:-mx-8 sm:px-8 sm:scroll-px-8"
+        >
+          {items.map((img, i) => (
+            <figure key={img.name} className="w-[82%] shrink-0 snap-start sm:w-[60%]">
+              <button
+                ref={(el) => {
+                  sliderTriggers.current[i] = el;
+                }}
+                type="button"
+                onClick={() => setOpen(i)}
+                className="block w-full overflow-hidden rounded-[24px] bg-chalk-2"
+                aria-label={`Open photo: ${img.caption}`}
+              >
+                <div className="aspect-[4/3]">
+                  <Photo img={img} sizes="82vw" />
+                </div>
+              </button>
+              <figcaption className="eyebrow mt-3 text-ink-soft">{img.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+
+        <button
+          type="button"
+          aria-label="Previous photo"
+          onClick={() => scrollByCard(-1)}
+          disabled={!canPrev}
+          tabIndex={canPrev ? 0 : -1}
+          className={`${arrowBase} left-3 ${canPrev ? arrowShown : arrowHidden}`}
+        >
+          <svg
+            width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"
+            className={canPrev && !canNext ? "gal-nudge-left" : ""}
+          >
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
+
+        <button
+          type="button"
+          aria-label="Next photo"
+          onClick={() => scrollByCard(1)}
+          disabled={!canNext}
+          tabIndex={canNext ? 0 : -1}
+          className={`${arrowBase} right-3 ${canNext ? arrowShown : arrowHidden}`}
+        >
+          {canNext && !canPrev && (
+            <span aria-hidden="true" className="gal-ring absolute inset-0 rounded-full border border-ink/30" />
+          )}
+          <svg
+            width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"
+            className={canNext && !canPrev ? "gal-nudge" : ""}
+          >
+            <path d="M9 18l6-6-6-6" />
+          </svg>
+        </button>
+      </div>
+
+      {/* Masonry grid (md and up only) */}
+      <ul className="hidden gap-5 md:block md:columns-2 lg:columns-3">
         {items.map((img, i) => (
           <li key={img.name} className="mb-5 break-inside-avoid">
             <figure>
@@ -69,7 +202,7 @@ export function GalleryGrid({ items }: { items: Img[] }) {
                 aria-label={`Open photo: ${img.caption}`}
               >
                 <div style={{ aspectRatio: `${img.w} / ${img.h}` }}>
-                  <Photo img={img} sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw" className="transition-transform duration-700 group-hover:scale-[1.03]" />
+                  <Photo img={img} sizes="(min-width:1024px) 33vw, 50vw" className="transition-transform duration-700 group-hover:scale-[1.03]" />
                 </div>
               </button>
               <figcaption className="eyebrow mt-3 text-ink-soft">{img.caption}</figcaption>

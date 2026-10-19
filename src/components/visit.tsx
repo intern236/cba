@@ -85,17 +85,7 @@ export function Visit({ headingLevel = 2, withPhoto = true }: { headingLevel?: 2
                 </p>
               </div>
             </div>
-            {withPhoto && (
-              <figure className="mt-5 flex items-center gap-4">
-                <div className="h-20 w-28 shrink-0 overflow-hidden rounded-2xl">
-                  <Photo img={images.mural} sizes="112px" />
-                </div>
-                <figcaption className="text-sm text-chalk/65">
-                  <NavigationArrow size={14} weight="bold" className="mr-1 inline text-lime" aria-hidden="true" />
-                  The entrance — look for the badminton mural beside the glass doors.
-                </figcaption>
-              </figure>
-            )}
+
           </Reveal>
         </div>
       </div>

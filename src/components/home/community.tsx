@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { images } from "@/lib/images";
 import { Photo } from "../photo";
 import { SectionHead } from "../section-head";
@@ -10,13 +10,71 @@ const strip = [images.group, images.wooden, images.rally, images.mural, images.g
 
 /**
  * Accordion strip from the client's moodboard ("cards scroller"). It expands on hover AND
- * keyboard focus, never auto-advances (NN/g auto-forwarding), and becomes a plain
- * horizontal scroller on touch screens.
+ * keyboard focus, never auto-advances (NN/g auto-forwarding). On touch screens (< md) it
+ * becomes a swipeable scroll-snap slider with prev/next arrows.
  */
 export function Community() {
   const [active, setActive] = useState(0);
+
+  // Mobile slider state
+  const sliderRef = useRef<HTMLUListElement>(null);
+  const [canPrev, setCanPrev] = useState(false);
+  const [canNext, setCanNext] = useState(true);
+
+  const updateArrows = useCallback(() => {
+    const el = sliderRef.current;
+    if (!el) return;
+    setCanPrev(el.scrollLeft > 8);
+    setCanNext(el.scrollLeft + el.clientWidth < el.scrollWidth - 8);
+  }, []);
+
+  useEffect(() => {
+    updateArrows();
+    const el = sliderRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(updateArrows);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [updateArrows]);
+
+  const scrollByCard = (dir: 1 | -1) => {
+    const el = sliderRef.current;
+    const card = el?.firstElementChild as HTMLElement | null;
+    if (!el || !card) return;
+    el.scrollBy({ left: dir * (card.offsetWidth + 12), behavior: "smooth" });
+  };
+
+  const arrowBase =
+    "absolute top-[40%] z-10 grid size-10 -translate-y-1/2 place-items-center rounded-full " +
+    "border border-ink/10 bg-chalk/80 text-ink shadow-sm backdrop-blur-md " +
+    "transition-all duration-300 ease-out active:scale-90 " +
+    "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2";
+  const arrowShown = "opacity-100 scale-100";
+  const arrowHidden = "pointer-events-none opacity-0 scale-75";
+
   return (
     <section aria-labelledby="community-title" className="on-light bg-chalk-2 py-24 sm:py-32">
+      <style>{`
+        @keyframes com-nudge {
+          0%, 100% { transform: translateX(0); }
+          50% { transform: translateX(3px); }
+        }
+        @keyframes com-nudge-left {
+          0%, 100% { transform: translateX(0); }
+          50% { transform: translateX(-3px); }
+        }
+        @keyframes com-ring {
+          0% { transform: scale(1); opacity: 0.5; }
+          100% { transform: scale(1.7); opacity: 0; }
+        }
+        .com-nudge { animation: com-nudge 1.6s ease-in-out infinite; }
+        .com-nudge-left { animation: com-nudge-left 1.6s ease-in-out infinite; }
+        .com-ring { animation: com-ring 2s ease-out infinite; }
+        @media (prefers-reduced-motion: reduce) {
+          .com-nudge, .com-nudge-left, .com-ring { animation: none; }
+        }
+      `}</style>
+
       <div className="mx-auto max-w-[1320px] px-5 sm:px-8">
         <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
           <SectionHead
@@ -32,6 +90,7 @@ export function Community() {
           </div>
         </div>
 
+        {/* md+: accordion strip (unchanged) */}
         <ul className="mt-12 hidden h-[520px] gap-3 md:flex" aria-label="Photos from the academy">
           {strip.map((img, i) => (
             <li
@@ -58,16 +117,61 @@ export function Community() {
           ))}
         </ul>
 
-        <ul className="-mx-5 mt-10 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-2 md:hidden" aria-label="Photos from the academy">
-          {strip.map((img) => (
-            <li key={img.name} className="w-[78%] shrink-0 snap-start">
-              <div className="aspect-[4/5] overflow-hidden rounded-[22px] bg-court-900">
-                <Photo img={img} sizes="80vw" />
-              </div>
-              <p className="eyebrow mt-3 text-ink-soft">{img.caption}</p>
-            </li>
-          ))}
-        </ul>
+        {/* < md: swipeable slider with arrows */}
+        <div className="relative mt-10 md:hidden">
+          <ul
+            ref={sliderRef}
+            onScroll={updateArrows}
+            className="-mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-2 scroll-px-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:-mx-8 sm:px-8 sm:scroll-px-8"
+            aria-label="Photos from the academy"
+          >
+            {strip.map((img) => (
+              <li key={img.name} className="w-[78%] shrink-0 snap-start">
+                <div className="aspect-[4/5] overflow-hidden rounded-[22px] bg-court-900">
+                  <Photo img={img} sizes="80vw" />
+                </div>
+                <p className="eyebrow mt-3 text-ink-soft">{img.caption}</p>
+              </li>
+            ))}
+          </ul>
+
+          <button
+            type="button"
+            aria-label="Previous photo"
+            onClick={() => scrollByCard(-1)}
+            disabled={!canPrev}
+            tabIndex={canPrev ? 0 : -1}
+            className={`${arrowBase} left-3 ${canPrev ? arrowShown : arrowHidden}`}
+          >
+            <svg
+              width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"
+              className={canPrev && !canNext ? "com-nudge-left" : ""}
+            >
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </button>
+
+          <button
+            type="button"
+            aria-label="Next photo"
+            onClick={() => scrollByCard(1)}
+            disabled={!canNext}
+            tabIndex={canNext ? 0 : -1}
+            className={`${arrowBase} right-3 ${canNext ? arrowShown : arrowHidden}`}
+          >
+            {canNext && !canPrev && (
+              <span aria-hidden="true" className="com-ring absolute inset-0 rounded-full border border-ink/30" />
+            )}
+            <svg
+              width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"
+              className={canNext && !canPrev ? "com-nudge" : ""}
+            >
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </button>
+        </div>
       </div>
     </section>
   );

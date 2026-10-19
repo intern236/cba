@@ -225,42 +225,8 @@ export function SiteHeader() {
 
             {/* Mobile action buttons */}
             <div className="mt-auto grid gap-3 pt-8">
-              <a
-                href={trialLink()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-primary justify-center"
-              >
-                Book a free trial
-                <span className="sr-only">
-                  {" "}(opens WhatsApp in a new tab)
-                </span>
-              </a>
-
-              <a
-                href={academy.booking.primary.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-ghost-dark justify-center"
-              >
-                Book a court · from {academy.booking.priceFrom}
-                <span className="sr-only">
-                  {" "}(opens Hudle in a new tab)
-                </span>
-              </a>
 
               <div className="grid grid-cols-3 gap-2 text-sm">
-                <a
-                  href={academy.contact.phoneHref}
-                  className="flex min-h-[48px] items-center justify-center gap-2 rounded-full ring-1 ring-white/20"
-                >
-                  <Phone
-                    size={16}
-                    weight="bold"
-                    aria-hidden="true"
-                  />
-                  Call
-                </a>
 
                 {academy.contact.whatsappUrl && (
                   <a
