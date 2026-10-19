@@ -1,0 +1,338 @@
+@import "tailwindcss";
+
+/*
+ * Palette is taken from the venue itself (research: Roland-Garros builds its palette
+ * from the playing surface). Deep court green = the hall under lights, mat = the
+ * actual court mats, chalk = the court lines, lime = the yellow net posts / shuttle
+ * flight. Lime is reserved for the primary action and the shuttle path only.
+ */
+@theme {
+  --color-court-950: #071c17;
+  --color-court-900: #0b2a23;
+  --color-court-800: #113a31;
+  --color-court-700: #17493e;
+  --color-mat: #1f9482;
+  --color-mat-soft: #7fc9bb;
+  --color-mat-deep: #12665a;
+  /* mat for text on chalk: 5.9:1 */
+  --color-chalk: #f3f0e8;
+  --color-chalk-2: #e9e5da;
+  --color-ink: #0e1a17;
+  --color-ink-soft: #46544f;
+  --color-lime: #d6f04e;
+  --color-lime-deep: #b9d43a;
+  --color-cork: #c9a36a;
+
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --radius-pill: 999px;
+  --ease-flight: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-marquee: marquee 38s linear infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    background: var(--color-chalk);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-variation-settings: "wdth" 100;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--color-lime);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-lime);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  .on-light :focus-visible,
+  .on-light:focus-visible {
+    outline-color: var(--color-ink);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+
+  /* Condensed display type: Archivo at its narrowest width axis. */
+  .display {
+    font-variation-settings: "wdth" 62;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    line-height: 0.9;
+  }
+
+  .display-wide {
+    font-variation-settings: "wdth" 112;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* Buttons — pill shape follows the client's moodboard (Notion "Buttons"). */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 48px;
+    padding: 0 1.4rem;
+    border-radius: var(--radius-pill);
+    font-weight: 600;
+    font-size: 0.975rem;
+    line-height: 1;
+    white-space: nowrap;
+    transition: transform 200ms var(--ease-flight), background-color 200ms, color 200ms, border-color 200ms;
+  }
+
+  .btn:active {
+    transform: translateY(1px) scale(0.985);
+  }
+
+  .btn-primary {
+    background: var(--color-lime);
+    color: var(--color-ink);
+  }
+
+  .btn-primary:hover {
+    background: #e3f77a;
+  }
+
+  .btn-ghost-dark {
+    color: var(--color-chalk);
+    box-shadow: inset 0 0 0 1.5px rgb(243 240 232 / 0.45);
+  }
+
+  .btn-ghost-dark:hover {
+    box-shadow: inset 0 0 0 1.5px var(--color-chalk);
+    background: rgb(243 240 232 / 0.06);
+  }
+
+  .btn-ink {
+    background: var(--color-ink);
+    color: var(--color-chalk);
+  }
+
+  .btn-ink:hover {
+    background: var(--color-court-800);
+  }
+
+  .btn-ghost-light {
+    color: var(--color-ink);
+    box-shadow: inset 0 0 0 1.5px rgb(14 26 23 / 0.35);
+  }
+
+  .btn-ghost-light:hover {
+    box-shadow: inset 0 0 0 1.5px var(--color-ink);
+  }
+
+  .btn-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    margin-right: -0.75rem;
+    border-radius: 999px;
+    background: var(--color-ink);
+    color: var(--color-lime);
+    transition: transform 300ms var(--ease-flight);
+  }
+
+  .btn:hover .btn-icon {
+    transform: translateX(2px) rotate(-45deg);
+  }
+
+  .btn-ink .btn-icon {
+    background: var(--color-lime);
+    color: var(--color-ink);
+  }
+
+  /* Court-line rule: the recurring brand device (2px chalk line with a service-line tick). */
+  .court-rule {
+    position: relative;
+    height: 2px;
+    background: currentColor;
+    opacity: 0.22;
+  }
+
+  /* String-bed texture (racket strings) — used once, behind the trial CTA. */
+  .strings {
+    background-image:
+      linear-gradient(to right, rgb(243 240 232 / 0.07) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(243 240 232 / 0.07) 1px, transparent 1px);
+    background-size: 14px 14px;
+  }
+
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1.5px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 300ms var(--ease-flight);
+  }
+
+  .link-underline:hover,
+  .link-underline:focus-visible {
+    background-size: 100% 1.5px;
+  }
+}
+
+/* ---------- Hero choreography (CSS so the headline paints before hydration: good for LCP) ---------- */
+@keyframes rise-line {
+  from {
+    transform: translateY(105%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes photo-in {
+  from {
+    transform: scale(0.97);
+  }
+
+  to {
+    transform: none;
+  }
+}
+
+.rise-line {
+  animation: rise-line 900ms var(--ease-flight) both;
+}
+
+@keyframes drop-in {
+  from {
+    transform: translateY(0.18em);
+  }
+
+  to {
+    transform: none;
+  }
+}
+
+.drop-in {
+  animation: drop-in 800ms var(--ease-flight) both;
+}
+
+.rise-in {
+  animation: rise-in 700ms var(--ease-flight) both;
+}
+
+.photo-in {
+  animation: photo-in 1000ms var(--ease-flight) both;
+}
+
+.court-line {
+  transition: transform 700ms var(--ease-flight), opacity 300ms ease;
+}
+
+.strip-item {
+  transition: opacity 500ms ease, transform 600ms var(--ease-flight);
+}
+
+.strip-off .strip-item {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.strip-on .strip-item {
+  opacity: 1;
+  transform: none;
+}
+
+.strip-on .strip-item:nth-child(2) {
+  transition-delay: 90ms;
+}
+
+.strip-on .strip-item:nth-child(3) {
+  transition-delay: 180ms;
+}
+
+.strip-on .strip-item:nth-child(4) {
+  transition-delay: 270ms;
+}
+
+/* If JS never runs, the strip must still be readable. */
+@media (scripting: none) {
+  .strip-off .strip-item {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- Scroll reveal: CSS scroll-driven, progressive enhancement ---------- */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal-rise linear both;
+      animation-timeline: view();
+      animation-range: entry calc(0% + var(--reveal-offset, 0%)) entry calc(30% + var(--reveal-offset, 0%));
+    }
+  }
+}
+
+@keyframes reveal-rise {
+  from {
+    transform: translateY(36px);
+  }
+
+  to {
+    transform: none;
+  }
+}

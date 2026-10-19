@@ -1,0 +1,40 @@
+import type { Metadata } from "next";
+import { InstagramLogo } from "@phosphor-icons/react/ssr";
+import { academy } from "@/lib/academy";
+import { images } from "@/lib/images";
+import { PageHeader } from "@/components/page-header";
+import { GalleryGrid } from "@/components/gallery-grid";
+import { ExternalButton } from "@/components/buttons";
+
+export const metadata: Metadata = {
+  title: "Gallery",
+  description: "Photos of the courts, gym and community at Celestial's Badminton Academy, Sector 104, Noida.",
+  alternates: { canonical: "/gallery/" },
+};
+
+const order = [images.rally, images.panorama, images.group, images.wooden, images.mural, images.courtsRow, images.gymFloor, images.empty, images.gymStrength];
+
+export default function GalleryPage() {
+  return (
+    <>
+      <PageHeader eyebrow="Gallery" title="Inside the hall" intro="Courts, gym and the people who use them. No stock photos — every image here is from Celestial’s.">
+        <ExternalButton href={academy.contact.instagram.url} variant="ghost-dark" note="opens Instagram">
+          More on Instagram
+        </ExternalButton>
+      </PageHeader>
+      <section aria-label="Photos" className="on-light bg-chalk py-20">
+        <div className="mx-auto max-w-[1320px] px-5 sm:px-8">
+          <GalleryGrid items={order} />
+          <p className="mt-10 flex items-center gap-2 text-ink-soft">
+            <InstagramLogo size={18} weight="bold" aria-hidden="true" />
+            Follow the academy on{" "}
+            <a href={academy.contact.instagram.url} target="_blank" rel="noopener noreferrer" className="link-underline font-semibold text-ink">
+              {academy.contact.instagram.handle}
+              <span className="sr-only"> (opens in a new tab)</span>
+            </a>
+          </p>
+        </div>
+      </section>
+    </>
+  );
+}

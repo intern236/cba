@@ -1,0 +1,18 @@
+<title>Celestial's Badminton Academy</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+  /* Launcher: hands the frame to the site's own home page (served raw, unwrapped). */
+  :root { --court: #071c17; --chalk: #f3f0e8; --lime: #d6f04e; --ink: #0b1411; color-scheme: dark; }
+  html, body { height: 100%; }
+  body { background: var(--court); color: var(--chalk); font: 16px/1.5 system-ui, sans-serif;
+         display: grid; place-items: center; padding-left: max(16px, env(safe-area-inset-left, 0px));
+         padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  a { color: var(--ink); background: var(--lime); padding: 12px 22px; border-radius: 999px; font-weight: 600; text-decoration: none; }
+  a:focus-visible { outline: 3px solid var(--chalk); outline-offset: 3px; }
+  p { margin: 0 0 16px; opacity: .7; text-align: center; }
+</style>
+<main>
+  <p>Loading the site…</p>
+  <a href="home.html">Open Celestial's Badminton Academy</a>
+</main>
+<script>location.replace("home.html");</script>
