@@ -82,12 +82,7 @@ export function StartingPoints() {
         </div>
 
         <div className="mt-6 grid gap-6 lg:grid-cols-12">
-          <Reveal className="flex flex-col justify-center lg:col-span-4 lg:pr-6" delay={0.05}>
-            <p className="display max-w-[18ch] text-[clamp(1.9rem,3vw,2.6rem)] text-ink/85">Not sure which? Answer three questions.</p>
-            <p className="mt-4 max-w-[40ch] text-ink-soft">
-              You&rsquo;ll get a suggested starting level on the pathway. Your answers go with the trial request, so the coach knows who&rsquo;s coming.
-            </p>
-          </Reveal>
+
           <Reveal className="lg:col-span-8" delay={0.1}>
             <LevelFinder />
           </Reveal>
