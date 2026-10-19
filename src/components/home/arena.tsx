@@ -12,7 +12,8 @@ import { FacilityIcon } from "../facility-icon";
 /**
  * Trust: Stanford credibility #2 and NN/g — real premises photos. Captions sit outside
  * the images (gallery-style), and the asymmetric grid avoids the 3-equal-cards template.
- * On mobile the photos become a horizontal scroll-snap row with arrows; from md up it's the grid.
+ * On mobile the photos become a horizontal scroll-snap row with arrows above it (right-aligned);
+ * from md up it's the grid.
  */
 export function Arena() {
   const sliderRef = useRef<HTMLDivElement>(null);
@@ -43,35 +44,16 @@ export function Arena() {
   };
 
   const arrowBase =
-    "absolute top-[38%] z-10 grid size-10 -translate-y-1/2 place-items-center rounded-full " +
-    "border border-ink/10 bg-chalk/80 text-ink shadow-sm backdrop-blur-md " +
-    "transition-all duration-300 ease-out active:scale-90 md:hidden " +
+    "relative grid size-10 place-items-center rounded-full " +
+    "border border-ink/10 bg-chalk text-ink shadow-sm " +
+    "transition-all duration-300 ease-out active:scale-90 " +
     "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2";
-  const arrowShown = "opacity-100 scale-100";
-  const arrowHidden = "pointer-events-none opacity-0 scale-75";
+  const arrowEnabled = "opacity-100";
+  const arrowDisabled = "pointer-events-none opacity-30";
 
   return (
     <section aria-labelledby="arena-title" className="on-light bg-chalk py-24 sm:py-32">
-      <style>{`
-        @keyframes arena-nudge {
-          0%, 100% { transform: translateX(0); }
-          50% { transform: translateX(3px); }
-        }
-        @keyframes arena-nudge-left {
-          0%, 100% { transform: translateX(0); }
-          50% { transform: translateX(-3px); }
-        }
-        @keyframes arena-ring {
-          0% { transform: scale(1); opacity: 0.5; }
-          100% { transform: scale(1.7); opacity: 0; }
-        }
-        .arena-nudge { animation: arena-nudge 1.6s ease-in-out infinite; }
-        .arena-nudge-left { animation: arena-nudge-left 1.6s ease-in-out infinite; }
-        .arena-ring { animation: arena-ring 2s ease-out infinite; }
-        @media (prefers-reduced-motion: reduce) {
-          .arena-nudge, .arena-nudge-left, .arena-ring { animation: none; }
-        }
-      `}</style>
+
 
       <div className="mx-auto max-w-[1320px] px-5 sm:px-8">
         <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
@@ -89,9 +71,47 @@ export function Arena() {
         </div>
 
         <div className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-6 md:grid-rows-[auto_auto]">
-          {/* Mobile: relative wrapper holding the scroller + arrows. md+: `contents`
+          {/* Mobile: wrapper holding the arrows row + scroller. md+: `contents`
               removes the wrapper so the figures act as direct grid items. */}
-          <div className="relative md:contents">
+          <div className="md:contents">
+            {/* Arrows: above the photos, right-aligned (mobile only) */}
+            <div className="mb-3 flex justify-end gap-2 md:hidden">
+              <button
+                type="button"
+                aria-label="Previous photo"
+                onClick={() => scrollByCard(-1)}
+                disabled={!canPrev}
+                className={`${arrowBase} ${canPrev ? arrowEnabled : arrowDisabled}`}
+              >
+                <svg
+                  width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"
+                  className={canPrev && !canNext ? "arena-nudge-left" : ""}
+                >
+                  <path d="M15 18l-6-6 6-6" />
+                </svg>
+              </button>
+
+              <button
+                type="button"
+                aria-label="Next photo"
+                onClick={() => scrollByCard(1)}
+                disabled={!canNext}
+                className={`${arrowBase} ${canNext ? arrowEnabled : arrowDisabled}`}
+              >
+                {canNext && !canPrev && (
+                  <span aria-hidden="true" className="arena-ring absolute inset-0 rounded-full border border-ink/30" />
+                )}
+                <svg
+                  width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"
+                  className={canNext && !canPrev ? "arena-nudge" : ""}
+                >
+                  <path d="M9 18l6-6-6-6" />
+                </svg>
+              </button>
+            </div>
+
             <div
               ref={sliderRef}
               onScroll={updateArrows}
@@ -129,43 +149,6 @@ export function Arena() {
                 <figcaption className="eyebrow mt-3 text-ink-soft">{images.gymStrength.caption}</figcaption>
               </Reveal>
             </div>
-
-            <button
-              type="button"
-              aria-label="Previous photo"
-              onClick={() => scrollByCard(-1)}
-              disabled={!canPrev}
-              tabIndex={canPrev ? 0 : -1}
-              className={`${arrowBase} left-3 ${canPrev ? arrowShown : arrowHidden}`}
-            >
-              <svg
-                width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"
-                className={canPrev && !canNext ? "arena-nudge-left" : ""}
-              >
-                <path d="M15 18l-6-6 6-6" />
-              </svg>
-            </button>
-
-            <button
-              type="button"
-              aria-label="Next photo"
-              onClick={() => scrollByCard(1)}
-              disabled={!canNext}
-              tabIndex={canNext ? 0 : -1}
-              className={`${arrowBase} right-3 ${canNext ? arrowShown : arrowHidden}`}
-            >
-              {canNext && !canPrev && (
-                <span aria-hidden="true" className="arena-ring absolute inset-0 rounded-full border border-ink/30" />
-              )}
-              <svg
-                width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"
-                className={canNext && !canPrev ? "arena-nudge" : ""}
-              >
-                <path d="M9 18l6-6-6-6" />
-              </svg>
-            </button>
           </div>
 
           <Reveal className="md:col-span-4" delay={0.12}>

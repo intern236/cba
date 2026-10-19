@@ -11,7 +11,7 @@ const strip = [images.group, images.wooden, images.rally, images.mural, images.g
 /**
  * Accordion strip from the client's moodboard ("cards scroller"). It expands on hover AND
  * keyboard focus, never auto-advances (NN/g auto-forwarding). On touch screens (< md) it
- * becomes a swipeable scroll-snap slider with prev/next arrows.
+ * becomes a swipeable scroll-snap slider with prev/next arrows above it (right-aligned).
  */
 export function Community() {
   const [active, setActive] = useState(0);
@@ -45,35 +45,16 @@ export function Community() {
   };
 
   const arrowBase =
-    "absolute top-[40%] z-10 grid size-10 -translate-y-1/2 place-items-center rounded-full " +
-    "border border-ink/10 bg-chalk/80 text-ink shadow-sm backdrop-blur-md " +
+    "relative grid size-10 place-items-center rounded-full " +
+    "border border-ink/10 bg-chalk text-ink shadow-sm " +
     "transition-all duration-300 ease-out active:scale-90 " +
     "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2";
-  const arrowShown = "opacity-100 scale-100";
-  const arrowHidden = "pointer-events-none opacity-0 scale-75";
+  const arrowEnabled = "opacity-100";
+  const arrowDisabled = "pointer-events-none opacity-30";
 
   return (
     <section aria-labelledby="community-title" className="on-light bg-chalk-2 py-24 sm:py-32">
-      <style>{`
-        @keyframes com-nudge {
-          0%, 100% { transform: translateX(0); }
-          50% { transform: translateX(3px); }
-        }
-        @keyframes com-nudge-left {
-          0%, 100% { transform: translateX(0); }
-          50% { transform: translateX(-3px); }
-        }
-        @keyframes com-ring {
-          0% { transform: scale(1); opacity: 0.5; }
-          100% { transform: scale(1.7); opacity: 0; }
-        }
-        .com-nudge { animation: com-nudge 1.6s ease-in-out infinite; }
-        .com-nudge-left { animation: com-nudge-left 1.6s ease-in-out infinite; }
-        .com-ring { animation: com-ring 2s ease-out infinite; }
-        @media (prefers-reduced-motion: reduce) {
-          .com-nudge, .com-nudge-left, .com-ring { animation: none; }
-        }
-      `}</style>
+
 
       <div className="mx-auto max-w-[1320px] px-5 sm:px-8">
         <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
@@ -117,8 +98,45 @@ export function Community() {
           ))}
         </ul>
 
-        {/* < md: swipeable slider with arrows */}
-        <div className="relative mt-10 md:hidden">
+        {/* < md: swipeable slider with arrows above (right-aligned) */}
+        <div className="mt-10 md:hidden">
+          <div className="mb-3 flex justify-end gap-2">
+            <button
+              type="button"
+              aria-label="Previous photo"
+              onClick={() => scrollByCard(-1)}
+              disabled={!canPrev}
+              className={`${arrowBase} ${canPrev ? arrowEnabled : arrowDisabled}`}
+            >
+              <svg
+                width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"
+                className={canPrev && !canNext ? "com-nudge-left" : ""}
+              >
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </button>
+
+            <button
+              type="button"
+              aria-label="Next photo"
+              onClick={() => scrollByCard(1)}
+              disabled={!canNext}
+              className={`${arrowBase} ${canNext ? arrowEnabled : arrowDisabled}`}
+            >
+              {canNext && !canPrev && (
+                <span aria-hidden="true" className="com-ring absolute inset-0 rounded-full border border-ink/30" />
+              )}
+              <svg
+                width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"
+                className={canNext && !canPrev ? "com-nudge" : ""}
+              >
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </button>
+          </div>
+
           <ul
             ref={sliderRef}
             onScroll={updateArrows}
@@ -134,43 +152,6 @@ export function Community() {
               </li>
             ))}
           </ul>
-
-          <button
-            type="button"
-            aria-label="Previous photo"
-            onClick={() => scrollByCard(-1)}
-            disabled={!canPrev}
-            tabIndex={canPrev ? 0 : -1}
-            className={`${arrowBase} left-3 ${canPrev ? arrowShown : arrowHidden}`}
-          >
-            <svg
-              width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"
-              className={canPrev && !canNext ? "com-nudge-left" : ""}
-            >
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </button>
-
-          <button
-            type="button"
-            aria-label="Next photo"
-            onClick={() => scrollByCard(1)}
-            disabled={!canNext}
-            tabIndex={canNext ? 0 : -1}
-            className={`${arrowBase} right-3 ${canNext ? arrowShown : arrowHidden}`}
-          >
-            {canNext && !canPrev && (
-              <span aria-hidden="true" className="com-ring absolute inset-0 rounded-full border border-ink/30" />
-            )}
-            <svg
-              width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"
-              className={canNext && !canPrev ? "com-nudge" : ""}
-            >
-              <path d="M9 18l6-6-6-6" />
-            </svg>
-          </button>
         </div>
       </div>
     </section>

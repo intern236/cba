@@ -9,7 +9,7 @@ import { Photo } from "./photo";
 
 /**
  * Gallery with an accessible lightbox (focus trapped to its controls, Esc/arrow keys, focus restored).
- * Mobile (< md): swipeable scroll-snap slider with arrows. md+: masonry grid.
+ * Mobile (< md): swipeable scroll-snap slider with arrows above it (right-aligned). md+: masonry grid.
  */
 export function GalleryGrid({ items }: { items: Img[] }) {
   const [open, setOpen] = useState<number | null>(null);
@@ -92,38 +92,56 @@ export function GalleryGrid({ items }: { items: Img[] }) {
   const cur = open !== null ? items[open] : null;
 
   const arrowBase =
-    "absolute top-[38%] z-10 grid size-10 -translate-y-1/2 place-items-center rounded-full " +
-    "border border-ink/10 bg-chalk/80 text-ink shadow-sm backdrop-blur-md " +
+    "relative grid size-10 place-items-center rounded-full " +
+    "border border-ink/10 bg-chalk text-ink shadow-sm " +
     "transition-all duration-300 ease-out active:scale-90 " +
     "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2";
-  const arrowShown = "opacity-100 scale-100";
-  const arrowHidden = "pointer-events-none opacity-0 scale-75";
+  const arrowEnabled = "opacity-100";
+  const arrowDisabled = "pointer-events-none opacity-30";
 
   return (
     <>
-      <style>{`
-        @keyframes gal-nudge {
-          0%, 100% { transform: translateX(0); }
-          50% { transform: translateX(3px); }
-        }
-        @keyframes gal-nudge-left {
-          0%, 100% { transform: translateX(0); }
-          50% { transform: translateX(-3px); }
-        }
-        @keyframes gal-ring {
-          0% { transform: scale(1); opacity: 0.5; }
-          100% { transform: scale(1.7); opacity: 0; }
-        }
-        .gal-nudge { animation: gal-nudge 1.6s ease-in-out infinite; }
-        .gal-nudge-left { animation: gal-nudge-left 1.6s ease-in-out infinite; }
-        .gal-ring { animation: gal-ring 2s ease-out infinite; }
-        @media (prefers-reduced-motion: reduce) {
-          .gal-nudge, .gal-nudge-left, .gal-ring { animation: none; }
-        }
-      `}</style>
 
       {/* Mobile slider (hidden from md up) */}
-      <div className="relative md:hidden">
+      <div className="md:hidden">
+        {/* Arrows: above the photos, right-aligned */}
+        <div className="mb-3 flex justify-end gap-2">
+          <button
+            type="button"
+            aria-label="Previous photo"
+            onClick={() => scrollByCard(-1)}
+            disabled={!canPrev}
+            className={`${arrowBase} ${canPrev ? arrowEnabled : arrowDisabled}`}
+          >
+            <svg
+              width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"
+              className={canPrev && !canNext ? "gal-nudge-left" : ""}
+            >
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </button>
+
+          <button
+            type="button"
+            aria-label="Next photo"
+            onClick={() => scrollByCard(1)}
+            disabled={!canNext}
+            className={`${arrowBase} ${canNext ? arrowEnabled : arrowDisabled}`}
+          >
+            {canNext && !canPrev && (
+              <span aria-hidden="true" className="gal-ring absolute inset-0 rounded-full border border-ink/30" />
+            )}
+            <svg
+              width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"
+              className={canNext && !canPrev ? "gal-nudge" : ""}
+            >
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </button>
+        </div>
+
         <div
           ref={sliderRef}
           onScroll={updateArrows}
@@ -148,43 +166,6 @@ export function GalleryGrid({ items }: { items: Img[] }) {
             </figure>
           ))}
         </div>
-
-        <button
-          type="button"
-          aria-label="Previous photo"
-          onClick={() => scrollByCard(-1)}
-          disabled={!canPrev}
-          tabIndex={canPrev ? 0 : -1}
-          className={`${arrowBase} left-3 ${canPrev ? arrowShown : arrowHidden}`}
-        >
-          <svg
-            width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"
-            className={canPrev && !canNext ? "gal-nudge-left" : ""}
-          >
-            <path d="M15 18l-6-6 6-6" />
-          </svg>
-        </button>
-
-        <button
-          type="button"
-          aria-label="Next photo"
-          onClick={() => scrollByCard(1)}
-          disabled={!canNext}
-          tabIndex={canNext ? 0 : -1}
-          className={`${arrowBase} right-3 ${canNext ? arrowShown : arrowHidden}`}
-        >
-          {canNext && !canPrev && (
-            <span aria-hidden="true" className="gal-ring absolute inset-0 rounded-full border border-ink/30" />
-          )}
-          <svg
-            width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"
-            className={canNext && !canPrev ? "gal-nudge" : ""}
-          >
-            <path d="M9 18l6-6-6-6" />
-          </svg>
-        </button>
       </div>
 
       {/* Masonry grid (md and up only) */}
