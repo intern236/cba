@@ -215,14 +215,18 @@ export function ProgramsSlider() {
                 >
                     <div
                         className="flex items-stretch transition-transform duration-500 ease-in-out motion-reduce:transition-none"
-                        style={{ transform: `translateX(-${activeIndex * 100}%)` }}
+                        style={{
+                            width: `${programs.length * 100}%`,
+                            transform: `translateX(-${(activeIndex * 100) / programs.length}%)`,
+                        }}
                     >
                         {programs.map((program) => (
                             <article
                                 key={program.number}
                                 aria-label={`${program.level} program`}
                                 aria-roledescription="slide"
-                                className="grid min-w-full shrink-0 lg:grid-cols-12"
+                                className="grid shrink-0 lg:grid-cols-12"
+                                style={{ width: `${100 / programs.length}%` }}
                             >
                                 {/* Left panel */}
                                 <div className="relative flex min-h-[340px] flex-col justify-between overflow-hidden bg-court-950 p-6 text-chalk sm:p-9 lg:col-span-5 lg:min-h-[380px] lg:p-10">
