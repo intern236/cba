@@ -470,24 +470,23 @@ export function TrainingRally({
           intro="Coaching at Celestial’s runs as a loop: find out where a player is, build the body to play, show them what happened, and decide what comes next."
         />
 
-        <div className="mt-4 flex justify-end">
-          {phase === "landed" && !reduce && (
-            <button
-              type="button"
-              onClick={play}
-              className="inline-flex min-h-[40px] items-center gap-1.5 rounded-full border border-white/20 bg-court-900 px-3.5 text-xs font-semibold uppercase tracking-wider text-chalk transition hover:border-white/40"
-              aria-label="Replay the training shuttle animation"
-            >
-              <ArrowCounterClockwise
-                size={13}
-                weight="bold"
-                aria-hidden="true"
-              />
-              <span>Replay</span>
-            </button>
-          )}
-        </div>
-
+<div className="mt-4 hidden justify-end lg:flex">
+  {phase === "landed" && !reduce && (
+    <button
+      type="button"
+      onClick={play}
+      className="inline-flex min-h-[40px] items-center gap-1.5 rounded-full border border-white/20 bg-court-900 px-3.5 text-xs font-semibold uppercase tracking-wider text-chalk transition hover:border-white/40"
+      aria-label="Replay the training shuttle animation"
+    >
+      <ArrowCounterClockwise
+        size={13}
+        weight="bold"
+        aria-hidden="true"
+      />
+      <span>Replay</span>
+    </button>
+  )}
+</div>
         <div ref={wrapRef} className="relative mt-8">
           {/* Shuttle track: desktop only */}
           <svg

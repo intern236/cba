@@ -43,17 +43,27 @@ const faqs = [
 export default function FirstSessionPage() {
   return (
     <>
-      <PageHeader
-        eyebrow="Your first session"
-        title="Day one, explained"
-        intro="The first session is free. Here’s exactly what happens, so the only thing you need to think about is the shuttle."
-      >
-        <div className="rounded-[22px] bg-court-900 p-6 ring-1 ring-white/10">
-          <p className="text-chalk/80">Kids, teens and adults. Complete beginners welcome.</p>
-          <ExternalButton href={trialLink()} note="opens WhatsApp" className="mt-4 ml-40 justify-between">Book a free trial</ExternalButton>
-          <p className="mt-3 ml-44 text-sm text-chalk/55">Or call {a.contact.phoneDisplay}</p>
-        </div>
-      </PageHeader>
+ <PageHeader
+  eyebrow="Your first session"
+  title="Day one, explained"
+  intro="The first session is free. Here’s exactly what happens, so the only thing you need to think about is the shuttle."
+>
+  <div className="rounded-[22px] bg-court-900 p-6 ring-1 ring-white/10">
+    <p className="text-chalk/80">
+      Kids, teens and adults. Complete beginners welcome.
+    </p>
+
+    <div className="mt-4 flex justify-end">
+      <ExternalButton href={trialLink()} note="opens WhatsApp">
+        Book a free trial
+      </ExternalButton>
+    </div>
+
+    <p className="mt-3 text-right text-sm text-chalk/55">
+      Or call {a.contact.phoneDisplay}
+    </p>
+  </div>
+</PageHeader>
 
       <section aria-labelledby="steps-title" className="on-light bg-chalk py-24">
         <div className="mx-auto grid max-w-[1320px] gap-12 px-5 sm:px-8 lg:grid-cols-12">
