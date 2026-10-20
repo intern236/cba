@@ -51,10 +51,21 @@ export function StartingPoints() {
                     <li key={t} className="flex gap-2.5"><Check size={18} weight="bold" className="mt-0.5 shrink-0" aria-hidden="true" />{t}</li>
                   ))}
                 </ul>
-                <div className="mt-auto flex flex-wrap items-center gap-x-6 gap-y-3 pt-8">
-                  <ExternalButton href={trialLink("I'm a beginner.")} variant="ink" note="opens WhatsApp">Book a free trial</ExternalButton>
-                  <TextLink href="/first-session/">What happens on day one</TextLink>
-                </div>
+<div className="mt-auto flex flex-wrap items-center justify-end gap-x-6 gap-y-3 pt-8">
+  <ExternalButton
+    href={trialLink("I'm a beginner.")}
+    variant="ink"
+    note="opens WhatsApp"
+  >
+    Book a free trial
+  </ExternalButton>
+
+  <div className="lg:mr-auto lg:order-first">
+    <TextLink href="/first-session/">
+      What happens on day one
+    </TextLink>
+  </div>
+</div>
               </div>
             </article>
           </Reveal>
@@ -72,10 +83,20 @@ export function StartingPoints() {
                     <li key={t} className="flex gap-2.5"><Check size={18} weight="bold" className="mt-0.5 shrink-0 text-lime" aria-hidden="true" />{t}</li>
                   ))}
                 </ul>
-                <div className="mt-auto flex flex-wrap items-center gap-x-6 gap-y-3 pt-8">
-                  <ExternalButton href={trialLink("I already play and want to improve.")} note="opens WhatsApp">Book a free trial</ExternalButton>
-                  <TextLink href="#problems" className="text-chalk/85">Bring us your problem</TextLink>
-                </div>
+                <div className="mt-auto flex flex-wrap items-center justify-end gap-x-6 gap-y-3 pt-8">
+  <ExternalButton
+    href={trialLink("I already play and want to improve.")}
+    note="opens WhatsApp"
+  >
+    Book a free trial
+  </ExternalButton>
+
+  <div className="lg:order-first lg:mr-auto">
+    <TextLink href="#problems" className="text-chalk/85">
+      Bring us your problem
+    </TextLink>
+  </div>
+</div>
               </div>
             </article>
           </Reveal>

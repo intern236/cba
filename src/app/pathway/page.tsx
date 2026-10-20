@@ -130,8 +130,8 @@ export default function PathwayPage() {
           </Reveal>
           <Reveal className="lg:col-span-7 lg:col-start-6" delay={0.08}>
             <LevelFinder id="find-your-level" />
-            <div className="mt-6">
-              <ExternalButton href={trialLink()} variant="ink" note="opens WhatsApp">Skip the questions: book a free trial</ExternalButton>
+            <div className="mt-6 flex justify-end">
+              <ExternalButton href={trialLink()} variant="ink" note="opens WhatsApp ">Skip the questions: book a free trial</ExternalButton>
             </div>
           </Reveal>
         </div>

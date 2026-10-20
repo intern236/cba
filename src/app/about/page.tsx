@@ -140,27 +140,27 @@ export default function AboutPage() {
   return (
     <>
       {/* Page Header */}
-      <section className="relative overflow-hidden bg-court-950 py-20 text-chalk sm:py-24 lg:py-32">
-        <div className="mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12 xl:px-16">
-          <Reveal>
-            <p className="eyebrow mb-4 mt-[13px] text-mat">
-              WHERE EVERYTHING IS POSSIBLE
-            </p>
 
-            <h1 className="display max-w-none text-[clamp(2.5rem,6vw,5rem)] leading-[0.98] tracking-tight">
-              CELESTIAL'S BADMINTON ACADEMY
-            </h1>
+<section className="relative overflow-hidden bg-court-950 py-20 text-chalk sm:py-24 lg:py-32">
+  <div className="mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12 xl:px-16">
+    <Reveal>
+      <h1 className="display mt-10 max-w-none text-[clamp(2.5rem,6vw,5rem)] leading-[0.98] tracking-tight">
+        CELESTIAL'S BADMINTON ACADEMY
+      </h1>
 
-            <p className="mt-8 max-w-[780px] text-base leading-relaxed text-chalk/75 sm:text-lg lg:text-xl">
-              Founded in 2022 in Sector 104, Noida, we help juniors,
-              adults and aspiring athletes learn, improve and compete.
-              <br className="hidden sm:block" />{" "}
-              Our sister academy, Noida Badminton Academy in Sector 26,
-              shares the same head coach.
-            </p>
-          </Reveal>
-        </div>
-      </section>
+      <p className="eyebrow mb-4 mt-6 text-mat">
+        WHERE EVERYTHING IS POSSIBLE
+      </p>
+
+      <p className="mt-8 max-w-[780px] text-base leading-relaxed text-chalk/75 sm:text-lg lg:text-xl">
+        Founded in 2022 in Sector 104, Noida, we help juniors,
+        adults and aspiring athletes learn, improve and compete.
+        <br />Our sister academy, Noida Badminton Academy in
+        Sector 26, shares the same head coach.
+      </p>
+    </Reveal>
+  </div>
+</section>
 
       {/* Sports Philosophy */}
       <section
@@ -597,20 +597,26 @@ export default function AboutPage() {
                 train with the coaching team before you decide.
               </p>
 
-              <div className="flex flex-wrap items-center gap-4 lg:col-span-5 lg:justify-end">
-                {a.contact.whatsappUrl && (
-                  <ExternalButton
-                    href={a.contact.whatsappUrl}
-                    note="opens WhatsApp"
-                  >
-                    Book a free trial
-                  </ExternalButton>
-                )}
+         <div className="flex w-full flex-col items-end gap-2 lg:col-span-5">
+    <TextLink
+    href="/pathway/"
+    className="flex !w-full max-w-[205px] items-center justify-center rounded-full border border-chalk/30 px-5 py-3 text-center text-chalk"
+  >
+    See the pathway
+  </TextLink>
+  
+  {a.contact.whatsappUrl && (
+    <ExternalButton
+      href={a.contact.whatsappUrl}
+      note="opens WhatsApp"
+      className="!flex !w-full !max-w-[200px] !justify-center"
+    >
+      Book a free trial
+    </ExternalButton>
+  )}
 
-                <TextLink href="/pathway/" className="text-chalk">
-                  See the pathway
-                </TextLink>
-              </div>
+
+</div>
             </Reveal>
           )}
         </div>

@@ -380,13 +380,11 @@ export function PathwaySteps() {
             title="Four levels. One direction."
             intro="Every player at Celestial’s sits somewhere on this pathway. You always know what you’re working on now, and what it takes to move up."
           />
-          <div className="flex flex-wrap items-center gap-3 lg:col-span-4 lg:justify-end">
-            {phase === "landed" && !reduced && (
+<div className="flex flex-wrap items-center justify-end gap-3 lg:col-span-4 lg:justify-end">            {phase === "landed" && !reduced && (
               <button
                 type="button"
                 onClick={play}
-                className="inline-flex min-h-[40px] items-center gap-1.5 rounded-full border border-ink/20 bg-chalk px-3.5 text-xs font-semibold uppercase tracking-wider text-ink transition hover:border-ink/40 hover:bg-chalk-2"
-                aria-label="Replay the shuttle flight transition"
+className="hidden min-h-[40px] items-center gap-1.5 rounded-full border border-ink/20 bg-chalk px-3.5 text-xs font-semibold uppercase tracking-wider text-ink transition hover:border-ink/40 hover:bg-chalk-2 lg:inline-flex"                aria-label="Replay the shuttle flight transition"
               >
                 <ArrowCounterClockwise size={13} weight="bold" aria-hidden="true" />
                 <span>Replay</span>

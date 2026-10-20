@@ -161,10 +161,22 @@ export default function ProgramsPage() {
                     Tell us the player&rsquo;s age, level and the times that suit you, and we&rsquo;ll send the current timetable and fees for the batches that fit.
                   </p>
                 </div>
-                <div className="flex flex-col gap-3">
-                  <ExternalButton href={trialLink("Please send current batch timings and fees.")} variant="ink" note="opens WhatsApp">Ask on WhatsApp</ExternalButton>
-                  <a href={a.contact.phoneHref} className="text-center font-semibold link-underline">Call {a.contact.phoneDisplay}</a>
-                </div>
+               <div className="flex flex-col items-end gap-3 sm:items-start">
+  <a
+    href={a.contact.phoneHref}
+    className="text-center font-semibold link-underline"
+  >
+    Call {a.contact.phoneDisplay}
+  </a>
+
+  <ExternalButton
+    href={trialLink("Please send current batch timings and fees.")}
+    variant="ink"
+    note="opens WhatsApp"
+  >
+    Ask on WhatsApp
+  </ExternalButton>
+</div>
               </div>
             )}
           </Reveal>

@@ -229,8 +229,7 @@ export function ProgramsSlider() {
                                 style={{ width: `${100 / programs.length}%` }}
                             >
                                 {/* Left panel */}
-                                <div className="relative flex min-h-[340px] flex-col justify-between overflow-hidden bg-court-950 p-6 text-chalk sm:p-9 lg:col-span-5 lg:min-h-[380px] lg:p-10">
-                                    <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full border border-chalk/10" />
+<div className="relative flex min-h-[280px] flex-col justify-between overflow-hidden bg-court-950 p-5 text-chalk sm:min-h-[300px] sm:p-7 lg:col-span-5 lg:min-h-[380px] lg:p-10">                                    <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full border border-chalk/10" />
                                     <div className="pointer-events-none absolute -right-6 -top-6 h-36 w-36 rounded-full border border-chalk/10" />
 
                                     <div className="relative">

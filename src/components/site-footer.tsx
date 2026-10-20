@@ -8,8 +8,7 @@ export function SiteFooter() {
   return (
     <footer className="bg-court-950 text-chalk">
       <div className="mx-auto max-w-[1320px] px-5 pt-20 pb-10 sm:px-8">
-        <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
-          <div>
+<div className="grid grid-cols-2 gap-6 md:grid-cols-[1.4fr_1fr_1fr_1fr] md:gap-12">            <div>
             <Link href="/" className="inline-flex items-center gap-3">
               <Mark className="h-11 w-11 text-chalk" />
               <span className="leading-none">

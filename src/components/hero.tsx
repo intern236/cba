@@ -249,7 +249,7 @@ export function Hero() {
         <div ref={grid} className="grid items-center gap-8 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
           {/* Copy */}
           <div className="order-2 lg:order-1">
-            <p className="eyebrow rise-in text-mat-soft" style={{ animationDelay: "60ms" }}>
+            <p className="eyebrow rise-in text-mat-soft pb-5" style={{ animationDelay: "60ms" }}>
               Badminton academy · Sector 104, Noida
             </p>
             <h1 id="hero-title" className="display mt-5 text-[clamp(3.3rem,6.15vw,5.9rem)]">
@@ -261,23 +261,44 @@ export function Hero() {
               </span>
             </h1>
             <p className="rise-in mt-6 max-w-[52ch] text-pretty text-[1.06rem] leading-relaxed text-chalk/75" style={{ animationDelay: "380ms" }}>
-              Coaching for kids, teens and adults, from a first lesson to a first tournament. Group batches or one-to-one,
-              with assessments and video analysis so you can see the progress. Your first session is free.
+              Coaching for kids, teens and adults, from a first lesson to a first tournament. Your first session is free.
             </p>
-            <div className="rise-in mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap" style={{ animationDelay: "480ms" }}>
-              <a href={trialLink()} target="_blank" rel="noopener noreferrer" className="btn btn-primary justify-between sm:justify-start">
-                <span>
-                  Book a free trial
-                  <span className="sr-only"> (opens WhatsApp in a new tab)</span>
-                </span>
-                <span className="btn-icon" aria-hidden="true">
-                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M4 12 12 4M5.5 4H12v6.5" /></svg>
-                </span>
-              </a>
-              <a href="#find-your-level" className="btn btn-ghost-dark justify-center">
-                Find your level
-              </a>
-            </div>
+        <div className="mt-8 flex w-full flex-row items-center justify-between gap-3">
+  <a
+    href="#find-your-level"
+    className="btn btn-ghost-dark justify-center"
+  >
+    Find your level
+  </a>
+ <a
+  href={trialLink()}
+  target="_blank"
+  rel="noopener noreferrer"
+  className="btn btn-primary justify-between lg:mr-40"
+>
+    <span>
+      Book a free trial
+      <span className="sr-only">
+        {" "}(opens WhatsApp in a new tab)
+      </span>
+    </span>
+
+    <span className="btn-icon" aria-hidden="true">
+      <svg
+        width="14"
+        height="14"
+        viewBox="0 0 16 16"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.2"
+      >
+        <path d="M4 12 12 4M5.5 4H12v6.5" />
+      </svg>
+    </span>
+  </a>
+
+  
+</div>
             <p className="rise-in mt-5 text-[0.95rem] text-chalk/60" style={{ animationDelay: "560ms" }}>
               Just want to play?{" "}
               <a href={a.booking.primary.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-semibold text-chalk/85 hover:text-chalk">

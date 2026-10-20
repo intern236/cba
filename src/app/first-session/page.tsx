@@ -50,8 +50,8 @@ export default function FirstSessionPage() {
       >
         <div className="rounded-[22px] bg-court-900 p-6 ring-1 ring-white/10">
           <p className="text-chalk/80">Kids, teens and adults. Complete beginners welcome.</p>
-          <ExternalButton href={trialLink()} note="opens WhatsApp" className="mt-4 w-full justify-between">Book a free trial</ExternalButton>
-          <p className="mt-3 text-sm text-chalk/55">Or call {a.contact.phoneDisplay}</p>
+          <ExternalButton href={trialLink()} note="opens WhatsApp" className="mt-4 ml-40 justify-between">Book a free trial</ExternalButton>
+          <p className="mt-3 ml-44 text-sm text-chalk/55">Or call {a.contact.phoneDisplay}</p>
         </div>
       </PageHeader>
 
