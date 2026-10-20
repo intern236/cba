@@ -20,11 +20,23 @@ export function BookCourt() {
             players per court, non-marking shoes required. Rates vary by slot; the booking page shows the live price.
           </p>
         </div>
-        <div className="flex flex-wrap gap-3 lg:col-span-5 lg:justify-end">
-          <ExternalButton href={a.booking.secondary.url} variant="ghost-light" note="opens Playo">Book on Playo</ExternalButton>
-           <ExternalButton href={a.booking.primary.url} variant="ink" note="opens Hudle">Book on Hudle</ExternalButton>
-       
-        </div>
+<div className="flex flex-wrap justify-end gap-3 lg:col-span-5 lg:justify-start">
+  <ExternalButton
+    href={a.booking.secondary.url}
+    variant="ghost-light"
+    note="opens Playo"
+  >
+    Book on Playo
+  </ExternalButton>
+
+  <ExternalButton
+    href={a.booking.primary.url}
+    variant="ink"
+    note="opens Hudle"
+  >
+    Book on Hudle
+  </ExternalButton>
+</div>
       </Reveal>
     </section>
   );
