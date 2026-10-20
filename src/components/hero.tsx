@@ -342,8 +342,8 @@ export function Hero() {
         </div>
 
         {/* Facts strip, revealed by the court line the shuttle lands on */}
-        <div className={`relative mt-10 lg:mt-[68px] ${showStrip ? "strip-on" : "strip-off"}`}>
-          <ul className="grid grid-cols-1 gap-x-8 gap-y-3 pt-5 text-[0.95rem] text-chalk/80 sm:grid-cols-2 lg:grid-cols-4 lg:pt-6">
+<div className="relative mt-10 lg:mt-[68px]">
+            <ul className="grid grid-cols-1 gap-x-8 gap-y-3 pt-5 text-[0.95rem] text-chalk/80 sm:grid-cols-2 lg:grid-cols-4 lg:pt-6">
             <li className="strip-item flex items-center gap-2">
               <UsersThree size={16} weight="bold" className="text-mat-soft" aria-hidden="true" />
               Kids · Teens · Adults
