@@ -11,27 +11,40 @@ export function SiteFooter() {
       <div className="mx-auto max-w-[1320px] px-5 pb-10 pt-20 sm:px-8">
         <div className="grid grid-cols-2 gap-6 md:grid-cols-[1.4fr_1fr_1fr_1fr] md:gap-12">
           {/* Brand */}
-          <div className="col-span-2 md:col-span-1">
-            <Link
-              href="/"
-              aria-label="Celestial's Badminton Academy home"
-              className="inline-block"
-            >
-              <Image
-                src="/images/LOGO.png"
-                alt="Celestial's Badminton Academy logo"
-                width={320}
-                height={320}
-                className="h-40 w-40 object-contain sm:h-48 sm:w-48 md:h-60 md:w-60"
-              />
-            </Link>
+         
+{/* Brand */}
+<div className="col-span-2 md:col-span-1">
+  <Link
+    href="/"
+    aria-label="Celestial's Badminton Academy home"
+    className="inline-flex items-center gap-3"
+  >
+    <Image
+      src="/images/LOGO.png"
+      alt="Celestial's Badminton Academy logo"
+      width={80}
+      height={80}
+      className="h-14 w-14 shrink-0 object-contain sm:h-16 sm:w-16"
+    />
 
-            <p className="mt-4 max-w-[34ch] text-chalk/70">
-              A badminton academy for players starting out and players getting
-              better: coaching, seven indoor courts and a recovery stack under
-              one roof in Sector&nbsp;104, Noida.
-            </p>
-          </div>
+    <span className="leading-none">
+      <span className="display block whitespace-nowrap text-[1.2rem] font-bold tracking-[0.01em] sm:text-[1.4rem]">
+        Celestial&rsquo;s
+      </span>
+
+      <span className="eyebrow mt-1.5 block whitespace-nowrap text-[0.55rem] uppercase tracking-[0.12em] text-chalk/70 sm:text-[0.6rem]">
+        Badminton Academy
+      </span>
+    </span>
+  </Link>
+
+  <p className="mt-7 max-w-[40ch] text-base leading-[1.7] text-chalk/80 sm:mt-8 sm:text-lg sm:leading-[1.6]">
+    A badminton academy for players starting out and players getting
+    better: coaching, seven indoor courts and a recovery stack under
+    one roof in Sector 104, Noida.
+  </p>
+</div>
+
 
           {/* Visit */}
           <div>
