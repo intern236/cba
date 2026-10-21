@@ -62,7 +62,7 @@ export const academy = {
     email: null as string | null,
     // [IG] bio names this number for WhatsApp free-trial enquiries.
     whatsappUrl:
-      "https://wa.me/919560478732?text=" +
+      "https://wa.me/88262 68236?text=" +
       encodeURIComponent("Hi Celestial's, I'd like to book a free trial session."),
     instagram: {
       handle: "@celestialsbadmintonacademy",

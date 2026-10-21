@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
-import { ArrowCounterClockwise, ArrowRight, Star, UsersThree, CalendarDots, VideoCamera } from "@phosphor-icons/react";
+import { ArrowCounterClockwiseIcon, ArrowRightIcon, StarIcon, UsersThreeIcon, CalendarDotsIcon, VideoCameraIcon } from "@phosphor-icons/react";
 import { academy, trialLink } from "@/lib/academy";
 import { fitToScreen, pathFrom, simulateClear, type ScreenSample } from "@/lib/flight";
 import { ShuttleShape } from "./shuttle";
@@ -303,7 +303,7 @@ export function Hero() {
               Just want to play?{" "}
               <a href={a.booking.primary.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-semibold text-chalk/85 hover:text-chalk">
                 <span className="link-underline">Book a court from {a.booking.priceFrom}</span>
-                <ArrowRight size={13} weight="bold" aria-hidden="true" />
+                <ArrowRightIcon size={13} weight="bold" aria-hidden="true" />
                 <span className="sr-only"> (opens Hudle in a new tab)</span>
               </a>
             </p>
@@ -333,7 +333,7 @@ export function Hero() {
                 disabled={!geo || reduced}
                 className={`absolute bottom-3 right-3 flex min-h-[40px] items-center gap-2 rounded-full bg-court-950/70 px-3.5 text-sm font-medium text-chalk ring-1 ring-white/15 backdrop-blur transition-opacity hover:bg-court-950/85 disabled:hidden ${landed ? "visible opacity-100" : "invisible opacity-0"}`}
               >
-                <ArrowCounterClockwise size={15} weight="bold" aria-hidden="true" />
+                <ArrowCounterClockwiseIcon size={15} weight="bold" aria-hidden="true" />
                 Replay the shot
               </button>
             </div>
@@ -345,19 +345,19 @@ export function Hero() {
 <div className="relative mt-10 lg:mt-[68px]">
             <ul className="grid grid-cols-1 gap-x-8 gap-y-3 pt-5 text-[0.95rem] text-chalk/80 sm:grid-cols-2 lg:grid-cols-4 lg:pt-6">
             <li className="strip-item flex items-center gap-2">
-              <UsersThree size={16} weight="bold" className="text-mat-soft" aria-hidden="true" />
+              <UsersThreeIcon size={16} weight="bold" className="text-mat-soft" aria-hidden="true" />
               Kids · Teens · Adults
             </li>
             <li className="strip-item flex items-center gap-2">
-              <CalendarDots size={16} weight="bold" className="text-mat-soft" aria-hidden="true" />
+              <CalendarDotsIcon size={16} weight="bold" className="text-mat-soft" aria-hidden="true" />
               Morning, evening &amp; weekend batches
             </li>
             <li className="strip-item flex items-center gap-2">
-              <VideoCamera size={16} weight="bold" className="text-mat-soft" aria-hidden="true" />
+              <VideoCameraIcon size={16} weight="bold" className="text-mat-soft" aria-hidden="true" />
               Assessments &amp; video analysis
             </li>
             <li className="strip-item flex items-center gap-2">
-              <Star size={16} weight="fill" className="text-lime" aria-hidden="true" />
+              <StarIcon size={16} weight="fill" className="text-lime" aria-hidden="true" />
               <a href={a.rating.url} target="_blank" rel="noopener noreferrer" className="link-underline">
                 {a.rating.value} on Google · {a.rating.countLabel} reviews
               </a>

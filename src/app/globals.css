@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-
 @theme {
   --animate-nudge: nudge 1.6s ease-in-out infinite;
   --animate-nudge-left: nudge-left 1.6s ease-in-out infinite;
@@ -44,28 +43,44 @@
 }
 
 /*
- * Palette is taken from the venue itself (research: Roland-Garros builds its palette
- * from the playing surface). Deep court green = the hall under lights, mat = the
- * actual court mats, chalk = the court lines, lime = the yellow net posts / shuttle
- * flight. Lime is reserved for the primary action and the shuttle path only.
+ * Palette: the dark court greens come from the venue itself (the hall under lights).
+ * The logo teal (#03989e) is the brand accent: buttons, links, highlights, focus rings
+ * and borders. Chalk = the court lines. Lime is kept as a small secondary accent only.
  */
 @theme {
-  --color-court-950: #071c17;
-  --color-court-900: #0b2a23;
-  --color-court-800: #113a31;
-  --color-court-700: #17493e;
-  --color-mat: #1f9482;
-  --color-mat-soft: #7fc9bb;
-  --color-mat-deep: #12665a;
-  /* mat for text on chalk: 5.9:1 */
+  /* Base dark backgrounds: dark teal (950 matches the hero background) */
+  --color-court-950: #041a1b;
+  --color-court-900: #07282a;
+  --color-court-800: #0b3a3d;
+  --color-court-700: #104d50;
+
+  /* Logo teal: accents (buttons, links, highlights, borders) */
+  --color-mat: #03989e;
+  --color-mat-soft: #6fd0d4;
+  --color-mat-deep: #05656b;
+
+  /* Logo teal scale: 500 is the exact logo color */
+  --color-logo-50: #e6f6f7;
+  --color-logo-100: #c2e9eb;
+  --color-logo-200: #8fd6da;
+  --color-logo-300: #5fc3c8;
+  --color-logo-400: #2bacb2;
+  --color-logo-500: #03989e;
+  --color-logo-600: #027a7f;
+  --color-logo-700: #025d61;
+  --color-logo-800: #095055;
+  --color-logo-900: #032f32;
+  --color-logo-950: #052a2d;
+
   --color-chalk: #f3f0e8;
   --color-chalk-2: #e9e5da;
   --color-ink: #0e1a17;
   --color-ink-soft: #46544f;
-  --color-lime: #d6f04e;
-  --color-lime-deep: #b9d43a;
+  /* "lime" now maps to logo teal, so every existing bg-lime / text-lime /
+     border-lime class across the site picks up the logo color automatically */
+  --color-lime: #6fd0d4;
+  --color-lime-deep: #03989e;
   --color-cork: #c9a36a;
-
   --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 
@@ -99,20 +114,22 @@
     text-rendering: optimizeLegibility;
   }
 
+  /* Text selection in logo teal */
   ::selection {
-    background: var(--color-lime);
+    background: var(--color-mat-soft);
     color: var(--color-ink);
   }
 
+  /* Focus ring in logo teal (light teal on dark, deep teal on light) */
   :focus-visible {
-    outline: 3px solid var(--color-lime);
+    outline: 3px solid var(--color-mat-soft);
     outline-offset: 3px;
     border-radius: 6px;
   }
 
   .on-light :focus-visible,
   .on-light:focus-visible {
-    outline-color: var(--color-ink);
+    outline-color: var(--color-mat-deep);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -154,7 +171,7 @@
     text-transform: uppercase;
   }
 
-  /* Buttons — pill shape follows the client's moodboard (Notion "Buttons"). */
+  /* Buttons: pill shape follows the client's moodboard (Notion "Buttons"). */
   .btn {
     display: inline-flex;
     align-items: center;
@@ -166,20 +183,33 @@
     font-size: 0.975rem;
     line-height: 1;
     white-space: nowrap;
-    transition: transform 200ms var(--ease-flight), background-color 200ms, color 200ms, border-color 200ms;
+    transition: transform 200ms var(--ease-flight), background-color 200ms, color 200ms, border-color 200ms, box-shadow 200ms;
   }
 
   .btn:active {
     transform: translateY(1px) scale(0.985);
   }
 
+  /* Primary: logo teal fill, dark text (as in the hero screenshot) */
   .btn-primary {
-    background: var(--color-lime);
-    color: var(--color-ink);
+    background: var(--color-mat);
+    color: var(--color-court-950);
+    font-weight: 700;
   }
 
   .btn-primary:hover {
-    background: #e3f77a;
+    background: var(--color-mat-soft);
+  }
+
+  /* Soft: pale teal fill for secondary actions on light backgrounds */
+  .btn-soft {
+    background: var(--color-logo-100);
+    color: var(--color-logo-700);
+  }
+
+  .btn-soft:hover {
+    background: var(--color-logo-200);
+    color: var(--color-logo-800);
   }
 
   .btn-ghost-dark {
@@ -188,26 +218,30 @@
   }
 
   .btn-ghost-dark:hover {
-    box-shadow: inset 0 0 0 1.5px var(--color-chalk);
-    background: rgb(243 240 232 / 0.06);
+    color: #fff;
+    background: rgb(3 152 158 / 0.25);
+    box-shadow: inset 0 0 0 1.5px var(--color-mat-soft);
   }
 
+  /* Ink button: deep logo teal, brighter teal on hover */
   .btn-ink {
-    background: var(--color-ink);
-    color: var(--color-chalk);
+    background: var(--color-logo-950);
+    color: #fff;
   }
 
   .btn-ink:hover {
-    background: var(--color-court-800);
+    background: var(--color-mat);
   }
 
   .btn-ghost-light {
-    color: var(--color-ink);
-    box-shadow: inset 0 0 0 1.5px rgb(14 26 23 / 0.35);
+    color: var(--color-mat-deep);
+    box-shadow: inset 0 0 0 1.5px var(--color-mat);
   }
 
   .btn-ghost-light:hover {
-    box-shadow: inset 0 0 0 1.5px var(--color-ink);
+    background: var(--color-mat);
+    color: #fff;
+    box-shadow: inset 0 0 0 1.5px var(--color-mat);
   }
 
   .btn-icon {
@@ -217,8 +251,8 @@
     height: 2rem;
     margin-right: -0.75rem;
     border-radius: 999px;
-    background: var(--color-ink);
-    color: var(--color-lime);
+    background: var(--color-mat);
+    color: #fff;
     transition: transform 300ms var(--ease-flight);
   }
 
@@ -226,24 +260,22 @@
     transform: translateX(2px) rotate(-45deg);
   }
 
+  /* On the teal primary button: dark teal circle, white arrow */
+  .btn-primary .btn-icon {
+    background: var(--color-logo-800);
+    color: #fff;
+  }
+
   .btn-ink .btn-icon {
-    background: var(--color-lime);
-    color: var(--color-ink);
+    background: var(--color-mat);
+    color: #fff;
   }
 
-  /* Court-line rule: the recurring brand device (2px chalk line with a service-line tick). */
-  .court-rule {
-    position: relative;
-    height: 2px;
-    background: currentColor;
-    opacity: 0.22;
-  }
-
-  /* String-bed texture (racket strings) — used once, behind the trial CTA. */
+  /* String-bed texture (racket strings), used once, behind the trial CTA. Teal tinted. */
   .strings {
     background-image:
-      linear-gradient(to right, rgb(243 240 232 / 0.07) 1px, transparent 1px),
-      linear-gradient(to bottom, rgb(243 240 232 / 0.07) 1px, transparent 1px);
+      linear-gradient(to right, rgb(111 208 212 / 0.09) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(111 208 212 / 0.09) 1px, transparent 1px);
     background-size: 14px 14px;
   }
 
@@ -252,12 +284,18 @@
     background-size: 0% 1.5px;
     background-position: 0 100%;
     background-repeat: no-repeat;
-    transition: background-size 300ms var(--ease-flight);
+    transition: background-size 300ms var(--ease-flight), color 200ms;
   }
 
   .link-underline:hover,
   .link-underline:focus-visible {
     background-size: 100% 1.5px;
+  }
+
+  /* Links in dark sections (footer, menu) turn light teal on hover */
+  .bg-court-950 .link-underline:hover,
+  .bg-court-950 .link-underline:focus-visible {
+    color: var(--color-mat-soft);
   }
 }
 

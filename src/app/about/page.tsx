@@ -7,6 +7,7 @@ import { Reveal } from "@/components/reveal";
 import { ExternalButton, TextLink } from "@/components/buttons";
 import { Community } from "@/components/home/community";
 import { AchievementsSlider } from "@/components/home/achievements-slider";
+import InstagramLive from "@/components/home/InstagramLive";
 
 export const metadata: Metadata = {
   title: "About Celestial's Badminton Academy",
@@ -68,67 +69,91 @@ const facilities = [
 
 const achievements = [
   {
-    name: "Parth Aggarwal",
-    result: "National silver medal",
-    event: "Mixed Doubles · Deaf Nationals",
-    date: "May 2026",
-  },
-  {
-    name: "Parth Aggarwal",
-    result: "UP State Champion",
-    event: "Singles and Doubles",
-    date: "March 2026",
-  },
-  {
-    name: "Dr. Ketan",
-    result: "Men's Singles champion",
-    event: "National Doctors Championship",
-    date: "March 2026",
-  },
+  name: "Parth Aggarwal",
+  result: "National silver medal\nUP State Champion",
+  event: "Mixed Doubles · Deaf Nationals (May 2026)\nSingles and Doubles · UP State Championship (March 2026)",
+  date: "May 2026 · March 2026",
+  image: "/images/Parth-Aggarwal.jpeg",
+},
+{
+  name: "Dr. Ketan",
+  result: "Men's Singles champion\nRunner-up",
+  event: "National Doctors Championship (March 2026)\nUP State Ranking · 35+ (October 2026)",
+  date: "March 2026 · October 2026",
+  image: "/images/Dr. Ketan.jpeg",
+},
   {
     name: "Siddhant Thakur",
     result: "India Top 10",
     event: "U-15 Boys Doubles",
     date: "July 2025",
+    image: "/images/Siddhant-Thakur.jpeg",
   },
   {
     name: "Sneha Maurya",
     result: "India Top 15",
     event: "U-17 Girls Doubles",
     date: "December 2025",
+    image: "/images/Sneha-Maurya.jpeg",
   },
+    {
+    name: "Vatsal Vedansh",
+    result: "Main draw qualification",
+    event: "All India Sub-Junior Ranking · U-15",
+    date: "February 2026",
+    image: "/images/Vatsal-Vedansh.jpeg",
+  },
+  {
+    name: "Kashish Sharma",
+    result: "CBSE East Zone medalist",
+    event: "CBSE East Zone",
+    date: "",
+    image: "/images/Kashish-Sharma.jpeg",
+  },
+  {
+    name: "Mamta Yadav",
+    result: "National medalist",
+    event: "Masters National Championship",
+    date: "",
+    image: "/images/Mamta-Yadav.jpeg",
+  },
+  {
+    name: "Richa Tomar",
+    result: "State champion",
+    event: "WS, WD and XD · State Championship · 40+ category",
+    date: "",
+    image: "/images/Richa-Tomar.jpeg",
+  },
+
   {
     name: "Kaira",
     result: "Silver medal",
     event: "Delhi State Championship",
     date: "October 2025",
+    image: "/images/Kaira.jpeg",
   },
   {
     name: "Lakshita",
     result: "Bronze medal",
     event: "Delhi State Championship",
     date: "October 2025",
-  },
-  {
-    name: "Vastal",
-    result: "Main draw qualification",
-    event: "All India Sub-Junior Ranking · U-15",
-    date: "February 2026",
+    image: "/images/Lakshita.jpeg",
   },
   {
     name: "Akshita",
     result: "3rd place",
     event: "U-11 Girls Singles · PNB MetLife JBC",
     date: "November 2023",
+    image: "/images/Akshita.jpeg",
   },
   {
-    name: "Dr. Ketan",
-    result: "Runner-up",
-    event: "UP State Ranking · 35+",
+    name: "8 Academy Players",
+    result: "Selected for UP State Mini Championships",
+    event: "U-11 · Trials held at Celestial's",
     date: "October 2026",
+    image: "/images/UP-State-Mini-Championship.jpeg",
   },
 ];
-
 const corporateEvents = [
   "Microsoft",
   "Adobe",
@@ -141,26 +166,26 @@ export default function AboutPage() {
     <>
       {/* Page Header */}
 
-<section className="relative overflow-hidden bg-court-950 py-20 text-chalk sm:py-24 lg:py-32">
-  <div className="mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12 xl:px-16">
-    <Reveal>
-      <h1 className="display mt-10 max-w-none text-[clamp(2.5rem,6vw,5rem)] leading-[0.98] tracking-tight">
-        CELESTIAL'S BADMINTON ACADEMY
-      </h1>
+      <section className="relative overflow-hidden bg-court-950 py-20 text-chalk sm:py-24 lg:py-32">
+        <div className="mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12 xl:px-16">
+          <Reveal>
+            <h1 className="display mt-10 max-w-none text-[clamp(2.5rem,6vw,5rem)] leading-[0.98] tracking-tight">
+              CELESTIAL'S BADMINTON ACADEMY
+            </h1>
 
-      <p className="eyebrow mb-4 mt-6 text-mat">
-        WHERE EVERYTHING IS POSSIBLE
-      </p>
+            <p className="eyebrow mb-4 mt-6 text-mat">
+              WHERE EVERYTHING IS POSSIBLE
+            </p>
 
-      <p className="mt-8 max-w-[780px] text-base leading-relaxed text-chalk/75 sm:text-lg lg:text-xl">
-        Founded in 2022 in Sector 104, Noida, we help juniors,
-        adults and aspiring athletes learn, improve and compete.
-        <br />Our sister academy, Noida Badminton Academy in
-        Sector 26, shares the same head coach.
-      </p>
-    </Reveal>
-  </div>
-</section>
+            <p className="mt-8 max-w-[780px] text-base leading-relaxed text-chalk/75 sm:text-lg lg:text-xl">
+              Founded in 2022 in Sector 104, Noida, we help juniors,
+              adults and aspiring athletes learn, improve and compete.
+              <br />Our sister academy, Noida Badminton Academy in
+              Sector 26, shares the same head coach.
+            </p>
+          </Reveal>
+        </div>
+      </section>
 
       {/* Sports Philosophy */}
       <section
@@ -535,7 +560,7 @@ export default function AboutPage() {
                   </p>
 
                   <p className="mt-2 text-sm text-ink-soft">
-                    Photo and bio to be provided
+                    Original high-resolution image
                   </p>
                 </div>
               </div>
@@ -597,29 +622,28 @@ export default function AboutPage() {
                 train with the coaching team before you decide.
               </p>
 
-         <div className="flex w-full flex-col items-end gap-2 lg:col-span-5">
-    <TextLink
-    href="/pathway/"
-    className="flex !w-full max-w-[205px] items-center justify-center rounded-full border border-chalk/30 px-5 py-3 text-center text-chalk"
-  >
-    See the pathway
-  </TextLink>
-  
-  {a.contact.whatsappUrl && (
-    <ExternalButton
-      href={a.contact.whatsappUrl}
-      note="opens WhatsApp"
-      className="!flex !w-full !max-w-[200px] !justify-center"
-    >
-      Book a free trial
-    </ExternalButton>
-  )}
+              <div className="flex w-full flex-col items-end gap-2 lg:col-span-5">
+                <TextLink
+                  href="/pathway/"
+                  className="flex !w-full max-w-[205px] items-center justify-center rounded-full border border-chalk/30 px-5 py-3 text-center text-chalk"
+                >
+                  See the pathway
+                </TextLink>
 
-
-</div>
+                {a.contact.whatsappUrl && (
+                  <ExternalButton
+                    href={a.contact.whatsappUrl}
+                    note="opens WhatsApp"
+                    className="!flex !w-full !max-w-[200px] !justify-center"
+                  >
+                    Book a free trial
+                  </ExternalButton>
+                )}
+              </div>
             </Reveal>
           )}
         </div>
+        <InstagramLive />
       </section>
     </>
   );
