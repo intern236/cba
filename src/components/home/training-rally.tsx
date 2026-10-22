@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -34,7 +33,6 @@ const steps = [
 
 const SCALE = 0.88;
 const HOP_DURATION = 620;
-const TOTAL_FLIGHT = HOP_DURATION * 3;
 
 type Point = {
   x: number;
@@ -69,12 +67,15 @@ const ARCS: Arc[] = [
   },
 ];
 
+const HOPS = ARCS.length;
+const TOTAL_FLIGHT = HOP_DURATION * HOPS;
+
 const RALLY_PATH =
   "M6 158 C 110 0, 290 0, 308 158 " +
   "C 412 0, 597 0, 615 158 " +
   "C 719 0, 905 0, 923 158";
 
-const LAND = ARCS[2].p3;
+const LAND = ARCS[HOPS - 1].p3;
 
 function getRestPose(land: Point) {
   const angle = 166;
@@ -88,11 +89,7 @@ function getRestPose(land: Point) {
   ];
 
   const maxY = Math.max(
-    ...points.map(
-      ([x, y]) =>
-        (x * Math.sin(radians) + y * Math.cos(radians)) *
-        SCALE
-    )
+    ...points.map(([x, y]) => (x * Math.sin(radians) + y * Math.cos(radians)) * SCALE)
   );
 
   return {
@@ -104,7 +101,10 @@ function getRestPose(land: Point) {
 
 const REST = getRestPose(LAND);
 
-function sampleBezier(arc: Arc, progress: number) {
+function sampleBezier(arc: Arc | undefined, progress: number) {
+  // Backstop: never throw if an arc index is ever out of range.
+  if (!arc) return { x: 0, y: 0, angle: 0, speed: 0 };
+
   const u = Math.max(0, Math.min(progress, 1));
   const v = 1 - u;
 
@@ -162,9 +162,7 @@ export function TrainingRally({
 
   const reduce = useReducedMotion();
 
-  const [phase, setPhase] = useState<
-    "idle" | "flying" | "landed"
-  >("idle");
+  const [phase, setPhase] = useState<"idle" | "flying" | "landed">("idle");
 
   const ex = academy.coaching.exchange;
 
@@ -173,13 +171,10 @@ export function TrainingRally({
       shuttleRef.current?.setAttribute(
         "transform",
         `translate(${x.toFixed(2)} ${y.toFixed(2)}) ` +
-        `rotate(${angle.toFixed(2)}) scale(${SCALE})`
+          `rotate(${angle.toFixed(2)}) scale(${SCALE})`
       );
 
-      skirtRef.current?.setAttribute(
-        "transform",
-        `scale(1 ${skirtScale.toFixed(3)})`
-      );
+      skirtRef.current?.setAttribute("transform", `scale(1 ${skirtScale.toFixed(3)})`);
     },
     []
   );
@@ -219,54 +214,35 @@ export function TrainingRally({
     const frame = (now: number) => {
       if (id !== runIdRef.current) return;
 
-      const elapsed = now - start;
+      // rAF timestamps can land slightly before performance.now() at start.
+      // That made elapsed negative, currentHop -1, and ARCS[-1] undefined.
+      const elapsed = Math.max(0, now - start);
 
       // Launch pulse at Assess.
       if (pingRef.current) {
         const p = Math.min(elapsed / 420, 1);
 
-        pingRef.current.setAttribute(
-          "r",
-          String(6 + p * 24)
-        );
-
-        pingRef.current.style.opacity = String(
-          p < 1 ? (1 - p) * 0.9 : 0
-        );
+        pingRef.current.setAttribute("r", String(6 + p * 24));
+        pingRef.current.style.opacity = String(p < 1 ? (1 - p) * 0.9 : 0);
       }
 
-      // Fly through the three coaching transitions.
+      // Fly through the coaching transitions.
       if (elapsed < TOTAL_FLIGHT) {
-        const currentHop = Math.min(
-          Math.floor(elapsed / HOP_DURATION),
-          2
-        );
+        const currentHop = Math.max(0, Math.min(Math.floor(elapsed / HOP_DURATION), HOPS - 1));
 
-        const hopElapsed =
-          elapsed - currentHop * HOP_DURATION;
+        const hopElapsed = elapsed - currentHop * HOP_DURATION;
 
-        const progress = Math.min(
-          hopElapsed / HOP_DURATION,
-          1
-        );
+        const progress = Math.min(hopElapsed / HOP_DURATION, 1);
 
         // Pulse when the shuttle reaches an intermediate step.
         if (currentHop > lastHop && currentHop > 0) {
           lastHop = currentHop;
 
-          const point = ARCS[currentHop].p0;
+          const stepPoint = ARCS[currentHop].p0;
 
           if (impactRef.current) {
-            impactRef.current.setAttribute(
-              "cx",
-              String(point.x)
-            );
-
-            impactRef.current.setAttribute(
-              "cy",
-              String(point.y)
-            );
-
+            impactRef.current.setAttribute("cx", String(stepPoint.x));
+            impactRef.current.setAttribute("cy", String(stepPoint.y));
             impactRef.current.setAttribute("r", "5");
             impactRef.current.style.opacity = "0.85";
           }
@@ -276,45 +252,24 @@ export function TrainingRally({
         if (impactRef.current && lastHop > 0) {
           const p = Math.min(hopElapsed / 360, 1);
 
-          impactRef.current.setAttribute(
-            "r",
-            String(5 + p * 22)
-          );
-
-          impactRef.current.style.opacity = String(
-            (1 - p) * 0.85
-          );
+          impactRef.current.setAttribute("r", String(5 + p * 22));
+          impactRef.current.style.opacity = String((1 - p) * 0.85);
         }
 
-        const point = sampleBezier(
-          ARCS[currentHop],
-          progress
-        );
+        const point = sampleBezier(ARCS[currentHop], progress);
 
         // Animate the shuttle skirt while flying.
-        spin +=
-          ((now - lastNow) / 1000) *
-          (2 + point.speed * 0.003) *
-          Math.PI *
-          2;
+        spin += ((now - lastNow) / 1000) * (2 + point.speed * 0.003) * Math.PI * 2;
 
-        const skirtScale =
-          0.84 + 0.16 * Math.abs(Math.cos(spin));
+        const skirtScale = 0.84 + 0.16 * Math.abs(Math.cos(spin));
 
-        placeShuttle(
-          point.x,
-          point.y,
-          point.angle,
-          skirtScale
-        );
+        placeShuttle(point.x, point.y, point.angle, skirtScale);
 
         // Reveal the lime trail behind the shuttle.
-        const overallProgress =
-          (currentHop + progress) / 3;
+        const overallProgress = (currentHop + progress) / HOPS;
 
         if (trailRef.current) {
-          trailRef.current.style.strokeDashoffset =
-            String(1 - overallProgress);
+          trailRef.current.style.strokeDashoffset = String(1 - overallProgress);
         }
 
         lastNow = now;
@@ -325,27 +280,15 @@ export function TrainingRally({
 
       // Landing impact at Review.
       const landingElapsed = elapsed - TOTAL_FLIGHT;
-      const endAngle = sampleBezier(ARCS[2], 1).angle;
+      const endAngle = sampleBezier(ARCS[HOPS - 1], 1).angle;
       const landingDuration = 480;
 
       if (impactRef.current) {
-        const p = Math.min(landingElapsed / 480, 1);
+        const p = Math.min(landingElapsed / landingDuration, 1);
 
-        impactRef.current.setAttribute(
-          "cx",
-          String(LAND.x)
-        );
-
-        impactRef.current.setAttribute(
-          "cy",
-          String(LAND.y)
-        );
-
-        impactRef.current.setAttribute(
-          "r",
-          String(5 + p * 26)
-        );
-
+        impactRef.current.setAttribute("cx", String(LAND.x));
+        impactRef.current.setAttribute("cy", String(LAND.y));
+        impactRef.current.setAttribute("r", String(5 + p * 26));
         impactRef.current.style.opacity = String(1 - p);
       }
 
@@ -360,15 +303,11 @@ export function TrainingRally({
 
         const ease = 1 - Math.pow(1 - p, 3);
 
-        const angle =
-          endAngle + (REST.angle - endAngle) * ease;
+        const angle = endAngle + (REST.angle - endAngle) * ease;
 
         const x = LAND.x + (REST.x - LAND.x) * ease;
 
-        const y =
-          LAND.y +
-          (REST.y - LAND.y) * ease -
-          hop * SCALE;
+        const y = LAND.y + (REST.y - LAND.y) * ease - hop * SCALE;
 
         placeShuttle(x, y, angle);
 
@@ -422,9 +361,7 @@ export function TrainingRally({
               playedRef.current = true;
               play();
             }
-          } else if (
-            entry.boundingClientRect.top > window.innerHeight
-          ) {
+          } else if (entry.boundingClientRect.top > window.innerHeight) {
             // Scrolling back above the section allows it to replay.
             playedRef.current = false;
           }
@@ -470,23 +407,20 @@ export function TrainingRally({
           intro="Coaching at Celestial’s runs as a loop: find out where a player is, build the body to play, show them what happened, and decide what comes next."
         />
 
-<div className="mt-4 hidden justify-end lg:flex">
-  {phase === "landed" && !reduce && (
-    <button
-      type="button"
-      onClick={play}
-      className="inline-flex min-h-[40px] items-center gap-1.5 rounded-full border border-white/20 bg-court-900 px-3.5 text-xs font-semibold uppercase tracking-wider text-chalk transition hover:border-white/40"
-      aria-label="Replay the training shuttle animation"
-    >
-      <ArrowCounterClockwise
-        size={13}
-        weight="bold"
-        aria-hidden="true"
-      />
-      <span>Replay</span>
-    </button>
-  )}
-</div>
+        <div className="mt-4 hidden justify-end lg:flex">
+          {phase === "landed" && !reduce && (
+            <button
+              type="button"
+              onClick={play}
+              className="inline-flex min-h-[40px] items-center gap-1.5 rounded-full border border-white/20 bg-court-900 px-3.5 text-xs font-semibold uppercase tracking-wider text-chalk transition hover:border-white/40"
+              aria-label="Replay the training shuttle animation"
+            >
+              <ArrowCounterClockwise size={13} weight="bold" aria-hidden="true" />
+              <span>Replay</span>
+            </button>
+          )}
+        </div>
+
         <div ref={wrapRef} className="relative mt-8">
           {/* Shuttle track: desktop only */}
           <svg
@@ -585,13 +519,9 @@ export function TrainingRally({
 
                 <p className="eyebrow text-mat-soft">{s.n}</p>
 
-                <h3 className="display mt-2 text-[2.6rem]">
-                  {s.t}
-                </h3>
+                <h3 className="display mt-2 text-[2.6rem]">{s.t}</h3>
 
-                <p className="mt-2 max-w-[30ch] text-chalk/70">
-                  {s.d}
-                </p>
+                <p className="mt-2 max-w-[30ch] text-chalk/70">{s.d}</p>
 
                 {i === 1 && (
                   <p className="mt-3 text-sm text-chalk/55">
@@ -606,17 +536,12 @@ export function TrainingRally({
         {/* International exposure */}
         <div className="mt-16 grid gap-8 rounded-[28px] bg-court-950/70 p-7 ring-1 ring-white/10 sm:p-9 lg:grid-cols-[1fr_auto] lg:items-center">
           <div>
-            <p className="eyebrow text-mat-soft">
-              International exposure
-            </p>
+            <p className="eyebrow text-mat-soft">International exposure</p>
 
             <p className="mt-3 max-w-[60ch] text-[1.1rem] leading-relaxed text-chalk/85">
               An {ex.label.toLowerCase()} with{" "}
-              <strong className="font-semibold text-chalk">
-                {ex.partner}
-              </strong>{" "}
-              in {ex.country} gives academy players a view of how the game is
-              coached elsewhere.
+              <strong className="font-semibold text-chalk">{ex.partner}</strong> in {ex.country}{" "}
+              gives academy players a view of how the game is coached elsewhere.
             </p>
           </div>
 

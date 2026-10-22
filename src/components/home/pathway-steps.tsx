@@ -10,13 +10,22 @@ import { ShuttleShape } from "../shuttle";
 
 /**
  * The pathway as a staircase: each level sits one step higher than the last.
- * When the user scrolls to the section, the signature shuttlecock hops up the 4 steps,
- * tracing and revealing the vibrant pathway arc behind it (signature motif, STRATEGY #6 & #19).
+ * When the user scrolls to the section, the signature shuttlecock hops up the steps
+ * (Beginner → Intermediate → Professional), tracing and revealing the pathway arc behind it
+ * (signature motif, STRATEGY #6 & #19).
+ *
+ * Everything below is driven by levels.length, so adding or removing a level in
+ * lib/pathway.ts adjusts the staircase automatically (the lg:grid-cols-3 class in the JSX
+ * is the one thing to change by hand).
  */
-const LIFT = [180, 120, 60, 0]; // px each column is pushed down on desktop
+const N = levels.length; // 3 levels
+const HOPS = N - 1; // 2 hops between 3 steps
+const STEP = 60; // px between steps
+const LIFT = levels.map((_, i) => (N - 1 - i) * STEP); // [120, 60, 0] px each column is pushed down on desktop
 const PAD = 60; // room above the top step for the arcs
-const H = PAD + LIFT[0]; // 240 px
-const Y_COORDS = LIFT.map((l) => PAD + l);
+const H = PAD + LIFT[0]; // 180 px
+const Y_COORDS = LIFT.map((l) => PAD + l); // [180, 120, 60]
+const GAP = 32; // matches gap-8 on the grid
 
 type Arc = {
   p0: { x: number; y: number };
@@ -35,6 +44,11 @@ type Geo = {
   land: { x: number; y: number };
   rest: { x: number; y: number; angle: number };
 };
+
+function fallbackX(width: number): number[] {
+  const colW = (width - (N - 1) * GAP) / N;
+  return Array.from({ length: N }, (_, i) => i * (colW + GAP) + 6);
+}
 
 function restPose(land: { x: number; y: number }, scale: number) {
   // Resting shuttle lies on its side, cork slightly lower than the skirt rim (from hero.tsx)
@@ -85,32 +99,30 @@ function computeGeo(
   wrapElement: HTMLElement | null = null
 ): Geo {
   const desktop = width >= 1024;
-  let xCoords = [6, 313, 621, 929];
+  const fallback = fallbackX(width);
+  let xCoords = fallback;
 
-  if (desktop && wrapElement && stepElements.length >= 4 && stepElements[0] && stepElements[3]) {
+  if (desktop && wrapElement && stepElements.length >= N && stepElements[0] && stepElements[N - 1]) {
     const wr = wrapElement.getBoundingClientRect();
-    const measured = stepElements.slice(0, 4).map((el, i) => {
-      if (!el) return [6, 313, 621, 929][i];
+    const measured = stepElements.slice(0, N).map((el, i) => {
+      if (!el) return fallback[i];
       const r = el.getBoundingClientRect();
       return r.left - wr.left + 6;
     });
-    if (measured.length === 4 && measured.every((v) => Number.isFinite(v))) {
+    if (measured.length === N && measured.every((v) => Number.isFinite(v))) {
       xCoords = measured;
     }
-  } else if (desktop) {
-    const colW = (width - 3 * 32) / 4;
-    xCoords = [6, colW + 32 + 6, 2 * (colW + 32) + 6, 3 * (colW + 32) + 6];
   }
 
   const yCoords = Y_COORDS;
   const arcs: Arc[] = [];
   let pathD = "";
 
-  for (let i = 0; i < 3; i++) {
-    const x1 = xCoords[i] ?? [6, 313, 621, 929][i];
-    const y1 = yCoords[i] ?? [240, 180, 120, 60][i];
-    const x2 = xCoords[i + 1] ?? [6, 313, 621, 929][i + 1];
-    const y2 = yCoords[i + 1] ?? [240, 180, 120, 60][i + 1];
+  for (let i = 0; i < HOPS; i++) {
+    const x1 = xCoords[i];
+    const y1 = yCoords[i];
+    const x2 = xCoords[i + 1];
+    const y2 = yCoords[i + 1];
     const peak = y2 - 58;
     const arc: Arc = {
       p0: { x: x1, y: y1 },
@@ -126,7 +138,7 @@ function computeGeo(
     }
   }
 
-  const land = { x: xCoords[3] ?? 929, y: yCoords[3] ?? 60 };
+  const land = { x: xCoords[N - 1], y: yCoords[N - 1] };
   const scale = 0.88;
   const rest = restPose(land, scale);
 
@@ -144,7 +156,7 @@ function computeGeo(
 
 const RM = "(prefers-reduced-motion: reduce)";
 function subscribeRM(cb: () => void) {
-  if (typeof window === "undefined") return () => { };
+  if (typeof window === "undefined") return () => {};
   const m = window.matchMedia(RM);
   m.addEventListener("change", cb);
   return () => m.removeEventListener("change", cb);
@@ -205,7 +217,7 @@ export function PathwaySteps() {
 
   const play = useCallback(() => {
     const g = geoRef.current;
-    if (!g || !g.arcs || g.arcs.length < 3) return;
+    if (!g || !g.arcs || g.arcs.length < HOPS) return;
     const id = ++runId.current;
     cancelAnimationFrame(raf.current);
 
@@ -213,8 +225,8 @@ export function PathwaySteps() {
     if (reveal.current) reveal.current.setAttribute("stroke-dashoffset", "1");
     if (shuttle.current) shuttle.current.style.opacity = "1";
 
-    const hopDuration = 620; // ms per hop across each step
-    const totalFlight = hopDuration * 3; // 3 hops across 4 levels (~1.86s)
+    const hopDuration = 620; // ms per hop between steps
+    const totalFlight = hopDuration * HOPS; // 2 hops across 3 levels (~1.24s)
     const start = performance.now();
     let lastNow = start;
     let spin = 0;
@@ -230,16 +242,16 @@ export function PathwaySteps() {
         return;
       }
 
-      // 1. Initial launch ping at Foundation step (Level 1)
+      // 1. Initial launch ping at the Beginner step
       if (ping.current) {
         const p = Math.min(el / 420, 1);
         ping.current.setAttribute("r", String(6 + p * 24));
         ping.current.style.opacity = String(p < 1 ? (1 - p) * 0.9 : 0);
       }
 
-      // 2. Flight across the 3 step arcs
+      // 2. Flight across the step arcs
       if (el < totalFlight) {
-        const curHop = Math.min(Math.max(0, Math.floor(el / hopDuration)), 2);
+        const curHop = Math.min(Math.max(0, Math.floor(el / hopDuration)), HOPS - 1);
         const hopEl = el - curHop * hopDuration;
         const u = Math.min(Math.max(hopEl / hopDuration, 0), 1);
 
@@ -258,8 +270,7 @@ export function PathwaySteps() {
 
         // Decay intermediate impact ring
         if (impact.current && lastHop > 0) {
-          const impactAge = hopEl;
-          const ip = Math.min(impactAge / 360, 1);
+          const ip = Math.min(hopEl / 360, 1);
           impact.current.setAttribute("r", String(5 + ip * 22));
           impact.current.style.opacity = String((1 - ip) * 0.85);
         }
@@ -273,7 +284,7 @@ export function PathwaySteps() {
         placeShuttle(x, y, angle, skirtScale);
 
         // Reveal trail behind shuttlecock
-        const overallProgress = (curHop + u) / 3;
+        const overallProgress = (curHop + u) / HOPS;
         reveal.current?.setAttribute("stroke-dashoffset", String(1 - overallProgress));
 
         lastNow = now;
@@ -281,10 +292,10 @@ export function PathwaySteps() {
         return;
       }
 
-      // 3. Impact & settling on final step (Level 4, Competitive / Excellence)
+      // 3. Impact & settling on the final step (Professional)
       const it = el - totalFlight; // ms since touchdown
       const land = g.land;
-      const lastArc = g.arcs[2] || g.arcs[g.arcs.length - 1];
+      const lastArc = g.arcs[g.arcs.length - 1];
       const endAngle = sampleBezier(lastArc, 1).angle;
 
       if (impact.current) {
@@ -377,14 +388,16 @@ export function PathwaySteps() {
             index="02"
             label="The pathway"
             id="pathway-title"
-            title="Four levels. One direction."
+            title="Three levels. One direction."
             intro="Every player at Celestial’s sits somewhere on this pathway. You always know what you’re working on now, and what it takes to move up."
           />
-<div className="flex flex-wrap items-center justify-end gap-3 lg:col-span-4 lg:justify-end">            {phase === "landed" && !reduced && (
+          <div className="flex flex-wrap items-center justify-end gap-3 lg:col-span-4 lg:justify-end">
+            {phase === "landed" && !reduced && (
               <button
                 type="button"
                 onClick={play}
-className="hidden min-h-[40px] items-center gap-1.5 rounded-full border border-ink/20 bg-chalk px-3.5 text-xs font-semibold uppercase tracking-wider text-ink transition hover:border-ink/40 hover:bg-chalk-2 lg:inline-flex"                aria-label="Replay the shuttle flight transition"
+                className="hidden min-h-[40px] items-center gap-1.5 rounded-full border border-ink/20 bg-chalk px-3.5 text-xs font-semibold uppercase tracking-wider text-ink transition hover:border-ink/40 hover:bg-chalk-2 lg:inline-flex"
+                aria-label="Replay the shuttle flight transition"
               >
                 <ArrowCounterClockwise size={13} weight="bold" aria-hidden="true" />
                 <span>Replay</span>
@@ -444,11 +457,11 @@ className="hidden min-h-[40px] items-center gap-1.5 rounded-full border border-i
               mask="url(#pathway-trail-mask)"
             />
 
-            {/* Launch ping at Level 1 */}
+            {/* Launch ping at the Beginner step */}
             <circle
               ref={ping}
-              cx={geo.xCoords[0] ?? 6}
-              cy={geo.yCoords[0] ?? 240}
+              cx={geo.xCoords[0]}
+              cy={geo.yCoords[0]}
               r="6"
               fill="none"
               stroke="#1f9482"
@@ -459,8 +472,8 @@ className="hidden min-h-[40px] items-center gap-1.5 rounded-full border border-i
             {/* Impact ping on touchdown */}
             <circle
               ref={impact}
-              cx={geo.xCoords[geo.xCoords.length - 1] ?? 929}
-              cy={geo.yCoords[geo.yCoords.length - 1] ?? 60}
+              cx={geo.xCoords[N - 1]}
+              cy={geo.yCoords[N - 1]}
               r="6"
               fill="none"
               stroke="#1f9482"
@@ -468,7 +481,7 @@ className="hidden min-h-[40px] items-center gap-1.5 rounded-full border border-i
               style={{ opacity: 0 }}
             />
 
-            {/* Flying Shuttlecock element transitioning across pathway steps */}
+            {/* Flying shuttlecock transitioning across pathway steps */}
             <g
               ref={shuttle}
               filter="url(#pathway-shuttle-shadow)"
@@ -481,7 +494,7 @@ className="hidden min-h-[40px] items-center gap-1.5 rounded-full border border-i
             </g>
           </svg>
 
-          <ol className="relative grid gap-10 lg:grid-cols-4 lg:gap-8" style={{ paddingTop: 0 }}>
+          <ol className="relative grid gap-10 lg:grid-cols-3 lg:gap-8" style={{ paddingTop: 0 }}>
             {levels.map((l, i) => (
               <li
                 key={l.id}
@@ -494,8 +507,9 @@ className="hidden min-h-[40px] items-center gap-1.5 rounded-full border border-i
                 <div className="lg:mt-[var(--lift)] lg:border-t-2 lg:border-ink/80 lg:pt-6">
                   <span
                     aria-hidden="true"
-                    className={`absolute -left-[7px] top-1 h-3 w-3 rounded-full lg:left-0 lg:top-[calc(var(--lift)-6px)] ${i === levels.length - 1 ? "bg-lime ring-2 ring-ink" : "bg-mat"
-                      }`}
+                    className={`absolute -left-[7px] top-1 h-3 w-3 rounded-full lg:left-0 lg:top-[calc(var(--lift)-6px)] ${
+                      i === levels.length - 1 ? "bg-lime ring-2 ring-ink" : "bg-mat"
+                    }`}
                   />
                   <p className="eyebrow text-ink-soft">
                     {l.n} · {l.ages}
@@ -503,6 +517,10 @@ className="hidden min-h-[40px] items-center gap-1.5 rounded-full border border-i
                   <h3 className="display mt-2 text-[clamp(2.4rem,3.4vw,3rem)]">{l.name}</h3>
                   <p className="mt-1 font-semibold text-mat-deep">{l.tagline}</p>
                   <p className="mt-3 max-w-[32ch] text-ink-soft">{l.forWho}</p>
+                  <p className="mt-4 text-sm text-ink-soft">
+                    <span className="eyebrow block text-[0.68rem] text-ink/70">Focus</span>
+                    {l.focus}
+                  </p>
                   <p className="mt-4 text-sm text-ink-soft">
                     <span className="eyebrow block text-[0.68rem] text-ink/70">
                       {i < levels.length - 1 ? "Move up when" : "The aim"}

@@ -54,7 +54,7 @@ export default function PathwayPage() {
                     ))}
                   </div>
                   <p className="eyebrow mt-5 text-ink-soft">
-                    Level {l.n} of 04 · {l.ages}
+                    Level {l.n} of 03 · {l.ages}
                   </p>
                   <h2 className="display mt-3 text-[clamp(3rem,4.6vw,4.6rem)]">{l.name}</h2>
                   <p className="mt-1 text-lg font-semibold text-mat-deep">{l.tagline}</p>

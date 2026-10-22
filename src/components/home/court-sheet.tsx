@@ -1,4 +1,5 @@
 import { academy } from "@/lib/academy";
+import { levels } from "@/lib/pathway";
 import { Reveal } from "../reveal";
 
 /**
@@ -10,9 +11,12 @@ import { Reveal } from "../reveal";
  */
 export function CourtSheet() {
   const a = academy;
+  const first = levels[0];
+  const last = levels[levels.length - 1];
   const rows = [
     { k: "Trained", v: a.studentsTrained, unit: "players", note: "Coached at the academy" },
-    { k: "Pathway", v: "4", unit: "levels", note: "Foundation to Competitive" },
+    // Count and range come from lib/pathway.ts, so this stays correct if the levels change again.
+    { k: "Pathway", v: String(levels.length), unit: "levels", note: `${first.name} to ${last.name}` },
     { k: "Batches", v: "3", unit: "windows", note: "Morning, evening, weekend" },
     { k: "Courts", v: String(a.courts.count), unit: "indoor", note: "Fully air-conditioned hall" },
     { k: "Google", v: a.rating.value, unit: "★", note: `From ${a.rating.countLabel} reviews` },

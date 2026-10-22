@@ -13,6 +13,9 @@ import { levels, levelById, type Level } from "@/lib/pathway";
  * so give a default). Three questions, one recommended starting level shown ON the pathway
  * (goal-gradient: a visible start point and a visible next step), and a trial request that
  * carries the answers into WhatsApp so the academy can place the player before they arrive.
+ *
+ * Levels: Beginner → Intermediate → Professional (see lib/pathway.ts). The placement rules in
+ * place() below are a proposal; the head coach should confirm them with the level names.
  */
 
 type Who = "me" | "child";
@@ -31,13 +34,13 @@ const NOW: Record<Who, { value: Now; label: string }[]> = {
     { value: "never", label: "Never really played" },
     { value: "casual", label: "I play, never coached" },
     { value: "coached", label: "Coached, play regularly" },
-    { value: "tournaments", label: "I play tournaments" },
+    { value: "tournaments", label: "I compete at state or national level" },
   ],
   child: [
     { value: "never", label: "New to badminton" },
     { value: "casual", label: "Plays for fun" },
-    { value: "coached", label: "Has had coaching" },
-    { value: "tournaments", label: "Plays tournaments" },
+    { value: "coached", label: "Has had coaching or plays school/district matches" },
+    { value: "tournaments", label: "Competes at state or national level" },
   ],
 };
 
@@ -55,8 +58,13 @@ const GOAL: Record<Who, { value: Goal; label: string }[]> = {
   ],
 };
 
-const ORDER: Level["id"][] = ["foundation", "development", "performance", "competitive"];
-const BASE: Record<Now, Level["id"]> = { never: "foundation", casual: "development", coached: "performance", tournaments: "competitive" };
+const ORDER: Level["id"][] = ["beginner", "intermediate", "professional"];
+const BASE: Record<Now, Level["id"]> = {
+  never: "beginner",
+  casual: "intermediate",
+  coached: "intermediate",
+  tournaments: "professional",
+};
 
 function place(who: Who, age: Age | null, now: Now, goal: Goal): Level {
   let i = ORDER.indexOf(BASE[now]);
@@ -112,11 +120,11 @@ function Step({ show, k, children }: { show: boolean; k: string; children: React
   );
 }
 
-/** The four levels as a court line; the recommended one is lit. */
+/** The three levels as a court line; the recommended one is lit. */
 function PathStrip({ active }: { active: Level["id"] }) {
   const at = ORDER.indexOf(active);
   return (
-    <ol className="mt-5 grid grid-cols-4 gap-1.5" aria-label="Where this sits on the pathway">
+    <ol className="mt-5 grid grid-cols-3 gap-1.5" aria-label="Where this sits on the pathway">
       {levels.map((l, i) => (
         <li key={l.id} className="min-w-0">
           <span aria-hidden="true" className={`block h-1.5 rounded-full ${i === at ? "bg-lime" : i < at ? "bg-chalk/45" : "bg-chalk/15"}`} />

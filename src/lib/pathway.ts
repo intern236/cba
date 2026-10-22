@@ -1,22 +1,24 @@
 /**
- * The training pathway — four levels a player moves through.
+ * The training pathway: three levels a player moves through.
  *
- * STATUS: PROPOSED, NOT YET CONFIRMED BY THE ACADEMY (see docs/DEPENDENCIES.md).
- * The academy's published material confirms coaching for kids, teens and adults, group and
- * one-to-one formats, morning/evening/weekend batches, periodic assessments, strength &
- * conditioning, video analysis, individual reviews, a physio on site and an exchange with
- * BATTS Athletics Academy (sources in academy.ts). It does NOT name levels. The level names,
- * the skills listed and the "ready to move up" markers below follow a standard badminton
- * coaching progression and must be checked and renamed by the head coach before launch.
- * Edit here only — every page reads from this file.
+ * STATUS: Level names, age bands and the focus of each level come from the academy's brief
+ * (Beginner / Intermediate / Professional). The detailed skill lists under `work` and the
+ * "ready to move up" markers in `readyWhen` follow a standard badminton coaching progression
+ * and still need checking by the head coach before launch (see docs/DEPENDENCIES.md).
+ * The academy's published material confirms group and one-to-one formats, periodic
+ * assessments, strength & conditioning, video analysis, individual reviews and a physio on
+ * site (sources in academy.ts).
+ * Edit here only. Every page reads from this file.
  */
 export type Level = {
-  id: "foundation" | "development" | "performance" | "competitive";
+  id: "beginner" | "intermediate" | "professional";
   n: string;
   name: string;
   tagline: string;
   forWho: string;
   ages: string;
+  /** The one-line focus of the level, straight from the academy's brief. */
+  focus: string;
   work: string[];
   readyWhen: string[];
   format: string;
@@ -26,76 +28,74 @@ export type Level = {
 
 export const levels: Level[] = [
   {
-    id: "foundation",
+    id: "beginner",
     n: "01",
-    name: "Foundation",
+    name: "Beginner",
     tagline: "First steps on court",
-    forWho: "Complete beginners: kids trying the sport, and adults who never learned properly.",
-    ages: "Kids · Teens · Adults",
+    forWho: "New players taking up the sport, usually young children.",
+    ages: "Approx. 5–10 yrs",
+    focus: "Basics, footwork, love for the game",
     work: [
       "Grip and ready position",
       "Basic footwork to all four corners",
       "Underarm and high serves",
       "The overhead clear",
       "Keeping a rally going",
-      "Rules and scoring",
+      "Fun games that build a love for the sport",
     ],
-    readyWhen: ["You can keep a rally going for 10+ shots", "You serve legally, every time", "You can score your own game"],
+    readyWhen: [
+      "You can keep a rally going for 10+ shots",
+      "You serve legally, every time",
+      "You look forward to every session",
+    ],
     format: "Group batch",
     support: ["Coach feedback in every session", "Periodic assessments"],
   },
   {
-    id: "development",
+    id: "intermediate",
     n: "02",
-    name: "Development",
+    name: "Intermediate",
     tagline: "Build a real game",
-    forWho: "Players who can rally but have never been coached, or who learned with bad habits.",
-    ages: "Kids · Teens · Adults",
+    forWho: "School and district-level players who can rally and are ready to compete.",
+    ages: "Approx. 8–16 yrs",
+    focus: "Match play, tactics, fitness",
     work: [
       "Full-court footwork patterns",
-      "Forehand and backhand clears, drops and net shots",
-      "A first smash",
-      "Singles and doubles positioning",
-      "Playing proper games",
+      "Clears, drops, net shots and a first smash",
+      "Singles and doubles tactics and positioning",
+      "Regular match play",
+      "Fitness: stamina, speed and agility",
     ],
-    readyWhen: ["Your clears reach the back of the court from both sides", "You move back to base after every shot", "You can play a full game with a plan"],
-    format: "Group batch, with one-to-one sessions if you want faster progress",
-    support: ["Periodic assessments", "Video analysis of key strokes"],
+    readyWhen: [
+      "You move back to base after every shot",
+      "You play a full match with a clear plan",
+      "You are competing at school or district level",
+    ],
+    format: "Group batch, with one-to-one sessions for faster progress",
+    support: ["Periodic assessments", "Video analysis of key strokes", "Strength & conditioning"],
   },
   {
-    id: "performance",
+    id: "professional",
     n: "03",
-    name: "Performance",
+    name: "Professional",
     tagline: "Train like a player",
-    forWho: "Regular players and juniors who want to get properly good, and stay injury-free doing it.",
-    ages: "Teens · Adults",
+    forWho: "State and national competitors training for results.",
+    ages: "State / national level",
+    focus: "High-intensity training, conditioning, video analysis, tournament plan",
     work: [
-      "Speed and agility around the court",
-      "Smash, defence and the transition between them",
-      "Deception and shot variety",
+      "High-intensity court sessions",
       "Strength & conditioning in the gym",
-      "Game-situation practice",
+      "Video analysis of your matches and opponents",
+      "Deception, shot variety and game-situation practice",
+      "A season-long tournament plan",
     ],
-    readyWhen: ["You want to enter tournaments", "You can train on a weekly plan", "Your coach agrees you're ready"],
+    readyWhen: [
+      "You are competing at state or national level",
+      "You train to a weekly and seasonal plan",
+      "Your coach agrees you're ready",
+    ],
     format: "Group batch plus one-to-one",
     support: ["Strength & conditioning", "Video analysis", "Individual reviews", "Physio on site"],
-  },
-  {
-    id: "competitive",
-    n: "04",
-    name: "Competitive",
-    tagline: "Tournament pathway",
-    forWho: "Juniors and adults entering tournaments, training to a plan built around the calendar.",
-    ages: "Juniors · Adults",
-    work: [
-      "A training plan built around your tournaments",
-      "Match review from video",
-      "Tactics against different opponents",
-      "Conditioning, recovery and injury prevention",
-    ],
-    readyWhen: ["This is the top of the pathway: the work becomes your results"],
-    format: "Academy training plus one-to-one",
-    support: ["Assessments", "Video analysis", "Individual reviews", "Strength & conditioning", "Physio", "Exchange with BATTS Athletics Academy, Canada"],
   },
 ];
 

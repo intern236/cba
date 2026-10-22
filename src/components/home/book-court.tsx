@@ -21,14 +21,14 @@ export function BookCourt() {
           </p>
         </div>
 <div className="flex flex-wrap justify-end gap-3 lg:col-span-5 lg:justify-start">
-  <ExternalButton
-    href={a.booking.secondary.url}
-    variant="ghost-light"
-    note="opens Playo"
-  >
-    Book on Playo
-  </ExternalButton>
-
+<ExternalButton
+  href={a.booking.secondary.url}
+  variant="ghost-light"
+  note="opens Playo"
+  className=" !text-black hover:!text-black !transition-none"
+>
+  Book on Playo
+</ExternalButton>
   <ExternalButton
     href={a.booking.primary.url}
     variant="ink"
