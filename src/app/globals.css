@@ -227,14 +227,14 @@
     transition: transform 300ms var(--ease-flight);
   }
 
-  .btn:hover .btn-icon {
+  /* .btn:hover .btn-icon {
     transform: translateX(2px) rotate(-45deg);
-  }
-
+  } */
+/* 
   .btn-ink .btn-icon {
     background: var(--color-accent);
     color: var(--color-ink);
-  }
+  } */
 
   /* Court-line rule: the recurring brand device (2px chalk line with a service-line tick). */
   .court-rule {

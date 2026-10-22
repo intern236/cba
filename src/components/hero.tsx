@@ -263,7 +263,7 @@ export function Hero() {
             <p className="rise-in mt-6 max-w-[52ch] text-pretty text-[1.06rem] leading-relaxed text-chalk/75" style={{ animationDelay: "380ms" }}>
               Coaching for kids, teens and adults, from a first lesson to a first tournament. Your first session is free.
             </p>
-        <div className="mt-8 flex w-full flex-row items-center justify-between gap-3">
+        <div className="mt-8 flex w-full flex-row items-center  gap-3">
   <a
     href="#find-your-level"
     className="btn btn-ghost-dark justify-center"

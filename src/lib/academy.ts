@@ -66,7 +66,7 @@ export const academy = {
   hoursSummary: "Daily 5 AM – 11 PM",
 
   contact: {
-    phoneDisplay: "+91 88262 68236",
+    phoneDisplay: "+91 8826268236",
     phoneHref: "tel:+918826268236",
 
     // Keep null until a working email address is confirmed
