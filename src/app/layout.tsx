@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: "%s · Celestial's Badminton Academy",
   },
   description:
-    "Badminton coaching in Sector 104, Noida for players starting out and players getting better: kids, teens and adults, group or one-to-one, with assessments, video analysis and a free first session. Courts also open for pay-and-play from ₹450.",
+    "Badminton coaching in Sector 104, Noida for players starting out and players getting better: kids, teens and adults, group or one-to-one, with assessments, video analysis and a free first session. Courts also open for pay-and-play.",
   openGraph: {
     type: "website",
     locale: "en_IN",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#071c17",
+  themeColor: "#041a1b",
   width: "device-width",
   initialScale: 1,
   // Pinch-zoom is deliberately NOT disabled (4 of 5 racket-sport sites researched lock it).
@@ -52,7 +52,6 @@ const jsonLd = {
   sport: "Badminton",
   image: `${siteUrl}/images/courts-panorama-1600.webp`,
   telephone: academy.contact.phoneHref.replace("tel:", ""),
-  priceRange: "₹450+",
   address: {
     "@type": "PostalAddress",
     streetAddress: `${academy.address.line1}, ${academy.address.line2}`,
@@ -68,6 +67,7 @@ const jsonLd = {
     opens: h.open,
     closes: h.close,
   })),
+  logo: `${siteUrl}/images/cba-logo.svg`,
   sameAs: [academy.contact.instagram.url, academy.contact.facebook],
 };
 
@@ -77,7 +77,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-dvh flex flex-col">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-lime focus:px-5 focus:py-3 focus:font-semibold focus:text-ink"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-accent focus:px-5 focus:py-3 focus:font-semibold focus:text-ink"
         >
           Skip to content
         </a>

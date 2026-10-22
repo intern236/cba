@@ -6,8 +6,7 @@ import { Photo } from "@/components/photo";
 import { Reveal } from "@/components/reveal";
 import { ExternalButton, TextLink } from "@/components/buttons";
 import { Community } from "@/components/home/community";
-import { AchievementsSlider } from "@/components/home/achievements-slider";
-import InstagramLive from "@/components/home/InstagramLive";
+import { Results } from "@/components/home/results";// import InstagramLive from "@/components/home/instagram-feed";
 
 export const metadata: Metadata = {
   title: "About Celestial's Badminton Academy",
@@ -356,56 +355,8 @@ export default function AboutPage() {
       </section>
 
       {/* Player Achievements */}
-      <section
-        aria-labelledby="achievements-title"
-        className="on-light bg-chalk-2 py-20 sm:py-24 lg:py-28"
-      >
-        <div className="mx-auto max-w-[1320px] px-5 sm:px-8">
-          {/* Heading + horizontal slider with arrows at top right */}
-          <AchievementsSlider achievements={achievements}>
-            <Reveal>
-              <p className="eyebrow text-mat">
-                PROGRESS THAT COUNTS
-              </p>
-
-              <h2
-                id="achievements-title"
-                className="display mt-4 max-w-[950px] text-[clamp(2.6rem,5vw,4.8rem)] leading-[1.02] tracking-tight"
-              >
-                Hard work.
-                <br />
-                Results on court.
-              </h2>
-
-              <p className="mt-6 max-w-[720px] text-lg leading-relaxed text-ink-soft">
-                From national rankings and championship medals to state-level
-                titles, our players continue to make progress across age groups
-                and competition categories.
-              </p>
-            </Reveal>
-          </AchievementsSlider>
-
-          {/* Team Selection */}
-          <Reveal
-            className="mt-8 rounded-[28px] bg-court-950 p-7 text-chalk shadow-sm sm:p-10 lg:p-12"
-            delay={0.08}
-          >
-            <p className="eyebrow text-mat">
-              TEAM ACHIEVEMENT
-            </p>
-
-            <h3 className="display mt-4 max-w-[850px] text-3xl leading-tight sm:text-4xl">
-              8 players selected for UP State Mini Championships
-            </h3>
-
-            <p className="mt-4 max-w-[760px] text-base leading-relaxed text-chalk/75 sm:text-lg">
-              Eight U-11 players were selected for the UP State Mini
-              Championships following trials held at Celestial's in
-              October 2026.
-            </p>
-          </Reveal>
-        </div>
-      </section>
+           {/* Player Achievements */}
+      <Results id="achievements-title" />
 
       {/* Community */}
       <Community />
@@ -643,7 +594,7 @@ export default function AboutPage() {
             </Reveal>
           )}
         </div>
-        <InstagramLive />
+        {/* <InstagramLive /> */}
       </section>
     </>
   );

@@ -18,7 +18,7 @@ const routes = [
   { I: WhatsappLogo, t: "Free trial or coaching questions", d: "Message the academy on WhatsApp. Tell us the player’s age and level.", href: trialLink(), ext: true, cta: "Open WhatsApp" },
   { I: Phone, t: "Call", d: a.contact.phoneDisplay, href: a.contact.phoneHref, ext: false, cta: "Call now" },
   { I: InstagramLogo, t: "Instagram", d: `${a.contact.instagram.handle}. DM for a free trial.`, href: a.contact.instagram.url, ext: true, cta: "Open Instagram" },
-  { I: CalendarCheck, t: "Book a court", d: `Pay-and-play from ${a.booking.priceFrom}. Pick a slot and pay online.`, href: a.booking.primary.url, ext: true, cta: "Open Hudle" },
+  { I: CalendarCheck, t: "Book a court", d: "Pay-and-play. Pick a slot and pay online.", href: a.booking.primary.url, ext: true, cta: "Open Hudle" },
 ];
 
 export default function ContactPage() {
@@ -35,7 +35,7 @@ export default function ContactPage() {
               {routes.map(({ I, t, d, href, ext, cta }) => (
                 <li key={t} className="border-t-2 border-ink/10">
                   <a href={href} {...(ext ? { target: "_blank", rel: "noopener noreferrer" } : {})} className="group flex items-center gap-5 py-6">
-                    <span aria-hidden="true" className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-ink text-lime transition-transform duration-300 group-hover:-rotate-12">
+                    <span aria-hidden="true" className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-ink text-accent transition-transform duration-300 group-hover:-rotate-12">
                       <I size={22} weight="bold" />
                     </span>
                     <span className="flex-1">

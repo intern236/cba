@@ -3,29 +3,33 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { ArrowCounterClockwise, ArrowRight } from "@phosphor-icons/react";
-import { levels } from "@/lib/pathway";
+import { levels, levelCountWord } from "@/lib/pathway";
 import { SectionHead } from "../section-head";
 import { InternalButton } from "../buttons";
 import { ShuttleShape } from "../shuttle";
+import { RailFlight } from "./rail-flight";
 
 /**
  * The pathway as a staircase: each level sits one step higher than the last.
- * When the user scrolls to the section, the signature shuttlecock hops up the steps
- * (Beginner → Intermediate → Professional), tracing and revealing the pathway arc behind it
- * (signature motif, STRATEGY #6 & #19).
- *
- * Everything below is driven by levels.length, so adding or removing a level in
- * lib/pathway.ts adjusts the staircase automatically (the lg:grid-cols-3 class in the JSX
- * is the one thing to change by hand).
+ * When the user scrolls to the section, the signature shuttlecock hops up the steps,
+ * tracing and revealing the vibrant pathway arc behind it (signature motif, STRATEGY #6 & #19).
+ * Works for any number of levels: the step count, arcs and grid all follow lib/pathway.ts.
  */
-const N = levels.length; // 3 levels
-const HOPS = N - 1; // 2 hops between 3 steps
-const STEP = 60; // px between steps
-const LIFT = levels.map((_, i) => (N - 1 - i) * STEP); // [120, 60, 0] px each column is pushed down on desktop
+const N = levels.length;
+const HOPS = Math.max(N - 1, 1);
+const STEP = 60; // px each level rises above the previous one on desktop
+const LIFT = levels.map((_, i) => (N - 1 - i) * STEP); // px each column is pushed down
 const PAD = 60; // room above the top step for the arcs
-const H = PAD + LIFT[0]; // 180 px
-const Y_COORDS = LIFT.map((l) => PAD + l); // [180, 120, 60]
-const GAP = 32; // matches gap-8 on the grid
+const H = PAD + LIFT[0];
+const Y_COORDS = LIFT.map((l) => PAD + l);
+const GAP = 32; // must match lg:gap-8
+const GRID_COLS = N === 3 ? "lg:grid-cols-3" : N === 2 ? "lg:grid-cols-2" : "lg:grid-cols-4";
+
+/** Column start positions for an N-column grid of the given width. */
+function defaultXs(width: number) {
+  const colW = (width - (N - 1) * GAP) / N;
+  return levels.map((_, i) => i * (colW + GAP) + 6);
+}
 
 type Arc = {
   p0: { x: number; y: number };
@@ -44,11 +48,6 @@ type Geo = {
   land: { x: number; y: number };
   rest: { x: number; y: number; angle: number };
 };
-
-function fallbackX(width: number): number[] {
-  const colW = (width - (N - 1) * GAP) / N;
-  return Array.from({ length: N }, (_, i) => i * (colW + GAP) + 6);
-}
 
 function restPose(land: { x: number; y: number }, scale: number) {
   // Resting shuttle lies on its side, cork slightly lower than the skirt rim (from hero.tsx)
@@ -99,17 +98,17 @@ function computeGeo(
   wrapElement: HTMLElement | null = null
 ): Geo {
   const desktop = width >= 1024;
-  const fallback = fallbackX(width);
+  const fallback = defaultXs(width);
   let xCoords = fallback;
 
-  if (desktop && wrapElement && stepElements.length >= N && stepElements[0] && stepElements[N - 1]) {
+  if (desktop && wrapElement && stepElements.length >= N && stepElements.slice(0, N).every(Boolean)) {
     const wr = wrapElement.getBoundingClientRect();
     const measured = stepElements.slice(0, N).map((el, i) => {
       if (!el) return fallback[i];
       const r = el.getBoundingClientRect();
       return r.left - wr.left + 6;
     });
-    if (measured.length === N && measured.every((v) => Number.isFinite(v))) {
+    if (measured.every((v) => Number.isFinite(v))) {
       xCoords = measured;
     }
   }
@@ -118,10 +117,10 @@ function computeGeo(
   const arcs: Arc[] = [];
   let pathD = "";
 
-  for (let i = 0; i < HOPS; i++) {
-    const x1 = xCoords[i];
+  for (let i = 0; i < N - 1; i++) {
+    const x1 = xCoords[i] ?? fallback[i];
     const y1 = yCoords[i];
-    const x2 = xCoords[i + 1];
+    const x2 = xCoords[i + 1] ?? fallback[i + 1];
     const y2 = yCoords[i + 1];
     const peak = y2 - 58;
     const arc: Arc = {
@@ -138,7 +137,7 @@ function computeGeo(
     }
   }
 
-  const land = { x: xCoords[N - 1], y: yCoords[N - 1] };
+  const land = { x: xCoords[N - 1] ?? fallback[N - 1], y: yCoords[N - 1] };
   const scale = 0.88;
   const rest = restPose(land, scale);
 
@@ -156,7 +155,7 @@ function computeGeo(
 
 const RM = "(prefers-reduced-motion: reduce)";
 function subscribeRM(cb: () => void) {
-  if (typeof window === "undefined") return () => {};
+  if (typeof window === "undefined") return () => { };
   const m = window.matchMedia(RM);
   m.addEventListener("change", cb);
   return () => m.removeEventListener("change", cb);
@@ -225,8 +224,8 @@ export function PathwaySteps() {
     if (reveal.current) reveal.current.setAttribute("stroke-dashoffset", "1");
     if (shuttle.current) shuttle.current.style.opacity = "1";
 
-    const hopDuration = 620; // ms per hop between steps
-    const totalFlight = hopDuration * HOPS; // 2 hops across 3 levels (~1.24s)
+    const hopDuration = 620; // ms per hop across each step
+    const totalFlight = hopDuration * HOPS; // one hop between each pair of levels
     const start = performance.now();
     let lastNow = start;
     let spin = 0;
@@ -242,7 +241,7 @@ export function PathwaySteps() {
         return;
       }
 
-      // 1. Initial launch ping at the Beginner step
+      // 1. Initial launch ping at the first level
       if (ping.current) {
         const p = Math.min(el / 420, 1);
         ping.current.setAttribute("r", String(6 + p * 24));
@@ -270,7 +269,8 @@ export function PathwaySteps() {
 
         // Decay intermediate impact ring
         if (impact.current && lastHop > 0) {
-          const ip = Math.min(hopEl / 360, 1);
+          const impactAge = hopEl;
+          const ip = Math.min(impactAge / 360, 1);
           impact.current.setAttribute("r", String(5 + ip * 22));
           impact.current.style.opacity = String((1 - ip) * 0.85);
         }
@@ -292,7 +292,7 @@ export function PathwaySteps() {
         return;
       }
 
-      // 3. Impact & settling on the final step (Professional)
+      // 3. Impact & settling on the top level
       const it = el - totalFlight; // ms since touchdown
       const land = g.land;
       const lastArc = g.arcs[g.arcs.length - 1];
@@ -336,7 +336,6 @@ export function PathwaySteps() {
       placeShuttle(geo.rest.x, geo.rest.y, geo.rest.angle, 1);
       reveal.current?.setAttribute("stroke-dashoffset", "0");
       if (shuttle.current) shuttle.current.style.opacity = "1";
-      setPhase("landed");
       return;
     }
 
@@ -375,11 +374,14 @@ export function PathwaySteps() {
 
   useEffect(() => () => cancelAnimationFrame(raf.current), []);
 
+  // Mobile (< lg): scroll-linked flight down the rail — see components/rail-flight.tsx.
+  const [reached, setReached] = useState(-1);
+
   return (
     <section
       ref={sectionRef}
       aria-labelledby="pathway-title"
-      className="on-light relative overflow-hidden bg-chalk-2 py-24 sm:py-32"
+      className="on-light relative overflow-hidden bg-chalk-2 py-20 sm:py-24 lg:py-28"
     >
       <div className="relative mx-auto max-w-[1320px] px-5 sm:px-8">
         <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
@@ -388,16 +390,14 @@ export function PathwaySteps() {
             index="02"
             label="The pathway"
             id="pathway-title"
-            title="Three levels. One direction."
+            title={`${levelCountWord} levels. One direction.`}
             intro="Every player at Celestial’s sits somewhere on this pathway. You always know what you’re working on now, and what it takes to move up."
           />
-          <div className="flex flex-wrap items-center justify-end gap-3 lg:col-span-4 lg:justify-end">
-            {phase === "landed" && !reduced && (
+<div className="flex flex-wrap items-center justify-end gap-3 lg:col-span-4 lg:justify-end">            {phase === "landed" && !reduced && (
               <button
                 type="button"
                 onClick={play}
-                className="hidden min-h-[40px] items-center gap-1.5 rounded-full border border-ink/20 bg-chalk px-3.5 text-xs font-semibold uppercase tracking-wider text-ink transition hover:border-ink/40 hover:bg-chalk-2 lg:inline-flex"
-                aria-label="Replay the shuttle flight transition"
+className="hidden min-h-[40px] items-center gap-1.5 rounded-full border border-ink/20 bg-chalk px-3.5 text-xs font-semibold uppercase tracking-wider text-ink transition hover:border-ink/40 hover:bg-chalk-2 lg:inline-flex"                aria-label="Replay the shuttle flight transition"
               >
                 <ArrowCounterClockwise size={13} weight="bold" aria-hidden="true" />
                 <span>Replay</span>
@@ -431,7 +431,7 @@ export function PathwaySteps() {
                 />
               </mask>
               <filter id="pathway-shuttle-shadow" x="-50%" y="-50%" width="200%" height="200%">
-                <feDropShadow dx="0" dy="2" stdDeviation="2" floodColor="#0e1a17" floodOpacity="0.22" />
+                <feDropShadow dx="0" dy="2" stdDeviation="2" floodColor="#0b1213" floodOpacity="0.22" />
               </filter>
             </defs>
 
@@ -439,7 +439,7 @@ export function PathwaySteps() {
             <path
               d={geo.d}
               fill="none"
-              stroke="#0e1a17"
+              stroke="#0b1213"
               strokeOpacity="0.16"
               strokeWidth="2"
               strokeDasharray="1 9"
@@ -451,20 +451,20 @@ export function PathwaySteps() {
               ref={trail}
               d={geo.d}
               fill="none"
-              stroke="#1f9482"
+              stroke="#03989e"
               strokeWidth="2.8"
               strokeLinecap="round"
               mask="url(#pathway-trail-mask)"
             />
 
-            {/* Launch ping at the Beginner step */}
+            {/* Launch ping at Level 1 */}
             <circle
               ref={ping}
-              cx={geo.xCoords[0]}
-              cy={geo.yCoords[0]}
+              cx={geo.xCoords[0] ?? 6}
+              cy={geo.yCoords[0] ?? 240}
               r="6"
               fill="none"
-              stroke="#1f9482"
+              stroke="#03989e"
               strokeWidth="2"
               style={{ opacity: 0 }}
             />
@@ -472,16 +472,16 @@ export function PathwaySteps() {
             {/* Impact ping on touchdown */}
             <circle
               ref={impact}
-              cx={geo.xCoords[N - 1]}
-              cy={geo.yCoords[N - 1]}
+              cx={geo.xCoords[geo.xCoords.length - 1] ?? 929}
+              cy={geo.yCoords[geo.yCoords.length - 1] ?? 60}
               r="6"
               fill="none"
-              stroke="#1f9482"
+              stroke="#03989e"
               strokeWidth="2"
               style={{ opacity: 0 }}
             />
 
-            {/* Flying shuttlecock transitioning across pathway steps */}
+            {/* Flying Shuttlecock element transitioning across pathway steps */}
             <g
               ref={shuttle}
               filter="url(#pathway-shuttle-shadow)"
@@ -494,7 +494,10 @@ export function PathwaySteps() {
             </g>
           </svg>
 
-          <ol className="relative grid gap-10 lg:grid-cols-3 lg:gap-8" style={{ paddingTop: 0 }}>
+          {/* Mobile flight (hidden from lg up, where the timed desktop flight runs) */}
+          <RailFlight wrapRef={wrap} itemRefs={stepRefs} count={N} onReach={setReached} />
+
+          <ol className={`relative grid gap-10 lg:gap-8 ${GRID_COLS}`}>
             {levels.map((l, i) => (
               <li
                 key={l.id}
@@ -507,9 +510,9 @@ export function PathwaySteps() {
                 <div className="lg:mt-[var(--lift)] lg:border-t-2 lg:border-ink/80 lg:pt-6">
                   <span
                     aria-hidden="true"
-                    className={`absolute -left-[7px] top-1 h-3 w-3 rounded-full lg:left-0 lg:top-[calc(var(--lift)-6px)] ${
-                      i === levels.length - 1 ? "bg-lime ring-2 ring-ink" : "bg-mat"
-                    }`}
+                    data-lit={reached >= i ? "" : undefined}
+                    className={`path-dot absolute -left-[7px] top-1 z-[2] h-3 w-3 rounded-full lg:left-0 lg:top-[calc(var(--lift)-6px)] ${i === levels.length - 1 ? "bg-accent ring-2 ring-ink" : "bg-mat"
+                      }`}
                   />
                   <p className="eyebrow text-ink-soft">
                     {l.n} · {l.ages}
@@ -517,10 +520,6 @@ export function PathwaySteps() {
                   <h3 className="display mt-2 text-[clamp(2.4rem,3.4vw,3rem)]">{l.name}</h3>
                   <p className="mt-1 font-semibold text-mat-deep">{l.tagline}</p>
                   <p className="mt-3 max-w-[32ch] text-ink-soft">{l.forWho}</p>
-                  <p className="mt-4 text-sm text-ink-soft">
-                    <span className="eyebrow block text-[0.68rem] text-ink/70">Focus</span>
-                    {l.focus}
-                  </p>
                   <p className="mt-4 text-sm text-ink-soft">
                     <span className="eyebrow block text-[0.68rem] text-ink/70">
                       {i < levels.length - 1 ? "Move up when" : "The aim"}

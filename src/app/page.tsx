@@ -9,15 +9,27 @@ import { CourtSheet } from "@/components/home/court-sheet";
 // import { Arena } from "@/components/home/arena";
 import { Proof } from "@/components/home/proof";
 import { BookCourt } from "@/components/home/book-court";
-import { Visit } from "@/components/visit";
+// import { Visit } from "@/components/visit";
 import { CorporateTournaments } from "@/components/home/Companies";
 import { ProgramsSlider } from "@/components/home/program-slider";
+import { Results } from "@/components/home/results";
+import { FindUs } from "@/components/home/find-us";
+import InstagramEmbed from '@/components/home/InstagramEmbed';
 /**
- * Revision 2 — academy-first journey (client direction, 16 Oct 2026):
- * hero (start right / keep getting better) → where are you starting from? + level finder
- * → the pathway → how we coach → problems improvers bring → parents' questions
- * → the academy in numbers → the place → reviews → book a court (secondary) → visit.
- * Each section answers one question; see docs/STRATEGY.md §6.
+ * Homepage flow (21 Oct 2026, mobile-first). Each section answers the question the one
+ * before it raises:
+ *   Hero — what is this? (coaching, free first session)
+ *   → Starting points + level finder — is it for me / my child? where do we start?
+ *   → Pathway — where does it lead?
+ *   → Programmes slider — what exactly, when, and how much?
+ *   → Results — does it work? (real players, with photos)
+ *   → Score sheet — how big / how established?
+ *   → Google reviews — what do other people say?
+ *   → Corporate tournaments — what else happens here?
+ *   → Instagram — what is it like day to day? (live feed once connected)
+ *   → Book a court — just want to play?
+ *   → Find us — where is it? (address, Google Map, directions)
+ * Removed by the owner (kept commented below): TrainingRally, Problems, Parents, Arena, Visit.
  */
 export default function Home() {
   // Let the browser start fetching the hero photo (the LCP element) from the <head>.
@@ -30,18 +42,21 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <CorporateTournaments />
       <StartingPoints />
       <PathwaySteps />
+      <ProgramsSlider />
+      <Results id="achievements-title" />
+      <CourtSheet />
+      <Proof />
+      <CorporateTournaments />
+      <InstagramEmbed />
+      <BookCourt />
+      <FindUs />
       {/* <TrainingRally /> */}
       {/* <Problems /> */}
       {/* <Parents /> */}
-      <CourtSheet />
-      <ProgramsSlider />
       {/* <Arena /> */}
-      <Proof />
-      <BookCourt />
-
+      {/* <Visit /> */}
     </>
   );
 }

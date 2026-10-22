@@ -1,5 +1,6 @@
+
 import Link from "next/link";
-import { ArrowUpRight, ArrowRight } from "@phosphor-icons/react/ssr";
+import { ArrowRight } from "@phosphor-icons/react/ssr";
 
 type Variant = "primary" | "ghost-dark" | "ink" | "ghost-light";
 
@@ -10,7 +11,7 @@ const cls: Record<Variant, string> = {
   "ghost-light": "btn btn-ghost-light",
 };
 
-/** External booking / messaging link. Always says where it goes (research: label the hand-off). */
+/** External booking / messaging link. Always says where it goes. */
 export function ExternalButton({
   href,
   children,
@@ -33,14 +34,19 @@ export function ExternalButton({
     >
       <span>
         {children}
-        <span className="sr-only">{note ? ` (${note} in a new tab)` : " (opens in a new tab)"}</span>
+        <span className="sr-only">
+          {note
+            ? ` (${note} in a new tab)`
+            : " (opens in a new tab)"}
+        </span>
       </span>
+
       {variant === "primary" || variant === "ink" ? (
         <span className="btn-icon" aria-hidden="true">
-          <ArrowUpRight size={16} weight="bold" />
+          <ArrowRight size={16} weight="bold" />
         </span>
       ) : (
-        <ArrowUpRight size={16} weight="bold" aria-hidden="true" />
+        <ArrowRight size={16} weight="bold" aria-hidden="true" />
       )}
     </a>
   );
@@ -60,6 +66,7 @@ export function InternalButton({
   return (
     <Link href={href} className={`${cls[variant]} ${className}`}>
       <span>{children}</span>
+
       {variant === "primary" || variant === "ink" ? (
         <span className="btn-icon" aria-hidden="true">
           <ArrowRight size={16} weight="bold" />
@@ -71,16 +78,33 @@ export function InternalButton({
   );
 }
 
-export function TextLink({ href, children, external = false, className = "" }: { href: string; children: React.ReactNode; external?: boolean; className?: string }) {
+export function TextLink({
+  href,
+  children,
+  external = false,
+  className = "",
+}: {
+  href: string;
+  children: React.ReactNode;
+  external?: boolean;
+  className?: string;
+}) {
   const inner = (
     <>
       <span className="link-underline">{children}</span>
-      {external ? <ArrowUpRight size={14} weight="bold" aria-hidden="true" /> : <ArrowRight size={14} weight="bold" aria-hidden="true" />}
+      <ArrowRight size={14} weight="bold" aria-hidden="true" />
     </>
   );
+
   const c = `inline-flex items-center gap-1.5 font-semibold ${className}`;
+
   return external ? (
-    <a href={href} target="_blank" rel="noopener noreferrer" className={c}>
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={c}
+    >
       {inner}
     </a>
   ) : (

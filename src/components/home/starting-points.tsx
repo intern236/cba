@@ -27,7 +27,7 @@ export function StartingPoints() {
     "One-to-one sessions for faster progress",
   ];
   return (
-    <section aria-labelledby="start-title" className="on-light bg-chalk py-24 sm:py-32">
+    <section aria-labelledby="start-title" className="on-light bg-chalk py-20 sm:py-24 lg:py-28">
       <div className="mx-auto max-w-[1320px] px-5 sm:px-8">
         <SectionHead
           index="01"
@@ -80,7 +80,7 @@ export function StartingPoints() {
                 <h3 id="better-title" className="display text-[clamp(2.4rem,4.4vw,3.6rem)]">I want to improve</h3>
                 <ul className="mt-6 grid gap-3 border-t-2 border-chalk/15 pt-6 text-[1.02rem] text-chalk/85">
                   {better.map((t) => (
-                    <li key={t} className="flex gap-2.5"><Check size={18} weight="bold" className="mt-0.5 shrink-0 text-lime" aria-hidden="true" />{t}</li>
+                    <li key={t} className="flex gap-2.5"><Check size={18} weight="bold" className="mt-0.5 shrink-0 text-accent" aria-hidden="true" />{t}</li>
                   ))}
                 </ul>
                 <div className="mt-auto flex flex-wrap items-center justify-end gap-x-6 gap-y-3 pt-8">
@@ -92,8 +92,9 @@ export function StartingPoints() {
   </ExternalButton>
 
   <div className="lg:order-first lg:mr-auto">
-    <TextLink href="#problems" className="text-chalk/85">
-      Bring us your problem
+    {/* Was "#problems" — that section is no longer on the homepage. */}
+    <TextLink href="/pathway/" className="text-chalk/85">
+      See how you&rsquo;ll progress
     </TextLink>
   </div>
 </div>
@@ -104,8 +105,8 @@ export function StartingPoints() {
 
         <div className="mt-6 grid gap-6 lg:grid-cols-12">
 
-          <Reveal className="lg:col-span-8" delay={0.1}>
-            <LevelFinder />
+          <Reveal className="lg:col-span-12" delay={0.1}>
+            <LevelFinder wide />
           </Reveal>
         </div>
       </div>

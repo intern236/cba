@@ -12,13 +12,12 @@ import { Reveal } from "./reveal";
 import { HoursTable } from "./hours-table";
 import { OpenStatus } from "./open-status";
 import { ExternalButton } from "./buttons";
+import { LocationMap } from "../components/location-map";
 
 export function Visit({
   headingLevel = 2,
-  withPhoto = true,
 }: {
   headingLevel?: 2 | 1;
-  withPhoto?: boolean;
 }) {
   const a = academy;
   const H = headingLevel === 1 ? "h1" : "h2";
@@ -166,7 +165,7 @@ export function Visit({
                 </div>
 
                 {/* <p className="mt-4 text-sm text-chalk/65">
-                  Just want a court? From {a.booking.priceFrom} on{" "}
+                  Just want a court? Book on{" "}
                   <a
                     href={a.booking.primary.url}
                     target="_blank"
@@ -196,6 +195,10 @@ export function Visit({
             </div>
           </Reveal>
         </div>
+
+        <Reveal className="mt-12" delay={0.12}>
+          <LocationMap tone="dark" className="h-[340px] sm:h-[420px] lg:h-[460px]" />
+        </Reveal>
       </div>
     </section>
   );

@@ -79,3 +79,16 @@ export function pathFrom(points: ScreenSample[]): string {
   const l = points[points.length - 1];
   return d + ` L${l.x.toFixed(1)},${l.y.toFixed(1)}`;
 }
+
+export function restPose(land: { x: number; y: number }, scale: number) {
+  const angle = 166;
+  const pts = [
+    [0, -5],
+    [0, 5],
+    [-35, -13.5],
+    [-35, 13.5],
+  ];
+  const r = (angle * Math.PI) / 180;
+  const maxY = Math.max(...pts.map(([x, y]) => (x * Math.sin(r) + y * Math.cos(r)) * scale));
+  return { x: land.x + 6 * scale, y: land.y - maxY - 1, angle };
+}

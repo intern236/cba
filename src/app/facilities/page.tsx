@@ -24,7 +24,7 @@ const spec = [
   ["Courts", `${a.courts.count} indoor courts`],
   ["Surface", "PVC court mats"],
   ["Climate", "Fully air-conditioned hall"],
-  ["Booking", `From ${a.booking.priceFrom} per slot on Hudle or Playo`],
+  ["Booking", "Online on Hudle or Playo"],
   ["Per court", "Up to 4 players per booking"],
   ["Footwear", "Non-marking shoes compulsory"],
 ];
@@ -130,8 +130,6 @@ export default function FacilitiesPage() {
             <p className="mt-5 max-w-[52ch] text-base leading-relaxed text-ink-soft sm:text-lg">
               Not training with the academy? The courts are open for pay-and-play.
               Book an hour online, bring your racket and non-marking shoes.
-              Rates vary by slot; the booking page shows the live price before
-              you pay.
             </p>
 
             <ul className="mt-6 grid gap-3 text-ink-soft">
@@ -156,10 +154,10 @@ export default function FacilitiesPage() {
           >
             <dl className="grid grid-cols-2 gap-x-4 gap-y-6 border-t-2 border-ink/10 pt-6 sm:gap-x-6">
               {[
-                ["From", a.booking.priceFrom],
+                ["Courts", `${a.courts.count} indoor`],
                 ["Per court", "Up to 4"],
                 ["Hours", "5 AM–11 PM"],
-                ["Tuesdays", "Till 8 PM"],
+                ["Open", "Every day"],
               ].map(([k, v]) => (
                 <div key={k} className="min-w-0">
                   <dt className="eyebrow text-ink-soft">{k}</dt>
@@ -302,7 +300,7 @@ export default function FacilitiesPage() {
                   <Check
                     size={14}
                     weight="bold"
-                    className="mt-0.5 shrink-0 text-lime"
+                    className="mt-0.5 shrink-0 text-accent"
                     aria-hidden="true"
                   />
 

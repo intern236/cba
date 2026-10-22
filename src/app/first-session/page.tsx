@@ -32,7 +32,7 @@ const steps = [
 ];
 
 const faqs = [
-  { q: "I’ve never played. Is that OK?", a: "Yes. The Foundation level exists for complete beginners, kids and adults." },
+  { q: "I’ve never played. Is that OK?", a: "Yes. The Beginner programme starts from the basics for kids, and adult batches welcome complete beginners." },
   { q: "Am I too old, or not fit enough?", a: "No. The academy coaches adults as well as juniors, and fitness is something the training builds. Tell the coach about any injuries and they’ll adapt the session." },
   { q: "Do I need my own racket?", a: "Bring one if you have it. If you don’t, mention it when you book the trial." },
   { q: "Will I be with much better players?", a: "The coach watches you play first, then places you at the level that fits." },
@@ -76,7 +76,7 @@ export default function FirstSessionPage() {
             <span aria-hidden="true" className="absolute bottom-6 left-[19px] top-6 w-[2px] bg-ink/12" />
             {steps.map((s, i) => (
               <Reveal as="li" key={s.t} delay={i * 0.04} className="relative grid grid-cols-[40px_1fr] gap-5 pb-9 last:pb-0">
-                <span className={`relative z-[1] grid h-10 w-10 place-items-center rounded-full font-mono text-sm font-semibold ${i === 0 ? "bg-lime text-ink" : "bg-ink text-chalk"}`}>
+                <span className={`relative z-[1] grid h-10 w-10 place-items-center rounded-full font-mono text-sm font-semibold ${i === 0 ? "bg-accent text-ink" : "bg-ink text-chalk"}`}>
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <div className="pt-1.5">
@@ -103,7 +103,7 @@ export default function FirstSessionPage() {
               { I: FirstAidKit, t: "A heads-up on injuries", d: "Tell the coach. There’s a physio on site." },
             ].map(({ I, t, d }, i) => (
               <Reveal as="li" key={t} delay={i * 0.04} className="flex gap-4 border-t-2 border-chalk/12 pt-5">
-                <span aria-hidden="true" className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-court-800 text-lime"><I size={20} weight="bold" /></span>
+                <span aria-hidden="true" className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-court-800 text-accent"><I size={20} weight="bold" /></span>
                 <div>
                   <p className="font-semibold">{t}</p>
                   <p className="text-chalk/65">{d}</p>

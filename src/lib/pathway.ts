@@ -1,14 +1,15 @@
 /**
- * The training pathway: three levels a player moves through.
+ * The academy's three programmes — the single source for the pathway section, the /pathway
+ * page, the level finder, the programme slider, /programs and the score sheet.
  *
- * STATUS: Level names, age bands and the focus of each level come from the academy's brief
- * (Beginner / Intermediate / Professional). The detailed skill lists under `work` and the
- * "ready to move up" markers in `readyWhen` follow a standard badminton coaching progression
- * and still need checking by the head coach before launch (see docs/DEPENDENCIES.md).
- * The academy's published material confirms group and one-to-one formats, periodic
- * assessments, strength & conditioning, video analysis, individual reviews and a physio on
- * site (sources in academy.ts).
- * Edit here only. Every page reads from this file.
+ * SOURCE: the academy's own programme list (Beginner / Intermediate / Professional, ages and
+ * focus areas), supplied 21 Oct 2026. `tagline`, `forWho`, `ages` and the first items of
+ * `work` are the academy's wording.
+ *
+ * STILL PROPOSED (confirm with the head coach — docs/DEPENDENCIES.md): the extra `work`
+ * items marked below, the `readyWhen` move-up markers, and `format` / `support`, which
+ * map the academy's confirmed methods (assessments, S&C, video analysis, reviews, physio,
+ * BATTS exchange) onto each programme.
  */
 export type Level = {
   id: "beginner" | "intermediate" | "professional";
@@ -17,12 +18,9 @@ export type Level = {
   tagline: string;
   forWho: string;
   ages: string;
-  /** The one-line focus of the level, straight from the academy's brief. */
-  focus: string;
   work: string[];
   readyWhen: string[];
   format: string;
-  /** Which of the academy's confirmed methods carry most weight at this level. */
   support: string[];
 };
 
@@ -31,72 +29,60 @@ export const levels: Level[] = [
     id: "beginner",
     n: "01",
     name: "Beginner",
-    tagline: "First steps on court",
-    forWho: "New players taking up the sport, usually young children.",
+    tagline: "Start with the fundamentals",
+    forWho: "New players, roughly 5 to 10 years old, starting from the basics.",
     ages: "Approx. 5–10 yrs",
-    focus: "Basics, footwork, love for the game",
     work: [
-      "Grip and ready position",
-      "Basic footwork to all four corners",
-      "Underarm and high serves",
-      "The overhead clear",
-      "Keeping a rally going",
-      "Fun games that build a love for the sport",
+      "Badminton basics",
+      "Footwork and coordination",
+      "Building a love for the game",
+      "Grip, ready position and serves", // proposed detail
+      "Keeping a rally going", // proposed detail
     ],
-    readyWhen: [
-      "You can keep a rally going for 10+ shots",
-      "You serve legally, every time",
-      "You look forward to every session",
-    ],
+    readyWhen: ["You can keep a rally going and serve legally", "Your footwork gets you to all four corners", "Your coach says you're ready"],
     format: "Group batch",
-    support: ["Coach feedback in every session", "Periodic assessments"],
+    support: ["Coach feedback every session", "Periodic assessments"],
   },
   {
     id: "intermediate",
     n: "02",
     name: "Intermediate",
-    tagline: "Build a real game",
-    forWho: "School and district-level players who can rally and are ready to compete.",
+    tagline: "Build a stronger game",
+    forWho: "Roughly 8 to 16 years old: school and district players building a real game.",
     ages: "Approx. 8–16 yrs",
-    focus: "Match play, tactics, fitness",
     work: [
-      "Full-court footwork patterns",
-      "Clears, drops, net shots and a first smash",
-      "Singles and doubles tactics and positioning",
-      "Regular match play",
-      "Fitness: stamina, speed and agility",
+      "Match play and tactics",
+      "Fitness and movement",
+      "Consistency under pressure",
+      "Full-court strokes: clears, drops, smash and net play", // proposed detail
     ],
-    readyWhen: [
-      "You move back to base after every shot",
-      "You play a full match with a clear plan",
-      "You are competing at school or district level",
-    ],
+    readyWhen: ["You're competing at district level or above", "You can train to a weekly plan", "Your coach agrees you're ready"],
     format: "Group batch, with one-to-one sessions for faster progress",
-    support: ["Periodic assessments", "Video analysis of key strokes", "Strength & conditioning"],
+    support: ["Periodic assessments", "Video analysis", "Strength & conditioning"],
   },
   {
     id: "professional",
     n: "03",
     name: "Professional",
-    tagline: "Train like a player",
-    forWho: "State and national competitors training for results.",
-    ages: "State / national level",
-    focus: "High-intensity training, conditioning, video analysis, tournament plan",
+    tagline: "Train to compete",
+    forWho: "State and national competitors training around a tournament calendar.",
+    ages: "State & national",
     work: [
-      "High-intensity court sessions",
-      "Strength & conditioning in the gym",
-      "Video analysis of your matches and opponents",
-      "Deception, shot variety and game-situation practice",
-      "A season-long tournament plan",
+      "High-intensity training",
+      "Conditioning and video analysis",
+      "Tournament planning",
+      "Match review and tactics against different opponents", // proposed detail
     ],
-    readyWhen: [
-      "You are competing at state or national level",
-      "You train to a weekly and seasonal plan",
-      "Your coach agrees you're ready",
-    ],
-    format: "Group batch plus one-to-one",
-    support: ["Strength & conditioning", "Video analysis", "Individual reviews", "Physio on site"],
+    readyWhen: ["State and national tournaments: this is where the work becomes results"],
+    format: "Academy training plus one-to-one",
+    support: ["Assessments", "Video analysis", "Individual reviews", "Strength & conditioning", "Physio", "Exchange with BATTS Athletics Academy, Canada"],
   },
 ];
 
 export const levelById = Object.fromEntries(levels.map((l) => [l.id, l])) as Record<Level["id"], Level>;
+
+/** Other ways to train, from the academy's programme list. */
+export const otherFormats = ["Adult batches", "One-on-one coaching", "Weekend batch", "Pay-and-play"] as const;
+
+/** "Three", "Four"… for headings, so copy follows the data. */
+export const levelCountWord = ["Zero", "One", "Two", "Three", "Four", "Five"][levels.length] ?? String(levels.length);

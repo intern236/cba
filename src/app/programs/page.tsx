@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Check } from "@phosphor-icons/react/ssr";
 import { academy, trialLink } from "@/lib/academy";
-import { batches } from "@/lib/batches";
+import { fees, weekdayTimings, weekendTimings, feesFrom } from "@/lib/batches";
+import { levels, levelCountWord } from "@/lib/pathway";
 import { PageHeader } from "@/components/page-header";
 import { Reveal } from "@/components/reveal";
 import { ExternalButton, TextLink } from "@/components/buttons";
@@ -12,27 +13,19 @@ import { LevelFinder } from "@/components/level-finder";
 export const metadata: Metadata = {
   title: "Coaching programs & batches",
   description:
-    "Badminton coaching in Sector 104, Noida for kids, teens and adults, from complete beginners to tournament players. Group batches or one-to-one, morning, evening and weekend, with assessments, video analysis and a free first session.",
+    "Badminton coaching in Sector 104, Noida: Beginner, Intermediate and Professional programmes plus adult batches and one-to-one coaching. Batch timings, monthly fees from ₹3,500, and a free first session.",
   alternates: { canonical: "/programs/" },
 };
 
 const a = academy;
 
-const ages = [
-  {
-    t: "Kids",
-    d: "Group batches that build the fundamentals the right way, with periodic assessments so parents can see progress, not just attendance.",
-    start: "Usually start at Foundation or Development",
-  },
-  {
-    t: "Teens",
-    d: "Technique, game-situation practice and strength & conditioning, with video analysis for players who want to compete.",
-    start: "Development to Competitive",
-  },
+const groups = [
+  ...levels.map((l) => ({ t: l.name, d: `${l.tagline}. ${l.forWho} Focus: ${l.work.slice(0, 3).join(", ").toLowerCase()}.`, start: `Programme ${l.n} · ${l.ages}`, href: `/pathway/#${l.id}` })),
   {
     t: "Adults",
-    d: "Complete beginners, returning players and competitors. Learn properly or sharpen your game in morning, evening or weekend batches, or one-to-one.",
-    start: "Any level, including complete beginners",
+    d: "Adult batches for complete beginners, returning players and regulars, in the morning, evening or at weekends, or one-to-one coaching for faster progress.",
+    start: "Adult batches · one-to-one",
+    href: "",
   },
 ];
 
@@ -41,8 +34,8 @@ const faqs = [
   { q: "Which ages do you coach?", a: "Kids, teens and adults. Tell us the player’s age and experience and we’ll suggest a batch." },
   { q: "Group batch or one-to-one?", a: "Group batches are the usual starting point. One-to-one sessions suit players who want faster, individual feedback, and many players combine the two." },
   { q: "How will I know I’m improving?", a: "Periodic assessments set a baseline and measure progress against it, and individual reviews turn that into the next block of work." },
-  { q: "What are the batch timings and fees?", a: <>There are morning, evening and weekend batches. Ask for current timings and fees on WhatsApp or call {a.contact.phoneDisplay}.</> },
-  { q: "Can I also just book a court?", a: <>Yes. Courts are booked on Hudle or Playo from {a.booking.priceFrom} a slot. <Link href="/facilities/#book-a-court" className="link-underline font-semibold text-ink">Court booking details</Link>.</> },
+  { q: "What are the batch timings and fees?", a: <>Weekday batches run from 8 am to 10 pm and weekend batches late morning and evening. Fees start at {feesFrom} a month. <a href="#timings" className="link-underline font-semibold text-ink">See the full timetable and fees</a>.</> },
+  { q: "Can I also just book a court?", a: <>Yes. Courts are booked online on Hudle or Playo. <Link href="/facilities/#book-a-court" className="link-underline font-semibold text-ink">Court booking details</Link>.</> },
 ];
 
 export default function ProgramsPage() {
@@ -73,21 +66,26 @@ export default function ProgramsPage() {
         <div className="mx-auto max-w-[1320px] px-5 sm:px-8">
           <Reveal>
             <p className="eyebrow text-ink-soft">01 · Who we coach</p>
-            <h2 id="ages-title" className="display mt-4 max-w-[18ch] text-[clamp(2.6rem,5vw,4.4rem)]">Three age groups, one pathway</h2>
+            <h2 id="ages-title" className="display mt-4 max-w-[18ch] text-[clamp(2.6rem,5vw,4.4rem)]">{levelCountWord} programmes, plus adult batches</h2>
           </Reveal>
           <ul className="mt-12 border-b-2 border-ink/10">
-            {ages.map((g, i) => (
+            {groups.map((g, i) => (
               <Reveal as="li" key={g.t} delay={i * 0.06} className="grid gap-3 border-t-2 border-ink/10 py-8 md:grid-cols-12 md:items-baseline">
                 <h3 className="display text-[clamp(3rem,6vw,5rem)] md:col-span-4">{g.t}</h3>
                 <div className="md:col-span-7 md:col-start-6">
                   <p className="max-w-[56ch] text-lg text-ink-soft">{g.d}</p>
                   <p className="eyebrow mt-3 text-mat-deep">{g.start}</p>
+                  {g.href && (
+                    <Link href={g.href} className="mt-1 inline-flex min-h-[44px] items-center font-semibold">
+                      <span className="link-underline">About {g.t}</span>
+                    </Link>
+                  )}
                 </div>
               </Reveal>
             ))}
           </ul>
           <Reveal className="mt-8">
-            <TextLink href="/pathway/">How the four levels work</TextLink>
+            <TextLink href="/pathway/">How the programmes connect</TextLink>
           </Reveal>
         </div>
       </section>
@@ -112,7 +110,7 @@ export default function ProgramsPage() {
               <h3 className="display text-[2.2rem]">What sits behind the coaching</h3>
               <ul className="mt-4 grid gap-x-8 gap-y-3 text-chalk/80 sm:grid-cols-2">
                 {[...a.coaching.methods, "Physiotherapist & medical room", `Exchange with ${a.coaching.exchange.partner} (${a.coaching.exchange.country})`].map((m) => (
-                  <li key={m} className="flex gap-2"><Check size={18} weight="bold" className="mt-0.5 shrink-0 text-lime" aria-hidden="true" />{m}</li>
+                  <li key={m} className="flex gap-2"><Check size={18} weight="bold" className="mt-0.5 shrink-0 text-accent" aria-hidden="true" />{m}</li>
                 ))}
               </ul>
             </Reveal>
@@ -128,57 +126,60 @@ export default function ProgramsPage() {
             <h2 id="timings-title" className="display mt-4 text-[clamp(2.6rem,5vw,4.4rem)]">Batches</h2>
           </Reveal>
           <Reveal className="lg:col-span-8" delay={0.08}>
-            {batches.length > 0 ? (
-              <div className="overflow-x-auto">
-                <table className="w-full min-w-[560px] border-b-2 border-ink/10 text-left">
+            <div className="grid gap-5 md:grid-cols-2">
+              <div className="rounded-[24px] bg-court-950 p-7 text-chalk">
+                <h3 className="display text-[2rem]">Batch timings</h3>
+                <h4 className="eyebrow mt-5 text-mat-soft">Weekdays</h4>
+                <ul className="mt-2 tabular-nums">
+                  {weekdayTimings.map((t) => (
+                    <li key={t} className="border-b border-chalk/10 py-2.5">{t}</li>
+                  ))}
+                </ul>
+                <h4 className="eyebrow mt-6 text-mat-soft">Weekends</h4>
+                <ul className="mt-2 tabular-nums">
+                  {weekendTimings.map((t) => (
+                    <li key={t} className="border-b border-chalk/10 py-2.5 last:border-b-0">{t}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="rounded-[24px] bg-chalk-2 p-7">
+                <h3 className="display text-[2rem]">Monthly fees</h3>
+                <table className="mt-4 w-full text-left tabular-nums">
+                  <caption className="sr-only">Monthly coaching fees by number of days per week</caption>
                   <thead>
                     <tr className="eyebrow text-ink-soft">
-                      <th scope="col" className="py-3 pr-4 font-normal">Level</th>
-                      <th scope="col" className="py-3 pr-4 font-normal">Ages</th>
-                      <th scope="col" className="py-3 pr-4 font-normal">Days</th>
-                      <th scope="col" className="py-3 pr-4 font-normal">Time</th>
-                      <th scope="col" className="py-3 font-normal">Fee</th>
+                      <th scope="col" className="py-2 font-normal">Plan</th>
+                      <th scope="col" className="py-2 text-right font-normal">Per month</th>
                     </tr>
                   </thead>
-                  <tbody className="tabular-nums">
-                    {batches.map((b) => (
-                      <tr key={`${b.level}-${b.days}-${b.time}`} className="border-t-2 border-ink/10">
-                        <th scope="row" className="py-4 pr-4 font-semibold">{b.level}</th>
-                        <td className="py-4 pr-4">{b.ages}</td>
-                        <td className="py-4 pr-4">{b.days}</td>
-                        <td className="py-4 pr-4">{b.time}</td>
-                        <td className="py-4">{b.fee ?? "Ask us"}</td>
+                  <tbody>
+                    {fees.map((f) => (
+                      <tr key={f.plan} className="border-t border-ink/10">
+                        <th scope="row" className="py-2.5 font-normal">{f.plan}</th>
+                        <td className="py-2.5 text-right font-semibold">{f.price}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
-            ) : (
-              <div className="grid gap-6 rounded-[24px] bg-chalk-2 p-7 sm:p-9 md:grid-cols-[1fr_auto] md:items-center">
-                <div>
-                  <p className="display text-[clamp(1.9rem,3vw,2.5rem)]">Morning, evening and weekend batches</p>
-                  <p className="mt-3 max-w-[52ch] text-ink-soft">
-                    Tell us the player&rsquo;s age, level and the times that suit you, and we&rsquo;ll send the current timetable and fees for the batches that fit.
-                  </p>
-                </div>
-               <div className="flex flex-col items-end gap-3 sm:items-start">
-  <a
-    href={a.contact.phoneHref}
-    className="text-center font-semibold link-underline"
-  >
-    Call {a.contact.phoneDisplay}
-  </a>
+            </div>
+            <div className="mt-6 flex flex-col items-end gap-4 sm:flex-row sm:items-center sm:justify-end">
 
-  <ExternalButton
-    href={trialLink("Please send current batch timings and fees.")}
-    variant="ink"
-    note="opens WhatsApp"
-  >
-    Ask on WhatsApp
-  </ExternalButton>
-</div>
-              </div>
-            )}
+              <a
+                href={a.contact.phoneHref}
+                className="font-semibold link-underline inline-flex min-h-[44px] items-center lg:min-h-0"
+              >
+                Call {a.contact.phoneDisplay}
+              </a>
+              <ExternalButton
+                href={trialLink("Which batch would suit the player?")}
+                variant="ink"
+                note="opens WhatsApp"
+              >
+                Ask which batch fits
+              </ExternalButton>
+            </div>
+            <p className="mt-4 text-sm text-ink-soft">The first session is free. Timings and fees are confirmed when you book.</p>
           </Reveal>
         </div>
       </section>

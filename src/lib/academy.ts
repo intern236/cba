@@ -40,29 +40,28 @@ export const academy = {
     nearestMetro: { name: "Noida Sector 81", distance: "2.5 km" },
   },
 
-  // [GBP] — Tuesday differs on Google; Playo lists 5 AM–11 PM for all days. confirm: true
+  // Confirmed by the academy, 22 Oct 2026: 5 AM – 11 PM every day (Google listed Tuesday until 8 PM; update it).
   hours: [
     { day: "Monday", short: "Mon", open: "05:00", close: "23:00" },
-    { day: "Tuesday", short: "Tue", open: "05:00", close: "20:00" },
+    { day: "Tuesday", short: "Tue", open: "05:00", close: "23:00" },
     { day: "Wednesday", short: "Wed", open: "05:00", close: "23:00" },
     { day: "Thursday", short: "Thu", open: "05:00", close: "23:00" },
     { day: "Friday", short: "Fri", open: "05:00", close: "23:00" },
     { day: "Saturday", short: "Sat", open: "05:00", close: "23:00" },
     { day: "Sunday", short: "Sun", open: "05:00", close: "23:00" },
   ],
-  hoursSummary: "Daily 5 AM – 11 PM · Tuesdays until 8 PM",
+  hoursSummary: "Daily 5 AM – 11 PM",
 
   contact: {
-    // [IG] bio "Free trial: DM/WhatsApp 9560478732" and [PLY] venue telephone agree.
-    // Other numbers seen online (ZoomInfo 88262 68236, Facebook 88829 43676) — confirm which to keep.
-    phoneDisplay: " +91 88262 68236 ",
-    phoneHref: "tel: +91 88262 68236 ",
+    // Confirmed by the user, 21 Oct 2026: +91 88262 68236 for calls AND WhatsApp.
+    // (Replaces 95604 78732 from the Instagram bio — update the bio too.)
+    phoneDisplay: "+91 88262 68236",
+    phoneHref: "tel:+918826268236",
     // Not shown: the domain has no MX records as of 16 Oct 2026, so the
     // published address cbainfo@celestialsacademy.com cannot receive mail.
     email: null as string | null,
-    // [IG] bio names this number for WhatsApp free-trial enquiries.
     whatsappUrl:
-      "https://wa.me/88262 68236?text=" +
+      "https://wa.me/918826268236?text=" +
       encodeURIComponent("Hi Celestial's, I'd like to book a free trial session."),
     instagram: {
       handle: "@celestialsbadmintonacademy",
@@ -84,15 +83,14 @@ export const academy = {
       provider: "Playo",
       url: "https://playo.co/venues/sector--104-ncr/celestials-badminton-academy-sector-4-ncr",
     },
-    // [HUD][DIS]
-    priceFrom: "₹450",
+      priceFrom: "₹450",
     priceNote: "per slot, onwards. Peak evening and weekend slots may cost more — the booking page shows the live rate.",
   },
 
-  // [GBP] aggregate only; review counts differ slightly across mirrors (258–279).
+  // [GBP] aggregate only. 324 reviews on Google on 22 Oct 2026, shown as "320+".
   rating: {
     value: "4.4",
-    countLabel: "270+",
+    countLabel: "320+", // Google showed 324 reviews on 22 Oct 2026
     source: "Google",
     url: "https://www.google.com/maps/search/?api=1&query=Celestials+Badminton+Academy+Sector+104+Noida",
   },
@@ -169,7 +167,7 @@ export type Academy = typeof academy;
  * (fewer back-and-forth messages before a trial is booked — design hypothesis H7).
  */
 export function trialLink(details?: string): string {
-  const base = "https://wa.me/919560478732?text=";
+  const base = "https://wa.me/918826268236?text=";
   const msg = details
     ? `Hi Celestial's, I'd like to book a free trial session.\n${details}`
     : "Hi Celestial's, I'd like to book a free trial session.";

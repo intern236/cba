@@ -1,55 +1,43 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import Image from "next/image";
+import { type Player, photoSrc } from "@/lib/achievements";
 
-type Achievement = {
-    name: string;
-    result: string;
-    event: string;
-    date: string;
-    image?: string;
-};
-
-const GAP = 16; // Must match gap-4
-
-const arrowClass =
-    "flex h-10 w-10 items-center justify-center rounded-full border border-ink/15 bg-chalk text-ink transition-all duration-200 hover:border-mat/50 hover:bg-court-950 hover:text-chalk disabled:pointer-events-none disabled:opacity-30";
+const GAP = 16; // must match gap-4
 
 export function AchievementsSlider({
-    achievements,
+    players = [],
     children,
+    tone = "light",
 }: {
-    achievements: Achievement[];
+    players?: Player[];
     children: React.ReactNode;
+    tone?: "light" | "dark";
 }) {
     const trackRef = useRef<HTMLDivElement>(null);
     const drag = useRef({ active: false, startX: 0, startScroll: 0 });
-
     const [canPrev, setCanPrev] = useState(false);
     const [canNext, setCanNext] = useState(true);
     const [dragging, setDragging] = useState(false);
+    const [progress, setProgress] = useState(0);
 
     const update = useCallback(() => {
         const el = trackRef.current;
         if (!el) return;
-
         setCanPrev(el.scrollLeft > 4);
         setCanNext(el.scrollLeft + el.clientWidth < el.scrollWidth - 4);
+        const max = el.scrollWidth - el.clientWidth;
+        setProgress(max > 0 ? el.scrollLeft / max : 1);
     }, []);
 
     useEffect(() => {
         const el = trackRef.current;
         if (!el) return;
-
         update();
-
         el.addEventListener("scroll", update, { passive: true });
         window.addEventListener("resize", update);
-
         const ro = new ResizeObserver(update);
         ro.observe(el);
-
         return () => {
             el.removeEventListener("scroll", update);
             window.removeEventListener("resize", update);
@@ -60,23 +48,16 @@ export function AchievementsSlider({
     const scrollByCard = (dir: 1 | -1) => {
         const el = trackRef.current;
         if (!el) return;
-
         const card = el.querySelector<HTMLElement>("[data-card]");
         const step = card ? card.offsetWidth + GAP : el.clientWidth * 0.8;
-
-        el.scrollTo({
-            left: el.scrollLeft + dir * step,
-            behavior: "smooth",
-        });
+        el.scrollTo({ left: el.scrollLeft + dir * step, behavior: "smooth" });
     };
 
-    // Mouse drag for desktop; touch swiping works natively.
+    // Mouse drag for desktop (touch devices already swipe natively)
     const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
         if (e.pointerType !== "mouse" || e.button !== 0) return;
-
         const el = trackRef.current;
         if (!el) return;
-
         drag.current = {
             active: true,
             startX: e.clientX,
@@ -88,14 +69,11 @@ export function AchievementsSlider({
     const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
         const el = trackRef.current;
         if (!drag.current.active || !el) return;
-
-        el.scrollLeft =
-            drag.current.startScroll - (e.clientX - drag.current.startX);
+        el.scrollLeft = drag.current.startScroll - (e.clientX - drag.current.startX);
     };
 
     const endDrag = () => {
         if (!drag.current.active) return;
-
         drag.current.active = false;
         setDragging(false);
     };
@@ -110,12 +88,16 @@ export function AchievementsSlider({
         }
     };
 
+    const arrowClass =
+        "flex h-10 w-10 items-center justify-center rounded-full border border-ink/15 bg-chalk text-ink transition-all duration-200 hover:border-mat/50 hover:bg-court-950 hover:text-chalk disabled:pointer-events-none disabled:opacity-30";
+
     return (
         <>
             <div className="flex items-end justify-between gap-6">
                 <div className="min-w-0">{children}</div>
 
-                <div className="flex shrink-0 gap-2">
+                {/* Arrows on larger screens; phones swipe (see the progress bar below the cards). */}
+                <div className="hidden shrink-0 gap-2 sm:flex">
                     <button
                         type="button"
                         aria-label="Previous achievements"
@@ -137,7 +119,6 @@ export function AchievementsSlider({
                             <path d="M15 18l-6-6 6-6" />
                         </svg>
                     </button>
-
                     <button
                         type="button"
                         aria-label="Next achievements"
@@ -166,65 +147,77 @@ export function AchievementsSlider({
                 ref={trackRef}
                 tabIndex={0}
                 role="region"
-                aria-label="Player achievements"
+                aria-label="Player results"
                 onKeyDown={onKeyDown}
                 onPointerDown={onPointerDown}
                 onPointerMove={onPointerMove}
                 onPointerUp={endDrag}
                 onPointerLeave={endDrag}
                 onPointerCancel={endDrag}
-                className={`scrollbar-none mt-6 grid w-full grid-flow-col auto-cols-[300px] gap-4 overflow-x-auto overscroll-x-contain pb-4 sm:auto-cols-[380px] lg:auto-cols-[calc((100%_-_2rem)/3)] ${
-                    dragging
-                        ? "cursor-grabbing select-none snap-none"
-                        : "snap-x snap-proximity lg:cursor-grab"
-                }`}
+                className={`-mx-5 mt-8 grid grid-flow-col auto-cols-[78%] gap-4 overflow-x-auto overscroll-x-contain px-5 pb-2 scroll-px-5 scrollbar-none sm:mx-0 sm:auto-cols-[300px] sm:px-0 sm:scroll-px-0 lg:auto-cols-[calc((100%_-_3rem)/4)] ${dragging
+                    ? "cursor-grabbing select-none snap-none"
+                    : "snap-x snap-mandatory lg:cursor-grab"
+                    }`}
                 style={{ WebkitOverflowScrolling: "touch" }}
             >
-                {achievements.map((achievement) => (
-                    <div
-                        key={`${achievement.name}-${achievement.event}-${achievement.date}`}
-                        data-card
-                        className="snap-start"
-                    >
-                        <article className="group flex h-full flex-col overflow-hidden rounded-[24px] border border-ink/10 bg-chalk shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-mat/40 hover:shadow-lg">
-                            {/* Achievement image */}
-                            <div className="relative aspect-[4/3] w-full shrink-0 overflow-hidden bg-chalk-2">
-                                {achievement.image ? (
-                                    <Image
-                                        src={achievement.image}
-                                        alt={`${achievement.name} - ${achievement.result}`}
-                                        fill
-                                        sizes="(max-width: 639px) 300px, (max-width: 1023px) 380px, 33vw"
-                                        className="object-cover object-top"
+                {(players ?? []).map((p) => {
+                    const img = photoSrc(p);
+                    return (
+                        <article
+                            key={p.name}
+                            data-card
+                            className="flex snap-start flex-col overflow-hidden rounded-[24px] bg-chalk text-ink ring-1 ring-ink/10"
+                        >
+                            <div className="relative aspect-[4/5] overflow-hidden bg-court-950">
+                                {img ? (
+                                    // eslint-disable-next-line @next/next/no-img-element
+                                    <img
+                                        src={img.src}
+                                        srcSet={img.srcSet}
+                                        sizes="(min-width: 1024px) 300px, 78vw"
+                                        width={480}
+                                        height={600}
+                                        alt={`${p.name}${p.results[0] ? ` with the ${p.results[0].event} award` : ""}`}
+                                        loading="lazy"
+                                        decoding="async"
+                                        draggable={false}
+                                        className="h-full w-full object-cover"
                                     />
                                 ) : (
-                                    <div className="flex h-full items-center justify-center px-4 text-center text-sm text-ink-soft">
-                                        Achievement photo coming soon
-                                    </div>
+                                    <svg aria-hidden="true" viewBox="0 0 400 500" className="h-full w-full" preserveAspectRatio="xMidYMid slice">
+                                        {/* No photo yet: a court seen from above, in the brand's court-line style */}
+                                        <g fill="none" stroke="#ffffff" strokeOpacity="0.16" strokeWidth="3">
+                                            <rect x="60" y="40" width="280" height="420" />
+                                            <path d="M80 40V460M320 40V460M60 250H340M60 190H340M60 310H340M60 64H340M60 436H340M200 40V190M200 310V460" />
+                                        </g>
+                                    </svg>
                                 )}
+                                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-court-950/90 via-court-950/40 to-transparent" aria-hidden="true" />
+                                <span className="eyebrow absolute left-3 top-3 rounded-full bg-court-950/75 px-2.5 py-1.5 text-[0.65rem] text-chalk backdrop-blur">
+                                    {p.tag}
+                                </span>
+                                <h3 className="display absolute inset-x-4 bottom-4 text-[1.9rem] leading-[0.95] text-chalk">{p.name}</h3>
                             </div>
-
-                            {/* Achievement details */}
-                            <div className="flex flex-1 flex-col p-6 sm:p-7">
-                                <p className="eyebrow inline-flex w-fit rounded-full bg-chalk-2 px-3 py-2 text-mat">
-                                    {achievement.date}
-                                </p>
-
-                                <h3 className="display mt-5 text-2xl leading-tight transition-colors duration-300 group-hover:text-mat sm:text-3xl">
-                                    {achievement.name}
-                                </h3>
-
-                                <p className="mt-3 whitespace-pre-line text-lg font-semibold leading-snug text-ink">
-                                    {achievement.result}
-                                </p>
-
-                                <p className="mt-2 text-sm leading-relaxed text-ink-soft">
-                                    {achievement.event}
-                                </p>
-                            </div>
+                            <ul className="flex flex-1 flex-col gap-4 p-4 sm:p-5">
+                                {p.results.map((r) => (
+                                    <li key={r.title + r.event}>
+                                        <p className="font-semibold leading-snug">{r.title}</p>
+                                        <p className="mt-0.5 text-sm leading-snug text-ink-soft">{r.event}</p>
+                                        {r.date && <p className="eyebrow mt-1.5 text-[0.65rem] text-mat-deep">{r.date}</p>}
+                                    </li>
+                                ))}
+                            </ul>
                         </article>
-                    </div>
-                ))}
+                    );
+                })}
+            </div>
+
+            {/* Swipe progress — tells phone users there is more to the side */}
+            <div className="mt-4 flex items-center gap-3 sm:hidden" aria-hidden="true">
+                <div className={`h-1 flex-1 overflow-hidden rounded-full ${tone === "dark" ? "bg-chalk/15" : "bg-ink/10"}`}>
+                    <div className="h-full rounded-full bg-mat transition-[width] duration-150" style={{ width: `${Math.max(12, progress * 100)}%` }} />
+                </div>
+                <span className={`eyebrow text-[0.65rem] ${tone === "dark" ? "text-chalk/60" : "text-ink-soft"}`}>Swipe</span>
             </div>
         </>
     );
