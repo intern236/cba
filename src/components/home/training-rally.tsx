@@ -536,8 +536,9 @@ export function TrainingRally({
         {/* International exposure */}
         <div className="mt-16 grid gap-8 rounded-[28px] bg-court-950/70 p-7 ring-1 ring-white/10 sm:p-9 lg:grid-cols-[1fr_auto] lg:items-center">
           <div>
-            <p className="eyebrow text-mat-soft">International exposure</p>
-
+<h2>
+  International exposure — BATTS Athletics Academy, Canada
+</h2>
             <p className="mt-3 max-w-[60ch] text-[1.1rem] leading-relaxed text-chalk/85">
               An {ex.label.toLowerCase()} with{" "}
               <strong className="font-semibold text-chalk">{ex.partner}</strong> in {ex.country}{" "}

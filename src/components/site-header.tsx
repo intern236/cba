@@ -76,7 +76,7 @@ export function SiteHeader() {
           >
             <Image
               src="/images/LOGO.png"
-              alt=""
+              alt="Celestial's Badminton Academy, Noida"
               width={96}
               height={96}
               priority

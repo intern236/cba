@@ -20,22 +20,40 @@ const mono = Geist_Mono({
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.celestialsacademy.com";
-
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Celestial's Badminton Academy — coaching for kids, teens & adults, Noida",
+    default: "Celestial's Badminton Academy — Sector 104, Noida",
     template: "%s · Celestial's Badminton Academy",
   },
   description:
-    "Badminton coaching in Sector 104, Noida for players starting out and players getting better: kids, teens and adults, group or one-to-one, with assessments, video analysis and a free first session. Courts also open for pay-and-play.",
+    "Top-rated badminton academy in Sector 104, Noida. 7 indoor AC PVC courts, certified BWF coaching for kids, teens & adults. Free first trial session. Pay-and-play court booking.",
+  keywords: [
+    "badminton academy in noida",
+    "badminton coaching sector 104 noida",
+    "indoor badminton courts noida",
+    "badminton training for kids noida",
+    "pay and play badminton courts noida",
+    "celestials badminton academy",
+  ],
   openGraph: {
     type: "website",
     locale: "en_IN",
+    url: siteUrl,
     siteName: academy.name,
-    images: [{ url: "/images/play-rally-1600.webp", width: 1440, height: 1080, alt: "A junior player training on court at Celestial's" }],
+    title: "Celestial's Badminton Academy — Noida Sector 104",
+    description: "7 indoor AC courts, BWF certified coaches, batches for kids and adults. Book your free trial.",
+    images: [{ url: "/images/play-rally-1600.webp", width: 1440, height: 1080, alt: "Badminton coaching at Celestial's" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Celestial's Badminton Academy — Sector 104, Noida",
+    description: "7 indoor AC courts, professional coaching & free trial.",
+    images: ["/images/play-rally-1600.webp"],
   },
   alternates: { canonical: "/" },
+  // Optional: paste your Google Search Console token here:
+  // verification: { google: "your-google-verification-code" },
 };
 
 export const viewport: Viewport = {
@@ -51,16 +69,31 @@ const jsonLd = {
   name: academy.name,
   sport: "Badminton",
   image: `${siteUrl}/images/courts-panorama-1600.webp`,
-  telephone: academy.contact.phoneHref.replace("tel:", ""),
+  telephone: "+918826268236",
+  priceRange: "₹450 - ₹1500",
+  currenciesAccepted: "INR",
+  paymentAccepted: "Cash, UPI, Credit Card",
   address: {
     "@type": "PostalAddress",
     streetAddress: `${academy.address.line1}, ${academy.address.line2}`,
-    addressLocality: "Noida",
+    addressLocality: "Sector 104, Noida",
     addressRegion: "Uttar Pradesh",
     postalCode: "201304",
     addressCountry: "IN",
   },
-  geo: { "@type": "GeoCoordinates", latitude: academy.address.lat, longitude: academy.address.lng },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: academy.address.lat,
+    longitude: academy.address.lng,
+  },
+  // ⭐ This enables the 4.4 Gold Star Rating in Google search results:
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "4.4",
+    reviewCount: "270",
+    bestRating: "5",
+    worstRating: "1",
+  },
   openingHoursSpecification: academy.hours.map((h) => ({
     "@type": "OpeningHoursSpecification",
     dayOfWeek: h.day,

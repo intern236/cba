@@ -11,45 +11,44 @@ export function SiteFooter() {
       <div className="mx-auto max-w-[1320px] px-5 pb-10 pt-20 sm:px-8">
         <div className="grid grid-cols-2 gap-6 md:grid-cols-[1.4fr_1fr_1fr_1fr] md:gap-12">
           {/* Brand */}
-         
-{/* Brand */}
-<div className="col-span-2 md:col-span-1">
-  <Link
-    href="/"
-    aria-label="Celestial's Badminton Academy home"
-    className="inline-flex items-center gap-3"
-  >
-    <Image
-      src="/images/LOGO.png"
-      alt="Celestial's Badminton Academy logo"
-      width={80}
-      height={80}
-      className="h-14 w-14 shrink-0 object-contain sm:h-16 sm:w-16"
-    />
 
-    <span className="leading-none">
-      <span className="display block whitespace-nowrap text-[1.2rem] font-bold tracking-[0.01em] sm:text-[1.4rem]">
-        Celestial&rsquo;s
-      </span>
+          {/* Brand */}
+          <div className="col-span-2 md:col-span-1">
+            <Link
+              href="/"
+              aria-label="Celestial's Badminton Academy home"
+              className="inline-flex items-center gap-3"
+            >
+              <Image
+                src="/images/LOGO.png"
+                alt="Celestial's Badminton Academy logo"
+                width={80}
+                height={80}
+                className="h-14 w-14 shrink-0 object-contain sm:h-16 sm:w-16"
+              />
 
-      <span className="eyebrow mt-1.5 block whitespace-nowrap text-[0.55rem] uppercase tracking-[0.12em] text-chalk/70 sm:text-[0.6rem]">
-        Badminton Academy
-      </span>
-    </span>
-  </Link>
+              <span className="leading-none">
+                <span className="display block whitespace-nowrap text-[1.2rem] font-bold tracking-[0.01em] sm:text-[1.4rem]">
+                  Celestial&rsquo;s
+                </span>
 
-  <p className="mt-7 max-w-[40ch] text-base leading-[1.7] text-chalk/80 sm:mt-8 sm:text-lg sm:leading-[1.6]">
-    A badminton academy for players starting out and players getting
-    better: coaching, seven indoor courts and a recovery stack under
-    one roof in Sector 104, Noida.
-  </p>
-</div>
+                <span className="eyebrow mt-1.5 block whitespace-nowrap text-[0.55rem] uppercase tracking-[0.12em] text-chalk/70 sm:text-[0.6rem]">
+                  Badminton Academy
+                </span>
+              </span>
+            </Link>
+
+            <p className="mt-7 max-w-[40ch] text-base leading-[1.7] text-chalk/80 sm:mt-8 sm:text-lg sm:leading-[1.6]">
+              A badminton academy for players starting out and players getting
+              better: coaching, seven indoor courts and a recovery stack under
+              one roof in Sector 104, Noida.
+            </p>
+          </div>
 
 
           {/* Visit */}
           <div>
-            <h2 className="eyebrow text-chalk/50">Visit</h2>
-
+            <p className="eyebrow text-chalk/50">Visit</p>
             <address className="mt-4 not-italic leading-relaxed text-chalk/85">
               {a.address.line1}
               <br />
@@ -79,8 +78,7 @@ export function SiteFooter() {
               <dd>5 AM – 8 PM</dd>
             </dl> */}
 
-            <h2 className="eyebrow mt-8 text-chalk/50">Talk to us</h2>
-
+            <p className="eyebrow mt-8 text-chalk/50">Talk to us</p>
             <ul className="mt-4 space-y-1.5 text-chalk/85">
               <li>
                 <a href={a.contact.phoneHref} className="link-underline">
@@ -127,8 +125,7 @@ export function SiteFooter() {
 
           {/* Explore + booking */}
           <div>
-            <h2 className="eyebrow text-chalk/50">Explore</h2>
-
+            <p className="eyebrow text-chalk/50">Explore</p>
             <ul className="mt-4 space-y-1.5 text-chalk/85">
               {[...navLinks, ...moreLinks].map((l) => (
                 <li key={l.href}>
@@ -139,8 +136,7 @@ export function SiteFooter() {
               ))}
             </ul>
 
-            <h2 className="eyebrow mt-8 text-chalk/50">Book a court</h2>
-
+            <p className="eyebrow mt-8 text-chalk/50">Book a court</p>
             <ul className="mt-4 space-y-1.5 text-chalk/85">
               {[a.booking.primary, a.booking.secondary].map((b) => (
                 <li key={b.provider}>

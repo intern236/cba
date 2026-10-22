@@ -1,6 +1,6 @@
+import Link from "next/link";
 import { ShuttleShape } from "./shuttle";
 
-/** Dark band for inner pages; ends on the court line with the resting shuttle — the hero's final frame. */
 export function PageHeader({
   eyebrow,
   title,
@@ -17,7 +17,13 @@ export function PageHeader({
       <div className="mx-auto max-w-[1320px] px-5 pb-14 pt-32 sm:px-8 sm:pt-40 lg:pb-16">
         <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-8">
-            <p className="eyebrow rise-in text-mat-soft">{eyebrow}</p>
+            {/* Breadcrumb Navigation */}
+            <nav aria-label="Breadcrumb" className="eyebrow rise-in flex items-center gap-2 text-mat-soft">
+              <Link href="/" className="hover:text-chalk transition-colors">Home</Link>
+              <span aria-hidden="true" className="text-chalk/35">/</span>
+              <span>{eyebrow}</span>
+            </nav>
+
             <h1 className="display mt-5 text-[clamp(3.2rem,7.4vw,6.6rem)]">
               <span className="drop-in block">{title}</span>
             </h1>

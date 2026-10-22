@@ -20,12 +20,34 @@ export const metadata: Metadata = {
 const a = academy;
 
 const groups = [
-  ...levels.map((l) => ({ t: l.name, d: `${l.tagline}. ${l.forWho} Focus: ${l.work.slice(0, 3).join(", ").toLowerCase()}.`, start: `Programme ${l.n} · ${l.ages}`, href: `/pathway/#${l.id}` })),
+...levels.map((l) => ({
+  t: l.name,
+  age: l.ages,
+  d: `${l.tagline}. ${l.forWho} Focus: ${l.work.slice(0, 3).join(", ").toLowerCase()}.`,
+  start: `Programme ${l.n}`,
+  href: `/pathway/#${l.id}`,
+})),
+  {
+    t: "Kids",
+    age: "Ages 5–11 years",
+    d: "Foundational badminton classes for kids in Noida. Young players learn correct racket grip, dynamic footwork, hand-eye coordination, balance, and basic strokes through fun, structured drills.",
+    start: "Junior development · Morning & evening batches",
+    href: "/first-session/",
+  },
+
+  {
+    t: "Teens",
+    age: "Ages 12–17 years",
+    d: "Intermediate and advanced training focused on stroke refinement (smashes, drops, clears), fast court agility, rally consistency, and tactical match play for school, district, and state tournaments.",
+    start: "Tournament prep · 3 to 6 days/week",
+    href: "/pathway/",
+  },
   {
     t: "Adults",
-    d: "Adult batches for complete beginners, returning players and regulars, in the morning, evening or at weekends, or one-to-one coaching for faster progress.",
-    start: "Adult batches · one-to-one",
-    href: "",
+    age: "Ages 18+ years",
+    d: "Flexible morning, evening, and weekend batches for complete beginners, returning players, and corporate athletes looking to improve technical consistency, cardio fitness, and gameplay.",
+    start: "Adult batches · One-to-one coaching",
+    href: "/first-session/",
   },
 ];
 
@@ -34,7 +56,24 @@ const faqs = [
   { q: "Which ages do you coach?", a: "Kids, teens and adults. Tell us the player’s age and experience and we’ll suggest a batch." },
   { q: "Group batch or one-to-one?", a: "Group batches are the usual starting point. One-to-one sessions suit players who want faster, individual feedback, and many players combine the two." },
   { q: "How will I know I’m improving?", a: "Periodic assessments set a baseline and measure progress against it, and individual reviews turn that into the next block of work." },
-  { q: "What are the batch timings and fees?", a: <>Weekday batches run from 8 am to 10 pm and weekend batches late morning and evening. Fees start at {feesFrom} a month. <a href="#timings" className="link-underline font-semibold text-ink">See the full timetable and fees</a>.</> },
+{
+  q: "What are the badminton batch timings and monthly fees in Noida?",
+  a: (
+    <>
+      Celestial's Badminton Academy offers weekday badminton coaching
+      batches from 8 am to 10 pm, with weekend batches available in
+      the late morning and evening. Monthly coaching fees start at
+      {` ${feesFrom}`} per month, depending on the selected plan
+      and training frequency. The first session is free.{" "}
+      <a
+        href="#timings"
+        className="link-underline font-semibold text-ink"
+      >
+        View the complete badminton batch timetable and monthly fees
+      </a>.
+    </>
+  ),
+},
   { q: "Can I also just book a court?", a: <>Yes. Courts are booked online on Hudle or Playo. <Link href="/facilities/#book-a-court" className="link-underline font-semibold text-ink">Court booking details</Link>.</> },
 ];
 
@@ -73,8 +112,8 @@ export default function ProgramsPage() {
               <Reveal as="li" key={g.t} delay={i * 0.06} className="grid gap-3 border-t-2 border-ink/10 py-8 md:grid-cols-12 md:items-baseline">
                 <h3 className="display text-[clamp(3rem,6vw,5rem)] md:col-span-4">{g.t}</h3>
                 <div className="md:col-span-7 md:col-start-6">
-                  <p className="max-w-[56ch] text-lg text-ink-soft">{g.d}</p>
-                  <p className="eyebrow mt-3 text-mat-deep">{g.start}</p>
+                  <p className="eyebrow mt-1 text-mat-deep font-semibold">{g.age}</p>
+                  <p className="max-w-[56ch] mt-2 text-lg text-ink-soft">{g.d}</p>                  <p className="eyebrow mt-3 text-ink/60">{g.start}</p>
                   {g.href && (
                     <Link href={g.href} className="mt-1 inline-flex min-h-[44px] items-center font-semibold">
                       <span className="link-underline">About {g.t}</span>
