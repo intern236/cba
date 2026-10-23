@@ -58,12 +58,14 @@ export default function FacilitiesPage() {
         title="Everything under one roof"
         intro="Courts to train on, a gym to get stronger, a physio when something hurts, and somewhere to sit down afterwards. The courts are also open for pay-and-play."
       >
-        <div className="rounded-[22px] bg-court-900 p-4 sm:p-5 ring-1 ring-white/10">
-          <OpenStatus className="text-chalk/85" />
-          <p className="mt-2 text-sm leading-relaxed text-chalk/60">
-            {a.hoursSummary}
-          </p>
-        </div>
+<div className="flex justify-end">
+  <div className="inline-block w-fit rounded-[12px] bg-court-900 px-3 py-4 ring-1 ring-white/10 text-right">
+    <OpenStatus className="text-chalk/85" />
+    <p className="mt-2 text-sm leading-relaxed text-chalk/60">
+      {a.hoursSummary}
+    </p>
+  </div>
+</div>
       </PageHeader>
 
       {/* COURT SPECIFICATIONS */}
