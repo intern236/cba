@@ -229,7 +229,11 @@ export function LevelFinder({ id: anchor = "find-your-level", wide = false }: { 
                 <p className="mt-2 text-sm text-chalk/55">
                   Fees from {feesFrom} a month. The coach confirms the programme in your free first session.
                 </p>
-                <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+                <div className="mt-6 flex flex-wrap items-center justify-end gap-x-6 gap-y-3">
+                  <Link href={`/pathway/#${lvl.id}`} className="inline-flex items-center gap-1.5 font-semibold text-chalk/85 hover:text-chalk">
+                    <span className="link-underline">About {lvl.name}</span>
+                    <ArrowRight size={14} weight="bold" aria-hidden="true" />
+                  </Link>
                   <a href={trialLink(details)} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
                     <span>
                       Book a free trial
@@ -237,10 +241,6 @@ export function LevelFinder({ id: anchor = "find-your-level", wide = false }: { 
                     </span>
                     <span className="btn-icon" aria-hidden="true"><ArrowUpRight size={16} weight="bold" /></span>
                   </a>
-                  <Link href={`/pathway/#${lvl.id}`} className="inline-flex items-center gap-1.5 font-semibold text-chalk/85 hover:text-chalk">
-                    <span className="link-underline">About {lvl.name}</span>
-                    <ArrowRight size={14} weight="bold" aria-hidden="true" />
-                  </Link>
                 </div>
               </>
             ) : placement?.kind === "adult" ? (
@@ -254,7 +254,11 @@ export function LevelFinder({ id: anchor = "find-your-level", wide = false }: { 
                   {placement.oneToOne && " Add one-to-one sessions if you want faster, individual feedback."} Fees from {feesFrom} a month.
                 </p>
                 <p className="mt-2 text-sm text-chalk/55">The coach confirms the right batch in your free first session.</p>
-                <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+                <div className="mt-6 flex flex-wrap items-center justify-end gap-x-6 gap-y-3">
+                  <Link href="/programs/#timings" className="inline-flex items-center gap-1.5 font-semibold text-chalk/85 hover:text-chalk">
+                    <span className="link-underline">Batch timings &amp; fees</span>
+                    <ArrowRight size={14} weight="bold" aria-hidden="true" />
+                  </Link>
                   <a href={trialLink(details)} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
                     <span>
                       Book a free trial
@@ -262,10 +266,6 @@ export function LevelFinder({ id: anchor = "find-your-level", wide = false }: { 
                     </span>
                     <span className="btn-icon" aria-hidden="true"><ArrowUpRight size={16} weight="bold" /></span>
                   </a>
-                  <Link href="/programs/#timings" className="inline-flex items-center gap-1.5 font-semibold text-chalk/85 hover:text-chalk">
-                    <span className="link-underline">Batch timings &amp; fees</span>
-                    <ArrowRight size={14} weight="bold" aria-hidden="true" />
-                  </Link>
                 </div>
               </>
             ) : (
@@ -276,7 +276,7 @@ export function LevelFinder({ id: anchor = "find-your-level", wide = false }: { 
                   Book a court for an hour on Hudle. Up to 4 players per court; non-marking shoes required.
                   If you ever want to get better, the first coaching session is free.
                 </p>
-                <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+                <div className="mt-6 flex flex-wrap items-center justify-end gap-x-6 gap-y-3">
                   <a href={academy.booking.primary.url} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
                     <span>
                       Book a court on Hudle

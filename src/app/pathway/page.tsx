@@ -33,7 +33,7 @@ export default function PathwayPage() {
     <>
       <PageHeader
         eyebrow="The training pathway"
-        title="Four levels. One direction."
+        title="Three levels. One direction."
         intro="From a first lesson to a tournament plan. Each level says who it’s for, what you’ll work on and what it takes to move up, so you always know where you are."
       >
         <nav aria-label="Levels" className="flex flex-wrap gap-2 lg:justify-end">
@@ -119,7 +119,7 @@ export default function PathwayPage() {
         </ol>
       </section>
 
-      <TrainingRally index="05" label="How progress is tracked" cta={{ href: "/programs/", label: "Programs & batches" }} />
+      <TrainingRally index="04" label="How progress is tracked" cta={{ href: "/programs/", label: "Programs & batches" }} />
 
       <section aria-labelledby="finder-title" className="on-light bg-chalk-2 py-24">
         <div className="mx-auto grid max-w-[1320px] gap-10 px-5 sm:px-8 lg:grid-cols-12">
