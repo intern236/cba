@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { academy } from "@/lib/academy";
 import { images } from "@/lib/images";
 import { coaches, founder } from "@/lib/coaches";
@@ -6,7 +7,8 @@ import { Photo } from "@/components/photo";
 import { Reveal } from "@/components/reveal";
 import { ExternalButton, TextLink } from "@/components/buttons";
 import { Community } from "@/components/home/community";
-import { Results } from "@/components/home/results";// import InstagramLive from "@/components/home/instagram-feed";
+import { Results } from "@/components/home/results";
+// import InstagramLive from "@/components/home/instagram-feed";
 
 export const metadata: Metadata = {
   title: { absolute: "About Celestial's Badminton Academy | Sector 104, Noida" },
@@ -275,7 +277,6 @@ export default function AboutPage() {
       </section>
 
       {/* Player Achievements */}
-      {/* Player Achievements */}
       <Results id="achievements-title" />
 
       {/* Community */}
@@ -376,21 +377,15 @@ export default function AboutPage() {
                 </p>
               </div>
 
-              <div
-                className="flex aspect-[4/5] w-full items-center justify-center overflow-hidden rounded-[18px] border border-dashed border-ink/20 bg-chalk-2 transition-colors duration-300 hover:border-mat/60"
-                aria-label="Utkarsh Chaudhary photo placeholder"
-              >
-                <div className="px-4 text-center">
-                  <p className="text-3xl text-ink-soft/50">+</p>
-
-                  <p className="eyebrow mt-3 text-ink-soft">
-                    ADD COACH PHOTO
-                  </p>
-
-                  <p className="mt-2 text-sm text-ink-soft">
-                    Original high-resolution image
-                  </p>
-                </div>
+              {/* Utkarsh photo */}
+              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[18px]">
+                <Image
+                  src="/images/players/dr-ketan-480.jpg" // 👈 put your image path here
+                  alt="Utkarsh Chaudhary, co-founder and head coach"
+                  fill
+                  sizes="(min-width:1024px) 320px, (min-width:768px) 30vw, 100vw"
+                  className="object-cover object-top"
+                />
               </div>
             </Reveal>
 
@@ -419,21 +414,15 @@ export default function AboutPage() {
                 </p>
               </div>
 
-              <div
-                className="flex aspect-[4/5] w-full items-center justify-center overflow-hidden rounded-[18px] border border-dashed border-ink/20 bg-chalk-2 transition-colors duration-300 hover:border-mat/60"
-                aria-label="Siddharth Jain photo placeholder"
-              >
-                <div className="px-4 text-center">
-                  <p className="text-3xl text-ink-soft/50">+</p>
-
-                  <p className="eyebrow mt-3 text-ink-soft">
-                    ADD COACH PHOTO
-                  </p>
-
-                  <p className="mt-2 text-sm text-ink-soft">
-                    Original high-resolution image
-                  </p>
-                </div>
+              {/* Siddharth photo */}
+              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[18px]">
+                <Image
+                  src="/images/players/dr-ketan-480.jpg" // 👈 put your coach image path here
+                  alt="Siddharth Jain, co-founder and head trainer"
+                  fill
+                  sizes="(min-width:1024px) 320px, (min-width:768px) 30vw, 100vw"
+                  className="object-cover object-top"
+                />
               </div>
             </Reveal>
           </div>

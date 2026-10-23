@@ -20,16 +20,16 @@ export function InstagramFeed({
   return (
     <section aria-labelledby="instagram-heading" className="bg-chalk-2 text-ink">
       <div className="mx-auto grid max-w-6xl gap-6 px-5 py-10 sm:px-8 lg:grid-cols-[540px_1fr] lg:items-center lg:gap-12 lg:py-14">
-       <div className="reveal mx-auto w-full max-w-[540px] overflow-hidden rounded-2xl bg-white p-2">
-  <iframe
-    src={`${profileUrl}embed`}
-    title={`Instagram posts from ${username}`}
-    loading="lazy"
-    scrolling="no"
-    className="block w-full rounded-xl border-0"
-    style={{ height }}
-  />
-</div>
+        <div className="reveal mx-auto w-full max-w-[540px] overflow-hidden rounded-2xl bg-white p-2">
+          <iframe
+            src={`${profileUrl}embed`}
+            title={`Instagram posts from ${username}`}
+            loading="lazy"
+            scrolling="no"
+            className="block w-full rounded-xl border-0"
+            style={{ height }}
+          />
+        </div>
 
         <div className="reveal">
           <h2
