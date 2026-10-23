@@ -20,7 +20,7 @@ import { academy } from "@/lib/academy"; // SEO: used for the structured data be
 /* SEO: this is what Google shows in search results.
    Title: keyword first, under 60 characters. Description: 120-160 characters. */
 export const metadata: Metadata = {
-  title: "Badminton Academy in Noida, Sector 104 | Celestial's",
+  title: { absolute: "Badminton Academy in Noida, Sector 104 | Celestial's" } ,
   description:
     "Badminton coaching in Sector 104, Noida for kids, teens and adults. NIS-certified coaches, 7 AC indoor courts, flexible batches. First session free.",
   alternates: {

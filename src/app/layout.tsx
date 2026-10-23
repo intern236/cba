@@ -100,7 +100,7 @@ const jsonLd = {
     opens: h.open,
     closes: h.close,
   })),
-  logo: `${siteUrl}/images/cba-logo.svg`,
+logo: `${siteUrl}/images/LOGO.png`,
   sameAs: [academy.contact.instagram.url, academy.contact.facebook],
 };
 

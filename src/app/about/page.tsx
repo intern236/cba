@@ -66,93 +66,7 @@ const facilities = [
   },
 ];
 
-const achievements = [
-  {
-  name: "Parth Aggarwal",
-  result: "National silver medal\nUP State Champion",
-  event: "Mixed Doubles · Deaf Nationals (May 2026)\nSingles and Doubles · UP State Championship (March 2026)",
-  date: "May 2026 · March 2026",
-  image: "/images/Parth-Aggarwal.jpeg",
-},
-{
-  name: "Dr. Ketan",
-  result: "Men's Singles champion\nRunner-up",
-  event: "National Doctors Championship (March 2026)\nUP State Ranking · 35+ (October 2026)",
-  date: "March 2026 · October 2026",
-  image: "/images/Dr. Ketan.jpeg",
-},
-  {
-    name: "Siddhant Thakur",
-    result: "India Top 10",
-    event: "U-15 Boys Doubles",
-    date: "July 2025",
-    image: "/images/Siddhant-Thakur.jpeg",
-  },
-  {
-    name: "Sneha Maurya",
-    result: "India Top 15",
-    event: "U-17 Girls Doubles",
-    date: "December 2025",
-    image: "/images/Sneha-Maurya.jpeg",
-  },
-    {
-    name: "Vatsal Vedansh",
-    result: "Main draw qualification",
-    event: "All India Sub-Junior Ranking · U-15",
-    date: "February 2026",
-    image: "/images/Vatsal-Vedansh.jpeg",
-  },
-  {
-    name: "Kashish Sharma",
-    result: "CBSE East Zone medalist",
-    event: "CBSE East Zone",
-    date: "",
-    image: "/images/Kashish-Sharma.jpeg",
-  },
-  {
-    name: "Mamta Yadav",
-    result: "National medalist",
-    event: "Masters National Championship",
-    date: "",
-    image: "/images/Mamta-Yadav.jpeg",
-  },
-  {
-    name: "Richa Tomar",
-    result: "State champion",
-    event: "WS, WD and XD · State Championship · 40+ category",
-    date: "",
-    image: "/images/Richa-Tomar.jpeg",
-  },
 
-  {
-    name: "Kaira",
-    result: "Silver medal",
-    event: "Delhi State Championship",
-    date: "October 2025",
-    image: "/images/Kaira.jpeg",
-  },
-  {
-    name: "Lakshita",
-    result: "Bronze medal",
-    event: "Delhi State Championship",
-    date: "October 2025",
-    image: "/images/Lakshita.jpeg",
-  },
-  {
-    name: "Akshita",
-    result: "3rd place",
-    event: "U-11 Girls Singles · PNB MetLife JBC",
-    date: "November 2023",
-    image: "/images/Akshita.jpeg",
-  },
-  {
-    name: "8 Academy Players",
-    result: "Selected for UP State Mini Championships",
-    event: "U-11 · Trials held at Celestial's",
-    date: "October 2026",
-    image: "/images/UP-State-Mini-Championship.jpeg",
-  },
-];
 const corporateEvents = [
   "Microsoft",
   "Adobe",
@@ -355,7 +269,7 @@ export default function AboutPage() {
       </section>
 
       {/* Player Achievements */}
-           {/* Player Achievements */}
+      {/* Player Achievements */}
       <Results id="achievements-title" />
 
       {/* Community */}

@@ -20,7 +20,7 @@ export type Player = {
   /** Short context chip: age group or category. */
   tag: string;
   results: Result[];
-  /** Slug of /public/images/players/{slug}-{480|960}.webp (4:5). */
+  /** Slug of /public/images/players/{slug}-{480|960}.jpg (4:5). */
   photo?: string;
   /** Widths available for this photo (some originals are small). */
   widths?: number[];
@@ -95,7 +95,7 @@ export function photoSrc(p: Player) {
   if (!p.photo) return null;
   const widths = p.widths ?? [480, 960];
   return {
-    src: `/images/players/${p.photo}-${widths[0]}.webp`,
-    srcSet: widths.map((w) => `/images/players/${p.photo}-${w}.webp ${w}w`).join(", "),
+    src: `/images/players/${p.photo}-${widths[0]}.jpg`,
+    srcSet: widths.map((w) => `/images/players/${p.photo}-${w}.jpg ${w}w`).join(", "),
   };
 }

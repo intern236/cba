@@ -54,7 +54,7 @@ export function LocationMap({ className = "", tone = "light" }: { className?: st
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/location-map-1400.webp"
-            alt=""
+            alt="Map and driving directions to Celestial's Badminton Academy in Sector 104 Noida near Sector 81 Metro"
             width={1400}
             height={1000}
             loading="lazy"
