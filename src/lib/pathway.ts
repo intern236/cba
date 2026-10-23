@@ -1,16 +1,4 @@
-/**
- * The academy's three programmes — the single source for the pathway section, the /pathway
- * page, the level finder, the programme slider, /programs and the score sheet.
- *
- * SOURCE: the academy's own programme list (Beginner / Intermediate / Professional, ages and
- * focus areas), supplied 21 Oct 2026. `tagline`, `forWho`, `ages` and the first items of
- * `work` are the academy's wording.
- *
- * STILL PROPOSED (confirm with the head coach — docs/DEPENDENCIES.md): the extra `work`
- * items marked below, the `readyWhen` move-up markers, and `format` / `support`, which
- * map the academy's confirmed methods (assessments, S&C, video analysis, reviews, physio,
- * BATTS exchange) onto each programme.
- */
+
 export type Level = {
   id: "beginner" | "intermediate" | "professional";
   n: string;

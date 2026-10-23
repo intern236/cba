@@ -4,21 +4,7 @@ import { useEffect, useRef } from "react";
 import { ArrowUpRight } from "@phosphor-icons/react/ssr";
 import { academy } from "@/lib/academy";
 
-/**
- * Location map: a static, self-hosted map image (OpenStreetMap data, tinted to the logo palette)
- * centred on the academy's Google Business Profile coordinates, with our own pin on top.
- *
- * Why not a Google Maps iframe: an embed depends on the host allowing google.com frames (the
- * preview host blocks them, and so do strict privacy settings). It also loads ~1 MB of script
- * on phones and traps scrolling. A static image always renders, costs ~57 KB on phones, and a
- * tap opens the real listing in Google Maps (the app on phones), which is what visitors
- * want there anyway: directions.
- *
- * The image is centred on the pin and shown at natural size (`object-none`), so the pin
- * is always at the centre of the frame, whatever the frame's size.
- * Motion: the pin drops in once when the map scrolls into view, then a ring pulses under it.
- * Without JS, or with reduced motion, the pin simply sits there.
- */
+
 export function LocationMap({ className = "", tone = "light" }: { className?: string; tone?: "light" | "dark" }) {
   const a = academy;
   const ref = useRef<HTMLDivElement>(null);
