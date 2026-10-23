@@ -56,6 +56,20 @@ export function SiteHeader() {
 
   const isActive = (href: string) => seg(pathname ?? "") === seg(href);
 
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
+    if (isActive(href)) {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: reduce ? "auto" : "smooth",
+      });
+    }
+  };
+
+
   return (
     <>
       {/* Fixed navbar: stays at the top on every page */}
@@ -68,12 +82,14 @@ export function SiteHeader() {
           aria-label="Main"
           className="mx-auto flex max-w-[1320px] items-center gap-2 rounded-full border border-white/10 bg-court-950/95 py-2 pl-4 pr-2 text-chalk shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_12px_30px_-18px_rgba(4,26,27,0.9)] backdrop-blur-md sm:pl-5 lg:bg-court-950/80"
         >
-          {/* Academy logo + name */}
+          {/* Desktop Logo (line 72) */}
           <Link
             href="/"
+            onClick={(e) => handleNavClick(e, "/")}
             aria-label="Celestial's Badminton Academy home"
             className="mr-auto flex min-w-0 items-center gap-2.5 rounded-full"
           >
+
             <Image
               src="/images/LOGO.png"
               alt="Celestial's Badminton Academy, Noida"
@@ -100,9 +116,11 @@ export function SiteHeader() {
               <li key={l.href}>
                 <Link
                   href={l.href}
+                  onClick={(e) => handleNavClick(e, l.href)}
                   aria-current={isActive(l.href) ? "page" : undefined}
                   className="relative rounded-full px-4 py-2.5 text-[0.94rem] font-medium text-chalk/75 transition-colors hover:text-chalk aria-[current=page]:text-chalk"
                 >
+
                   {isActive(l.href) && (
                     <span
                       aria-hidden="true"
@@ -115,7 +133,6 @@ export function SiteHeader() {
               </li>
             ))}
           </ul>
-
           {/* Free trial button */}
           <a
             href={trialLink()}
