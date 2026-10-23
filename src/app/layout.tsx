@@ -51,9 +51,7 @@ export const metadata: Metadata = {
     description: "7 indoor AC courts, professional coaching & free trial.",
     images: ["/images/play-rally-1600.webp"],
   },
-  alternates: { canonical: "/" },
-  // Optional: paste your Google Search Console token here:
-  // verification: { google: "your-google-verification-code" },
+
 };
 
 export const viewport: Viewport = {
@@ -100,8 +98,14 @@ const jsonLd = {
     opens: h.open,
     closes: h.close,
   })),
-logo: `${siteUrl}/images/LOGO.png`,
-  sameAs: [academy.contact.instagram.url, academy.contact.facebook],
+  logo: `${siteUrl}/images/LOGO.png`,
+  sameAs: [
+    academy.contact.instagram.url,
+    academy.contact.facebook,
+    academy.address.mapsUrl,
+    academy.booking.primary.url,
+    academy.booking.secondary.url,
+  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

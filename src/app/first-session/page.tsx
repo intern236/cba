@@ -8,11 +8,17 @@ import { Faq } from "@/components/faq";
 import { LevelFinder } from "@/components/level-finder";
 
 export const metadata: Metadata = {
-  title: "Your first session",
+  title: { absolute: "Book a Free Badminton Trial Class in Noida | Celestial's" },
   description:
-    "What happens in your free first badminton session at Celestial's, Sector 104, Noida: how to book, what to bring, what the coach looks at, and what happens after. Beginners, kids and adults welcome.",
+    "Book a free trial badminton session at Celestial's in Sector 104, Noida. Skill assessment with certified coaches for beginners, kids & adults. No fee or pressure.",
   alternates: { canonical: "/first-session/" },
+  openGraph: {
+    title: "Book a Free Badminton Trial Class in Noida | Celestial's",
+    description: "Book your free first session. Beginners, kids and adults welcome. Sector 104 Noida.",
+    url: "/first-session/",
+  },
 };
+
 
 const a = academy;
 
@@ -43,27 +49,28 @@ const faqs = [
 export default function FirstSessionPage() {
   return (
     <>
- <PageHeader
-  eyebrow="Your first session"
-  title="Day one, explained"
-  intro="The first session is free. Here’s exactly what happens, so the only thing you need to think about is the shuttle."
->
-  <div className="rounded-[22px] bg-court-900 p-6 ring-1 ring-white/10">
-    <p className="text-chalk/80">
-      Kids, teens and adults. Complete beginners welcome.
-    </p>
+      <PageHeader
+        eyebrow="Your first session"
+        title="Book Your Free Badminton Trial Session in Noida"
+        intro="Free. No pressure. Just play. What to expect on day one at Celestial's, Sector 104: how to book, what to bring, and how our coaches find your level."
+      >
 
-    <div className="mt-4 flex justify-end">
-      <ExternalButton href={trialLink()} note="opens WhatsApp">
-        Book a free trial
-      </ExternalButton>
-    </div>
+        <div className="rounded-[22px] bg-court-900 p-6 ring-1 ring-white/10">
+          <p className="text-chalk/80">
+            Kids, teens and adults. Complete beginners welcome.
+          </p>
 
-    <p className="mt-3 text-right text-sm text-chalk/55">
-      Or call {a.contact.phoneDisplay}
-    </p>
-  </div>
-</PageHeader>
+          <div className="mt-4 flex justify-end">
+            <ExternalButton href={trialLink()} note="opens WhatsApp">
+              Book a free trial
+            </ExternalButton>
+          </div>
+
+          <p className="mt-3 text-right text-sm text-chalk/55">
+            Or call {a.contact.phoneDisplay}
+          </p>
+        </div>
+      </PageHeader>
 
       <section aria-labelledby="steps-title" className="on-light bg-chalk py-24">
         <div className="mx-auto grid max-w-[1320px] gap-12 px-5 sm:px-8 lg:grid-cols-12">

@@ -10,10 +10,15 @@ import { TrainingRally } from "@/components/home/training-rally";
 import { Faq } from "@/components/faq";
 
 export const metadata: Metadata = {
-  title: "The training pathway",
+  title: { absolute: "Badminton Training Pathway & Levels in Noida | Celestial's" },
   description:
-    "Four levels from first lesson to tournament play: Foundation, Development, Performance and Competitive. What each level works on, who it's for and what it takes to move up, at Celestial's Badminton Academy, Noida.",
+    "4-level badminton coaching pathway in Sector 104, Noida: Foundation, Development, Performance and Competitive. Structured progression for kids, teens & adults.",
   alternates: { canonical: "/pathway/" },
+  openGraph: {
+    title: "Badminton Training Pathway & Levels in Noida | Celestial's",
+    description: "From beginner basics to tournament play: explore our 4-level coaching pathway.",
+    url: "/pathway/",
+  },
 };
 
 const faqs = [

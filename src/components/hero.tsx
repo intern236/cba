@@ -253,6 +253,9 @@ export function Hero() {
               Badminton academy · Sector 104, Noida
             </p>
             <h1 id="hero-title" className="display mt-5 text-[clamp(3.3rem,6.15vw,5.9rem)]">
+              <span className="sr-only">
+                Celestial&rsquo;s Badminton Academy &mdash; Premier Badminton Coaching &amp; Indoor Courts in Sector 104, Noida
+              </span>
               <span className="block overflow-hidden pb-[0.04em]">
                 <span className="rise-line block" style={{ animationDelay: "120ms" }}>Start right.</span>
               </span>
@@ -260,45 +263,46 @@ export function Hero() {
                 <span className="rise-line block text-chalk/55" style={{ animationDelay: "240ms" }}>Keep getting better.</span>
               </span>
             </h1>
+
             <p className="rise-in mt-6 max-w-[52ch] text-pretty text-[1.06rem] leading-relaxed text-chalk/75" style={{ animationDelay: "380ms" }}>
               Coaching for kids, teens and adults, from a first lesson to a first tournament. Your first session is free.
             </p>
-        <div className="mt-8 flex w-full flex-row items-center  gap-3">
-  <a
-    href="#find-your-level"
-    className="btn btn-ghost-dark justify-center"
-  >
-    Find your level
-  </a>
- <a
-  href={trialLink()}
-  target="_blank"
-  rel="noopener noreferrer"
-  className="btn btn-primary justify-between lg:mr-40"
->
-    <span>
-      Book a free trial
-      <span className="sr-only">
-        {" "}(opens WhatsApp in a new tab)
-      </span>
-    </span>
+            <div className="mt-8 flex w-full flex-row items-center  gap-3">
+              <a
+                href="#find-your-level"
+                className="btn btn-ghost-dark justify-center"
+              >
+                Find your level
+              </a>
+              <a
+                href={trialLink()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary justify-between lg:mr-40"
+              >
+                <span>
+                  Book a free trial
+                  <span className="sr-only">
+                    {" "}(opens WhatsApp in a new tab)
+                  </span>
+                </span>
 
-    <span className="btn-icon" aria-hidden="true">
-      <svg
-        width="14"
-        height="14"
-        viewBox="0 0 16 16"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.2"
-      >
-        <path d="M4 12 12 4M5.5 4H12v6.5" />
-      </svg>
-    </span>
-  </a>
+                <span className="btn-icon" aria-hidden="true">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.2"
+                  >
+                    <path d="M4 12 12 4M5.5 4H12v6.5" />
+                  </svg>
+                </span>
+              </a>
 
-  
-</div>
+
+            </div>
             <p className="rise-in mt-5 text-[0.95rem] text-chalk/60" style={{ animationDelay: "560ms" }}>
               Just want to play?{" "}
               <a href={a.booking.primary.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-semibold text-chalk/85 hover:text-chalk">
@@ -342,8 +346,8 @@ export function Hero() {
         </div>
 
         {/* Facts strip, revealed by the court line the shuttle lands on */}
-<div className="relative mt-10 lg:mt-[68px]">
-            <ul className="grid grid-cols-1 gap-x-8 gap-y-3 pt-5 text-[0.95rem] text-chalk/80 sm:grid-cols-2 lg:grid-cols-4 lg:pt-6">
+        <div className="relative mt-10 lg:mt-[68px]">
+          <ul className="grid grid-cols-1 gap-x-8 gap-y-3 pt-5 text-[0.95rem] text-chalk/80 sm:grid-cols-2 lg:grid-cols-4 lg:pt-6">
             <li className="strip-item flex items-center gap-2">
               <UsersThreeIcon size={16} weight="bold" className="text-mat-soft" aria-hidden="true" />
               Kids · Teens · Adults

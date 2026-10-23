@@ -11,10 +11,16 @@ import { Faq } from "@/components/faq";
 import { LevelFinder } from "@/components/level-finder";
 
 export const metadata: Metadata = {
-  title: "Badminton Coaching in Noida: Batches & Fees",
-  description: `Badminton coaching classes in Noida for every age: group or one-to-one, weekday and weekend batches, fees from ${feesFrom}/month. Book a free trial.`,
+  title: { absolute: "Badminton Coaching in Noida: Batches & Fees | Celestial's" },
+  description: `Badminton coaching classes in Noida for every age: kids, teens & adults. Weekday & weekend batches from ${feesFrom}/month. Book a free trial.`,
   alternates: { canonical: "/programs/" },
+  openGraph: {
+    title: "Badminton Coaching in Noida: Batches & Fees | Celestial's",
+    description: `Coaching batches for kids, teens, and adults. Morning, evening and weekend batches from ${feesFrom}/month. Free trial available.`,
+    url: "/programs/",
+  },
 };
+
 
 const a = academy;
 const siteUrl = "https://www.celestialsacademy.com";

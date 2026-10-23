@@ -1,18 +1,4 @@
-/**
- * Player results — single source for the homepage results section and /about.
- * SOURCE: supplied by the academy, 21 Oct 2026 (names, results, dates, photos).
- *
- * CHECK BEFORE LAUNCH (docs/DEPENDENCIES.md):
- *  - Written consent to publish each player's name and photo (parents' consent for minors).
- *  - Photo ↔ name matching. Matched from the event banners in the photos where possible;
- *    Kashish Sharma and Siddhant Thakur were matched by elimination — please confirm.
- *  - Dates the photos disagree with: Dr. Ketan's National Doctors Championship poster says
- *    21–22 Feb 2026 (supplied: Mar 2026); Parth's UP State Deaf Championship banner says
- *    22 Feb 2026 (supplied: Mar 2026). Supplied dates are shown until confirmed.
- *  - Richa Tomar's date (Sep 2026) is read from the 2nd U.P. State Masters banner in her photo.
- *  - Removed 22 Oct 2026 (no photos): Kaira (silver) & Lakshita (bronze), Delhi State Championship,
- *    Oct 2025; Akshita, 3rd place U-11 GS, PNB MetLife JBC, Nov 2023. Re-add with photos if supplied.
- */
+
 export type Result = { title: string; event: string; date?: string };
 
 export type Player = {

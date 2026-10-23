@@ -9,13 +9,19 @@ import { Community } from "@/components/home/community";
 import { Results } from "@/components/home/results";// import InstagramLive from "@/components/home/instagram-feed";
 
 export const metadata: Metadata = {
-  title: "About Celestial's Badminton Academy",
+  title: { absolute: "About Celestial's Badminton Academy | Sector 104, Noida" },
   description:
-    "Discover Celestial's Badminton Academy in Sector 104, Noida: seven indoor badminton courts, athlete support facilities, competitive achievements, professional coaching and corporate tournaments.",
+    "Learn about Celestial's Badminton Academy in Sector 104, Noida. 7 indoor AC PVC courts, certified BWF coaches, player achievements, and athletic facilities.",
   alternates: {
     canonical: "/about/",
   },
+  openGraph: {
+    title: "About Celestial's Badminton Academy — Sector 104, Noida",
+    description: "7 indoor AC courts, BWF certified coaches, competitive achievements, and training facilities.",
+    url: "/about/",
+  },
 };
+
 
 const a = academy;
 

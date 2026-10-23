@@ -12,11 +12,17 @@ import { ExternalButton } from "@/components/buttons";
 import { FacilityIcon } from "@/components/facility-icon";
 
 export const metadata: Metadata = {
-  title: "Facilities & timings",
+  title: { absolute: "7 Indoor AC Badminton Courts & Facilities in Noida | Celestial's" },
   description:
-    "Where the academy trains: seven air-conditioned indoor PVC badminton courts, a strength gym, physio and medical room, steam bath, lockers, cafeteria, pro shop and hostel. Open 5 AM – 11 PM in Sector 104, Noida.",
+    "7 air-conditioned indoor PVC badminton courts, strength gym, physio room, and cafeteria in Sector 104, Noida. Open daily 5 AM–11 PM. Pay & play bookings available.",
   alternates: { canonical: "/facilities/" },
+  openGraph: {
+    title: "7 Indoor AC Badminton Courts & Facilities in Noida | Celestial's",
+    description: "7 air-conditioned courts, gym, cafeteria and pay-and-play booking in Sector 104 Noida.",
+    url: "/facilities/",
+  },
 };
+
 
 const a = academy;
 
@@ -55,17 +61,18 @@ export default function FacilitiesPage() {
     <>
       <PageHeader
         eyebrow="Facilities & timings"
-        title="Everything under one roof"
+        title="7 Indoor AC Badminton Courts & World-Class Facilities"
         intro="Courts to train on, a gym to get stronger, a physio when something hurts, and somewhere to sit down afterwards. The courts are also open for pay-and-play."
       >
-<div className="flex justify-end">
-  <div className="inline-block w-fit rounded-[12px] bg-court-900 px-3 py-4 ring-1 ring-white/10 text-right">
-    <OpenStatus className="text-chalk/85" />
-    <p className="mt-2 text-sm leading-relaxed text-chalk/60">
-      {a.hoursSummary}
-    </p>
-  </div>
-</div>
+
+        <div className="flex justify-end">
+          <div className="inline-block w-fit rounded-[12px] bg-court-900 px-3 py-4 ring-1 ring-white/10 text-right">
+            <OpenStatus className="text-chalk/85" />
+            <p className="mt-2 text-sm leading-relaxed text-chalk/60">
+              {a.hoursSummary}
+            </p>
+          </div>
+        </div>
       </PageHeader>
 
       {/* COURT SPECIFICATIONS */}
@@ -171,26 +178,26 @@ export default function FacilitiesPage() {
               ))}
             </dl>
 
-        <div className="mt-8 flex w-full flex-col items-end gap-2">
-  <ExternalButton
-    href={a.booking.secondary.url}
-    variant="ghost-light"
-    note="opens Playo"
-    className="w-fit justify-between"
-  >
-    Book on Playo
-  </ExternalButton>
+            <div className="mt-8 flex w-full flex-col items-end gap-2">
+              <ExternalButton
+                href={a.booking.secondary.url}
+                variant="ghost-light"
+                note="opens Playo"
+                className="w-fit justify-between"
+              >
+                Book on Playo
+              </ExternalButton>
 
-  <ExternalButton
-    href={a.booking.primary.url}
-    variant="ink"
-    note="opens Hudle"
-    className="w-fit justify-between"
-  >
-    Book on Hudle
-  </ExternalButton>
-</div>
-</Reveal>
+              <ExternalButton
+                href={a.booking.primary.url}
+                variant="ink"
+                note="opens Hudle"
+                className="w-fit justify-between"
+              >
+                Book on Hudle
+              </ExternalButton>
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -210,18 +217,16 @@ export default function FacilitiesPage() {
               className="grid min-w-0 gap-6 sm:gap-8 lg:grid-cols-12 lg:items-center"
             >
               <Reveal
-                className={`min-w-0 lg:col-span-7 ${
-                  i % 2 ? "lg:order-2 lg:col-start-6" : ""
-                }`}
+                className={`min-w-0 lg:col-span-7 ${i % 2 ? "lg:order-2 lg:col-start-6" : ""
+                  }`}
               >
                 <div
-                  className={`relative w-full overflow-hidden rounded-2xl bg-chalk-2 sm:rounded-[24px] lg:rounded-[28px] ${
-                    i === 0
-                      ? "aspect-[4/3] sm:aspect-[16/9] lg:aspect-[16/9]"
-                      : i === 1
-                        ? "aspect-[4/3] sm:aspect-[16/10] lg:aspect-[16/9]"
-                        : "aspect-[4/3]"
-                  }`}
+                  className={`relative w-full overflow-hidden rounded-2xl bg-chalk-2 sm:rounded-[24px] lg:rounded-[28px] ${i === 0
+                    ? "aspect-[4/3] sm:aspect-[16/9] lg:aspect-[16/9]"
+                    : i === 1
+                      ? "aspect-[4/3] sm:aspect-[16/10] lg:aspect-[16/9]"
+                      : "aspect-[4/3]"
+                    }`}
                 >
                   <Photo
                     img={z.img}
@@ -231,11 +236,10 @@ export default function FacilitiesPage() {
               </Reveal>
 
               <Reveal
-                className={`min-w-0 lg:col-span-4 ${
-                  i % 2
-                    ? "lg:order-1 lg:col-start-1"
-                    : "lg:col-start-9"
-                }`}
+                className={`min-w-0 lg:col-span-4 ${i % 2
+                  ? "lg:order-1 lg:col-start-1"
+                  : "lg:col-start-9"
+                  }`}
                 delay={0.08}
               >
                 <p className="eyebrow text-ink-soft">
@@ -325,24 +329,24 @@ export default function FacilitiesPage() {
                 <HoursTable />
               </div>
 
-        <div className="mt-3 flex  items-end gap-2">
-  <ExternalButton
-    href={a.booking.secondary.url}
-    variant="ghost-dark"
-    note="opens Playo"
-    className="w-full justify-between"
-  >
-    Playo
-  </ExternalButton>
+              <div className="mt-3 flex  items-end gap-2">
+                <ExternalButton
+                  href={a.booking.secondary.url}
+                  variant="ghost-dark"
+                  note="opens Playo"
+                  className="w-full justify-between"
+                >
+                  Playo
+                </ExternalButton>
 
-  <ExternalButton
-    href={a.booking.primary.url}
-    note="opens Hudle"
-    className="w-full justify-between"
-  >
-    Hudle
-  </ExternalButton>
-</div>
+                <ExternalButton
+                  href={a.booking.primary.url}
+                  note="opens Hudle"
+                  className="w-full justify-between"
+                >
+                  Hudle
+                </ExternalButton>
+              </div>
             </div>
           </Reveal>
         </div>
