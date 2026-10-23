@@ -355,44 +355,20 @@ export default function AboutPage() {
 
           {/* Co-Founder Profiles */}
           <div className="mt-10 grid gap-6 lg:grid-cols-2">
-            <Reveal className="grid gap-6 overflow-hidden rounded-[24px] border border-ink/10 bg-chalk p-5 shadow-sm transition-shadow duration-300 hover:shadow-lg sm:p-7 md:grid-cols-[1fr_0.8fr] md:items-center">
-              <div>
-                <p className="eyebrow text-mat">
-                  CO-FOUNDER · HEAD COACH
-                </p>
-
-                <h3 className="display mt-4 text-3xl leading-tight sm:text-4xl">
-                  Utkarsh Chaudhary
-                </h3>
-
-                <p className="mt-4 text-base leading-relaxed text-ink-soft">
-                  NIS and BAI certified, BWF Shuttle Time trained, and a
-                  former international-level player.
-                </p>
-
-                <p className="mt-4 text-base leading-relaxed text-ink-soft">
-                  With over 10 years of coaching experience, Utkarsh has
-                  helped train more than 1,000 children, many of whom now
-                  compete at state and inter-state levels.
-                </p>
-              </div>
-
-              {/* Utkarsh photo */}
-              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[18px]">
-                <Image
-                  src="/images/players/dr-ketan-480.jpg" // 👈 put your image path here
-                  alt="Utkarsh Chaudhary, co-founder and head coach"
-                  fill
-                  sizes="(min-width:1024px) 320px, (min-width:768px) 30vw, 100vw"
-                  className="object-cover object-top"
-                />
-              </div>
-            </Reveal>
 
             <Reveal
               className="grid gap-6 overflow-hidden rounded-[24px] border border-ink/10 bg-chalk p-5 shadow-sm transition-shadow duration-300 hover:shadow-lg sm:p-7 md:grid-cols-[1fr_0.8fr] md:items-center"
               delay={0.08}
             >
+              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[18px]">
+                <Image
+                  src="/images/Siddharth.jpeg" // 👈 put your coach image path here
+                  alt="Siddharth Jain, co-founder and head trainer"
+                  fill
+                  sizes="(min-width:1024px) 320px, (min-width:768px) 30vw, 100vw"
+                  className="object-cover object-top"
+                />
+              </div>
               <div>
                 <p className="eyebrow text-mat">
                   CO-FOUNDER · HEAD TRAINER
@@ -415,16 +391,45 @@ export default function AboutPage() {
               </div>
 
               {/* Siddharth photo */}
+              
+            </Reveal>
+            <Reveal className="grid gap-6 overflow-hidden rounded-[24px] border border-ink/10 bg-chalk p-5 shadow-sm transition-shadow duration-300 hover:shadow-lg sm:p-7 md:grid-cols-[1fr_0.8fr] md:items-center">
+               {/* Utkarsh photo */}
               <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[18px]">
                 <Image
-                  src="/images/players/dr-ketan-480.jpg" // 👈 put your coach image path here
-                  alt="Siddharth Jain, co-founder and head trainer"
+                  src="/images/coach.jpeg" // 👈 put your image path here
+                  alt="Utkarsh Chaudhary, co-founder and head coach"
                   fill
                   sizes="(min-width:1024px) 320px, (min-width:768px) 30vw, 100vw"
                   className="object-cover object-top"
                 />
               </div>
+              
+              <div>
+                <p className="eyebrow text-mat">
+                  CO-FOUNDER · HEAD COACH
+                </p>
+
+                <h3 className="display mt-4 text-3xl leading-tight sm:text-4xl">
+                  Utkarsh Chaudhary
+                </h3>
+
+                <p className="mt-4 text-base leading-relaxed text-ink-soft">
+                  NIS and BAI certified, BWF Shuttle Time trained, and a
+                  former international-level player.
+                </p>
+
+                <p className="mt-4 text-base leading-relaxed text-ink-soft">
+                  With over 10 years of coaching experience, Utkarsh has
+                  helped train more than 1,000 children, many of whom now
+                  compete at state and inter-state levels.
+                </p>
+              </div>
+
+             
             </Reveal>
+
+            
           </div>
 
           {/* Founder Note */}
