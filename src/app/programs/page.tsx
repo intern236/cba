@@ -33,27 +33,7 @@ const groups = [
     start: `Programme ${l.n}`,
     href: `/pathway/#${l.id}`,
   })),
-  {
-    t: "Kids",
-    age: "Ages 5–11 years",
-    d: "Foundational badminton classes for kids in Noida. Young players learn correct racket grip, dynamic footwork, hand-eye coordination, balance, and basic strokes through fun, structured drills.",
-    start: "Junior development · Morning & evening batches",
-    href: "/first-session/",
-  },
-  {
-    t: "Teens",
-    age: "Ages 12–17 years",
-    d: "Intermediate and advanced training focused on stroke refinement (smashes, drops, clears), fast court agility, rally consistency, and tactical match play for school, district, and state tournaments.",
-    start: "Tournament prep · 3 to 6 days/week",
-    href: "/pathway/",
-  },
-  {
-    t: "Adults",
-    age: "Ages 18+ years",
-    d: "Flexible morning, evening, and weekend batches for complete beginners, returning players, and corporate athletes looking to improve technical consistency, cardio fitness, and gameplay.",
-    start: "Adult batches · One-to-one coaching",
-    href: "/first-session/",
-  },
+ 
 ];
 
 /* SEO: `text` is the plain-text answer used in FAQPage JSON-LD.

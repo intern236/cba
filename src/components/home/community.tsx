@@ -60,7 +60,7 @@ export function Community() {
         <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
           <SectionHead
             className="lg:col-span-8"
-            index="04"
+            index="01"
             label="On court"
             id="community-title"
             title="Early mornings, late rallies"
