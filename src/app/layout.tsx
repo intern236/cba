@@ -110,7 +110,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-IN" className={`${archivo.variable} ${mono.variable} antialiased`}>
+    <html lang="en-IN" data-scroll-behavior="smooth" className={`${archivo.variable} ${mono.variable} antialiased`}>
       <body className="min-h-dvh flex flex-col">
         <a
           href="#main"

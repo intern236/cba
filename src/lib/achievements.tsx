@@ -69,6 +69,17 @@ export const players: Player[] = [
     photo: "kashish-sharma",
     results: [{ title: "Medallist", event: "CBSE East Zone" }],
   },
+  {
+  name: "",
+  tag: "Masters",
+  photo: "M-D",
+  results: [
+    {
+      title: "Runner-Up",
+      event: "UP State Masters Badminton Championship (MD 65+)",
+    },
+  ],
+},
 ];
 
 /** Team result shown alongside the player cards. */

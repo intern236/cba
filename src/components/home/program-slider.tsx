@@ -164,7 +164,10 @@ export function ProgramsSlider() {
                 {/* Heading and top-right slider controls */}
                 <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
                     <div className="max-w-[760px]">
-                        <p className="eyebrow text-mat">FIND YOUR GAME</p>
+                       <p className="eyebrow text-mat flex items-center gap-4">
+  <span className="h-[2px] w-10 bg-ink/20" aria-hidden="true" />
+  FIND YOUR GAME
+</p>
 
                         <h2
                             id="programs-title"

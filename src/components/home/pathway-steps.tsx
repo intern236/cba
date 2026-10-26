@@ -387,7 +387,7 @@ export function PathwaySteps() {
         <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
           <SectionHead
             className="lg:col-span-8"
-            index="02"
+            // index="02"
             label="The pathway"
             id="pathway-title"
             title={`${levelCountWord} levels. One direction.`}

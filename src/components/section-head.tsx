@@ -10,7 +10,7 @@ export function SectionHead({
   id,
   className = "",
 }: {
-  index: string;
+index?: string;
   label: string;
   title: React.ReactNode;
   intro?: React.ReactNode;

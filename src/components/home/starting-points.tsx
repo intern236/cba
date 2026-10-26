@@ -30,7 +30,6 @@ export function StartingPoints() {
     <section aria-labelledby="start-title" className="on-light bg-chalk py-20 sm:py-24 lg:py-28">
       <div className="mx-auto max-w-[1320px] px-5 sm:px-8">
         <SectionHead
-          index="01"
           label="Where are you starting from?"
           id="start-title"
           title={<>New to the game, or ready for more?</>}

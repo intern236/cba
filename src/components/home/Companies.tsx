@@ -31,8 +31,9 @@ export function CorporateTournaments() {
             <div className="mx-auto max-w-[1320px] px-5 sm:px-8 lg:px-10">
                 {/* Section heading */}
                 <div className="max-w-[820px]">
-                    <p className="eyebrow text-mat">BEYOND THE COURT</p>
-
+                    <p className="eyebrow text-mat flex items-center gap-4">
+  <span className="h-[2px] w-10 bg-ink/20" aria-hidden="true" />
+ BEYOND THE COURT</p>
                     <h2
                         id="corporate-title"
                         className="display mt-3 text-[clamp(2.1rem,4.5vw,4rem)] leading-[1.05] tracking-tight"

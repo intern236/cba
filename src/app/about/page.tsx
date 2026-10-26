@@ -115,7 +115,9 @@ export default function AboutPage() {
       >
         <div className="mx-auto grid w-full max-w-[1320px] gap-10 px-5 sm:px-8 lg:grid-cols-12 lg:items-start">
           <Reveal className="lg:col-span-7">
-            <p className="eyebrow text-mat">MORE THAN MEDALS</p>
+           <p className="eyebrow text-mat flex items-center gap-4">
+  <span className="h-[2px] w-10 bg-ink/20" aria-hidden="true" />
+  MORE THAN MEDALS</p>
 
             <h2
               id="philosophy-title"
@@ -168,7 +170,9 @@ export default function AboutPage() {
       >
         <div className="mx-auto max-w-[1320px] px-5 sm:px-8">
           <Reveal>
-            <p className="eyebrow text-mat">BUILT FOR THE GAME</p>
+            <p className="eyebrow text-mat flex items-center gap-4">
+                <span className="h-[2px] w-10 bg-ink/20" aria-hidden="true" />
+BUILT FOR THE GAME</p>
 
             <h2
               id="infrastructure-title"
@@ -289,7 +293,9 @@ export default function AboutPage() {
       >
         <div className="mx-auto max-w-[1320px] px-5 sm:px-8">
           <Reveal>
-            <p className="eyebrow text-mat">
+  <p className="eyebrow text-mat flex items-center gap-4">
+  <span className="h-[2px] w-10 bg-ink/20" aria-hidden="true" />
+              
               BEYOND THE COURT
             </p>
 
@@ -341,7 +347,8 @@ export default function AboutPage() {
       >
         <div className="mx-auto max-w-[1320px] px-5 sm:px-8">
           <Reveal>
-            <p className="eyebrow text-ink-soft">
+                      <p className="eyebrow text-mat flex items-center gap-4">
+  <span className="h-[2px] w-10 bg-ink/20" aria-hidden="true" />
               THE TEAM
             </p>
 
