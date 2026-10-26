@@ -14,7 +14,7 @@ Environment (optional):
 
 | Variable | Purpose |
 |---|---|
-| `NEXT_PUBLIC_SITE_URL` | Final domain, used for canonical URLs, sitemap and JSON-LD (default `https://www.celestialsacademy.com`) |
+| `NEXT_PUBLIC_SITE_URL` | Final domain, used for canonical URLs, sitemap and JSON-LD (default ``) |
 | `NEXT_PUBLIC_ENQUIRY_ENDPOINT` | JSON POST endpoint (e.g. Formspree). When set, an enquiry form appears on /contact. Hidden otherwise. |
 
 ## Where things live
@@ -23,7 +23,7 @@ Environment (optional):
 |---|---|
 | `src/lib/academy.ts` | **Every business fact on the site**, each with its source. Edit here, not in components. |
 | `src/lib/images.ts` | Photo manifest (sizes, alt text, captions). Files in `public/images/` (800 w + large WebP). |
-| `src/lib/pathway.ts` | The four training levels (**proposed — needs head-coach sign-off**). Every page reads from here. |
+| `src/lib/pathway.ts` | The Three training levels (**proposed — needs head-coach sign-off**). Every page reads from here. |
 | `src/lib/batches.ts` | Batch timetable + fees. Empty → "ask on WhatsApp"; fill it and a table appears on /programs. |
 | `src/lib/coaches.ts`, `src/lib/testimonials.ts` | Empty until the client supplies real content — sections switch on automatically. |
 | `src/lib/flight.ts` | Shuttle physics (gravity + quadratic drag, Vt 6.5 m/s) used by the hero. |
