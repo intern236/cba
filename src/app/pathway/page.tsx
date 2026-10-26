@@ -12,11 +12,11 @@ import { Faq } from "@/components/faq";
 export const metadata: Metadata = {
   title: { absolute: "Badminton Training Pathway & Levels in Noida | Celestial's" },
   description:
-    "4-level badminton coaching pathway in Sector 104, Noida: Foundation, Development, Performance and Competitive. Structured progression for kids, teens & adults.",
+    "3-level badminton coaching pathway in Sector 104, Noida: Beginner, Intermediate and Professional. Structured progression for kids, teens & adults.",
   alternates: { canonical: "/pathway/" },
   openGraph: {
     title: "Badminton Training Pathway & Levels in Noida | Celestial's",
-    description: "From beginner basics to tournament play: explore our 4-level coaching pathway.",
+    description: "From beginner basics to tournament play: explore our 3-level coaching pathway.",
     url: "/pathway/",
   },
 };
