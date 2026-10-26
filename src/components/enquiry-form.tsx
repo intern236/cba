@@ -2,13 +2,6 @@
 
 import { useState } from "react";
 import { CheckCircle, WarningCircle } from "@phosphor-icons/react";
-
-/**
- * INTEGRATION POINT — renders only when NEXT_PUBLIC_ENQUIRY_ENDPOINT is set
- * (e.g. a Formspree / Basin / Supabase function URL that accepts JSON POST).
- * The academy's published email domain has no mail records, so there is no working
- * address to send to yet; rather than ship a form that silently fails, it stays hidden.
- */
 export const ENQUIRY_ENDPOINT = process.env.NEXT_PUBLIC_ENQUIRY_ENDPOINT ?? "";
 
 type Errors = Partial<Record<"name" | "phone" | "interest", string>>;
