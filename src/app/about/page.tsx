@@ -10,9 +10,10 @@ import { Community } from "@/components/home/community";
 import { Results } from "@/components/home/results";
 // import InstagramLive from "@/components/home/instagram-feed";
 
-
 export const metadata: Metadata = {
-  title: { absolute: "About Celestial's Badminton Academy, Noida | Our Coaches" },
+  title: {
+    absolute: "About Celestial's Badminton Academy, Noida | Our Coaches",
+  },
   description:
     "Founded in 2022 in Sector 104, Noida. Meet NIS and BAI-certified coaches Utkarsh Chaudhary and Siddharth Jain and the players they've trained.",
   alternates: {
@@ -31,7 +32,6 @@ export const metadata: Metadata = {
       "Founded in 2022 in Sector 104, Noida. Meet NIS and BAI-certified coaches Utkarsh Chaudhary and Siddharth Jain and the players they've trained.",
   },
 };
-
 
 const a = academy;
 
@@ -82,32 +82,28 @@ const facilities = [
   },
 ];
 
-
-const corporateEvents = [
-  "Microsoft",
-  "Adobe",
-  "Cognizant",
-  "BNI",
-];
+const corporateEvents = ["Microsoft", "Adobe", "Cognizant", "BNI"];
 
 export default function AboutPage() {
   return (
     <>
       {/* Page Header */}
-
       <section className="relative overflow-hidden bg-court-950 py-20 text-chalk sm:py-24 lg:py-32">
         <div className="mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12 xl:px-16">
           <Reveal>
-            <h1 className="display mt-10 max-w-none text-[clamp(2.5rem,6vw,5rem)] leading-[0.98] tracking-tight ">
-              About Celestial's Badminton Academy, Noida            </h1>
+            <h1 className="display mt-10 max-w-none text-[clamp(2.5rem,6vw,5rem)] leading-[0.98] tracking-tight">
+              About Celestial's Badminton Academy, Noida
+            </h1>
 
             <p className="eyebrow mb-4 mt-6 text-mat normal-case">
               Where everything is possible
             </p>
+
             <p className="mt-8 max-w-[780px] text-base leading-relaxed text-chalk/75 sm:text-lg lg:text-xl">
-              Founded in 2022 in Sector 104, Noida, we help juniors,
-              adults and aspiring athletes learn, improve and compete.
-              <br />Our sister academy: Noida Badminton Academy, Sector 26
+              Founded in 2022 in Sector 104, Noida, we help juniors, adults
+              and aspiring athletes learn, improve and compete.
+              <br />
+              Our sister academy: Noida Badminton Academy, Sector 26
             </p>
           </Reveal>
         </div>
@@ -119,54 +115,99 @@ export default function AboutPage() {
         className="on-light bg-chalk-2 py-20 sm:py-24 lg:py-28"
       >
         <div className="mx-auto max-w-[1320px] px-5 sm:px-8">
-          {/* Heading (left on desktop) + Card (right on desktop) */}
-          <div className="grid gap-8 lg:grid-cols-2 lg:items-start lg:gap-12">      {/* LEFT: Meet the coach */}
-            <Reveal>
-              <p className="eyebrow text-mat flex items-center gap-4">
-                <span className="h-[2px] w-10 bg-ink/20" aria-hidden="true" />
-                THE TEAM
-              </p>
+          <Reveal>
+            <p className="eyebrow flex items-center gap-4 text-mat">
+              <span
+                className="h-[2px] w-10 bg-ink/20"
+                aria-hidden="true"
+              />
+              THE TEAM
+            </p>
 
-              <h2
-                id="coaches-title"
-                className="display mt-4 text-[clamp(2.6rem,5vw,4.4rem)] leading-tight"
-              >
-                Meet the coach
-              </h2>
-            </Reveal>
+            <h2
+              id="coaches-title"
+              className="display mt-4 text-[clamp(2.6rem,5vw,4.4rem)] leading-tight"
+            >
+              Meet our coaches
+            </h2>
+          </Reveal>
 
-            {/* RIGHT: Co-Founder card */}
+          {/* Co-founder and head coach profiles */}
+          <div className="mt-10 mb-10px grid gap-6 lg:grid-cols-2">
             <Reveal
-              className="grid gap-6 overflow-hidden rounded-[24px] border border-ink/10 bg-chalk p-5 shadow-sm transition-shadow duration-300 hover:shadow-lg sm:p-7 md:grid-cols-[200px_1fr] md:items-center lg:grid-cols-[220px_1fr] xl:grid-cols-[260px_1fr]"
+              className="grid gap-6 overflow-hidden rounded-[24px] border border-ink/10 bg-chalk p-5 shadow-sm transition-shadow duration-300 hover:shadow-lg sm:p-7 md:grid-cols-[200px_1fr] md:items-center xl:grid-cols-[220px_1fr]"
               delay={0.08}
             >
-              <div className="relative mx-auto aspect-[4/5] w-full max-w-[260px] overflow-hidden rounded-[18px] md:mx-0 md:max-w-none">          <Image
-                src="/images/Siddharth.jpeg"
-                alt="Siddharth Jain, co-founder and head trainer"
-                fill
-                sizes="(min-width:1280px) 260px, (min-width:1024px) 220px, (min-width:768px) 200px, 260px"
-                className="object-cover object-top"
-              />
+              <div className="relative mx-auto aspect-[4/5] w-full max-w-[260px] overflow-hidden rounded-[18px] bg-chalk-2 md:mx-0 md:max-w-none">
+                <Image
+                  src="/images/Utkarsh.jpeg"
+                  alt="Utkarsh Chaudhary, co-founder and head coach"
+                  fill
+                  sizes="(min-width:1280px) 220px, (min-width:768px) 200px, 260px"
+                  className="object-cover object-top"
+                />
               </div>
 
               <div>
-                <p className="eyebrow text-mat">CO-FOUNDER · HEAD TRAINER</p>
+                <p className="eyebrow text-mat">
+                  CO-FOUNDER · HEAD COACH
+                </p>
+
+                <h3 className="display mt-4 text-3xl leading-tight sm:text-4xl">
+                  Utkarsh Chaudhary
+                </h3>
+
+                <p className="mt-4 text-base leading-relaxed text-ink-soft">
+                  NIS and BAI certified, BWF Shuttle Time trained, and a
+                  former international-level player with over 10 years of
+                  coaching experience.
+                </p>
+
+                <p className="mt-4 text-base leading-relaxed text-ink-soft">
+                  Utkarsh has trained more than 1,000 children, many of whom
+                  now compete at state and inter-state level.
+                </p>
+              </div>
+            </Reveal>
+            {/* Siddharth Jain */}
+            <Reveal
+              className="grid gap-6 overflow-hidden rounded-[24px] border border-ink/10 bg-chalk p-5 shadow-sm transition-shadow duration-300 hover:shadow-lg sm:p-7 md:grid-cols-[200px_1fr] md:items-center xl:grid-cols-[220px_1fr]"
+              delay={0.04}
+            >
+              <div className="relative mx-auto aspect-[4/5] w-full max-w-[260px] overflow-hidden rounded-[18px] md:mx-0 md:max-w-none">
+                <Image
+                  src="/images/Siddharth.jpeg"
+                  alt="Siddharth Jain, co-founder and head trainer"
+                  fill
+                  sizes="(min-width:1280px) 220px, (min-width:768px) 200px, 260px"
+                  className="object-cover object-top"
+                />
+              </div>
+
+              <div>
+                <p className="eyebrow text-mat">
+                  CO-FOUNDER · HEAD TRAINER
+                </p>
 
                 <h3 className="display mt-4 text-3xl leading-tight sm:text-4xl">
                   Siddharth Jain
                 </h3>
 
                 <p className="mt-4 text-base leading-relaxed text-ink-soft">
-                  NIS and BAI certified, with over 10 years of coaching experience.
+                  NIS and BAI certified, with over 10 years of coaching
+                  experience.
                 </p>
 
                 <p className="mt-4 text-base leading-relaxed text-ink-soft">
-                  Siddharth has contributed to training more than 1,000 children
-                  alongside the coaching team, helping young players progress
-                  towards state and inter-state competition.
+                  Siddharth has contributed to training more than 1,000
+                  children alongside the coaching team, helping young
+                  players progress towards state and inter-state competition.
                 </p>
               </div>
             </Reveal>
+
+            {/* Utkarsh Chaudhary */}
+
           </div>
 
           {/* Founder Note */}
@@ -232,7 +273,7 @@ export default function AboutPage() {
                   <ExternalButton
                     href={a.contact.whatsappUrl}
                     note="opens WhatsApp"
-                    className="!flex !w-full !max-w-[200px] !justify-center"
+                    className="!flex w-full !max-w-[200px] !justify-center"
                   >
                     Book a free trial
                   </ExternalButton>
@@ -241,6 +282,7 @@ export default function AboutPage() {
             </Reveal>
           )}
         </div>
+
         {/* <InstagramLive /> */}
       </section>
 
@@ -251,9 +293,13 @@ export default function AboutPage() {
       >
         <div className="mx-auto grid w-full max-w-[1320px] gap-10 px-5 sm:px-8 lg:grid-cols-12 lg:items-start">
           <Reveal className="lg:col-span-7">
-            <p className="eyebrow text-mat flex items-center gap-4">
-              <span className="h-[2px] w-10 bg-ink/20" aria-hidden="true" />
-              MORE THAN MEDALS</p>
+            <p className="eyebrow flex items-center gap-4 text-mat">
+              <span
+                className="h-[2px] w-10 bg-ink/20"
+                aria-hidden="true"
+              />
+              MORE THAN MEDALS
+            </p>
 
             <h2
               id="philosophy-title"
@@ -263,9 +309,9 @@ export default function AboutPage() {
             </h2>
 
             <p className="mt-6 max-w-[65ch] text-lg leading-relaxed text-ink-soft sm:text-xl">
-              Medals and a sports career are great, but they aren't the
-              only goal. Children who play early grow up disciplined,
-              resilient and respectful, and become better members of society.
+              Medals and a sports career are great, but they aren't the only
+              goal. Children who play early grow up disciplined, resilient and
+              respectful, and become better members of society.
             </p>
           </Reveal>
 
@@ -274,9 +320,7 @@ export default function AboutPage() {
             delay={0.08}
           >
             <div className="rounded-[24px] border border-ink/10 bg-chalk p-6 shadow-sm transition-shadow duration-300 hover:shadow-md sm:p-8">
-              <p className="eyebrow text-ink-soft">
-                THE VALUES WE BUILD
-              </p>
+              <p className="eyebrow text-ink-soft">THE VALUES WE BUILD</p>
 
               <ul className="mt-6 space-y-4">
                 {values.map((value, index) => (
@@ -306,15 +350,19 @@ export default function AboutPage() {
       >
         <div className="mx-auto max-w-[1320px] px-5 sm:px-8">
           <Reveal>
-            <p className="eyebrow text-mat flex items-center gap-4">
-              <span className="h-[2px] w-10 bg-ink/20" aria-hidden="true" />
-              BUILT FOR THE GAME</p>
+            <p className="eyebrow flex items-center gap-4 text-mat">
+              <span
+                className="h-[2px] w-10 bg-ink/20"
+                aria-hidden="true"
+              />
+              BUILT FOR THE GAME
+            </p>
 
             <h2
               id="infrastructure-title"
               className="display mt-4 max-w-[950px] text-[clamp(2.6rem,5vw,4.8rem)] leading-[1.02] tracking-tight"
             >
-             A complete badminton complex in Sector 104
+              A complete badminton complex in Sector 104
             </h2>
 
             <p className="mt-6 max-w-[760px] text-lg leading-relaxed text-ink-soft sm:text-xl">
@@ -351,9 +399,7 @@ export default function AboutPage() {
             className="mt-8 rounded-[28px] bg-court-950 p-7 text-chalk shadow-sm sm:p-10 lg:p-12"
             delay={0.08}
           >
-            <p className="eyebrow text-mat">
-              INTERNATIONAL EXCHANGE
-            </p>
+            <p className="eyebrow text-mat">INTERNATIONAL EXCHANGE</p>
 
             <h3 className="display mt-4 text-[clamp(2rem,4vw,3.5rem)] leading-tight">
               Learning beyond borders.
@@ -361,9 +407,9 @@ export default function AboutPage() {
 
             <p className="mt-5 max-w-[760px] text-lg leading-relaxed text-chalk/75">
               Through an {a.coaching.exchange.label.toLowerCase()} with{" "}
-              {a.coaching.exchange.partner} in{" "}
-              {a.coaching.exchange.country}, academy players get exposure
-              to coaching approaches and badminton development beyond India.
+              {a.coaching.exchange.partner} in {a.coaching.exchange.country},
+              academy players get exposure to coaching approaches and
+              badminton development beyond India.
             </p>
           </Reveal>
         </div>
@@ -390,9 +436,7 @@ export default function AboutPage() {
             className="lg:col-span-5 lg:col-start-8"
             delay={0.08}
           >
-            <p className="eyebrow text-mat">
-              OUR COMMUNITY
-            </p>
+            <p className="eyebrow text-mat">OUR COMMUNITY</p>
 
             <h2
               id="numbers-title"
@@ -407,8 +451,8 @@ export default function AboutPage() {
             </p>
 
             <p className="mt-5 text-lg leading-relaxed text-chalk/75">
-              Our approach combines on-court coaching with the facilities
-              and support players need to keep developing.
+              Our approach combines on-court coaching with the facilities and
+              support players need to keep developing.
             </p>
           </Reveal>
         </div>
@@ -427,9 +471,11 @@ export default function AboutPage() {
       >
         <div className="mx-auto max-w-[1320px] px-5 sm:px-8">
           <Reveal>
-            <p className="eyebrow text-mat flex items-center gap-4">
-              <span className="h-[2px] w-10 bg-ink/20" aria-hidden="true" />
-
+            <p className="eyebrow flex items-center gap-4 text-mat">
+              <span
+                className="h-[2px] w-10 bg-ink/20"
+                aria-hidden="true"
+              />
               BEYOND THE COURT
             </p>
 
@@ -437,7 +483,7 @@ export default function AboutPage() {
               id="corporate-title"
               className="display mt-4 max-w-[950px] text-[clamp(2.6rem,5vw,4.8rem)] leading-[1.02] tracking-tight"
             >
-            Tournaments we've hosted
+              Tournaments we've hosted
             </h2>
 
             <p className="mt-6 max-w-[760px] text-lg leading-relaxed text-ink-soft">
@@ -451,9 +497,7 @@ export default function AboutPage() {
             className="mt-10 rounded-[28px] border border-ink/10 bg-chalk-2 p-6 shadow-sm sm:p-10"
             delay={0.08}
           >
-            <p className="eyebrow text-ink-soft">
-              CORPORATE TOURNAMENTS
-            </p>
+            <p className="eyebrow text-ink-soft">CORPORATE TOURNAMENTS</p>
 
             <div className="mt-6 flex flex-wrap gap-3">
               {corporateEvents.map((company) => (
@@ -473,8 +517,6 @@ export default function AboutPage() {
           </Reveal>
         </div>
       </section>
-
-
     </>
   );
 }

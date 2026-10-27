@@ -16,7 +16,6 @@ import { ProgramsSlider } from "@/components/home/program-slider";
 import { Results } from "@/components/home/results";
 import { FindUs } from "@/components/home/find-us";
 import InstagramEmbed from '@/components/home/InstagramEmbed';
-import { academy } from "@/lib/academy"; // SEO: used for the structured data below
 /* SEO: this is what Google shows in search results.
    Title: keyword first, under 60 characters. Description: 120-160 characters. */
 export const metadata: Metadata = {
@@ -25,6 +24,14 @@ export const metadata: Metadata = {
     "Badminton coaching for kids, teens and adults in Sector 104, Noida. 7 AC indoor courts, NIS-certified coaches, gym and physio. First session free.",
   alternates: {
     canonical: "/",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Badminton Academy in Noida | Celestial's, Sector 104",
+    description:
+      "Badminton coaching for kids, teens and adults in Sector 104, Noida. 7 AC indoor courts, NIS-certified coaches, gym and physio. First session free.",
+    images: ["/images/play-rally-1600.webp"],
+
   },
 };
 
