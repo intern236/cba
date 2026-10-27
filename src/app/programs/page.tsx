@@ -23,8 +23,11 @@ export const metadata: Metadata = {
 
 
 const a = academy;
-const siteUrl = "https://www.celestialsacademy.com";
-
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "http://localhost:3000");
 const groups = [
   ...levels.map((l) => ({
     t: l.name,
