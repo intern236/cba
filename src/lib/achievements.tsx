@@ -70,9 +70,9 @@ export const players: Player[] = [
     results: [{ title: "Medallist", event: "CBSE East Zone" }],
   },
   {
-  name: "",
+  name: "Anil Bhatnagar",
   tag: "Masters",
-  photo: "M-D",
+  photo: "anil-bhatnagar",
   results: [
     {
       title: "Runner-Up",

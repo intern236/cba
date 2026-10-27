@@ -341,182 +341,136 @@ BUILT FOR THE GAME</p>
       </section>
 
       {/* Coaching Team */}
-      <section
-        aria-labelledby="coaches-title"
-        className="on-light bg-chalk-2 py-20 sm:py-24 lg:py-28"
-      >
-        <div className="mx-auto max-w-[1320px] px-5 sm:px-8">
-          <Reveal>
-                      <p className="eyebrow text-mat flex items-center gap-4">
-  <span className="h-[2px] w-10 bg-ink/20" aria-hidden="true" />
-              THE TEAM
+     {/* Coaching Team */}
+<section
+  aria-labelledby="coaches-title"
+  className="on-light bg-chalk-2 py-20 sm:py-24 lg:py-28"
+>
+  <div className="mx-auto max-w-[1320px] px-5 sm:px-8">
+    {/* Heading (left on desktop) + Card (right on desktop) */}
+<div className="grid gap-8 lg:grid-cols-2 lg:items-start lg:gap-12">      {/* LEFT: Meet the coach */}
+      <Reveal>
+        <p className="eyebrow text-mat flex items-center gap-4">
+          <span className="h-[2px] w-10 bg-ink/20" aria-hidden="true" />
+          THE TEAM
+        </p>
+
+        <h2
+          id="coaches-title"
+          className="display mt-4 text-[clamp(2.6rem,5vw,4.4rem)] leading-tight"
+        >
+          Meet the coach
+        </h2>
+      </Reveal>
+
+      {/* RIGHT: Co-Founder card */}
+<Reveal
+  className="grid gap-6 overflow-hidden rounded-[24px] border border-ink/10 bg-chalk p-5 shadow-sm transition-shadow duration-300 hover:shadow-lg sm:p-7 md:grid-cols-[200px_1fr] md:items-center lg:grid-cols-[220px_1fr] xl:grid-cols-[260px_1fr]"
+  delay={0.08}
+>
+  <div className="relative mx-auto aspect-[4/5] w-full max-w-[260px] overflow-hidden rounded-[18px] md:mx-0 md:max-w-none">          <Image
+            src="/images/Siddharth.jpeg"
+            alt="Siddharth Jain, co-founder and head trainer"
+            fill
+sizes="(min-width:1280px) 260px, (min-width:1024px) 220px, (min-width:768px) 200px, 260px"
+            className="object-cover object-top"
+          />
+        </div>
+
+        <div>
+          <p className="eyebrow text-mat">CO-FOUNDER · HEAD TRAINER</p>
+
+          <h3 className="display mt-4 text-3xl leading-tight sm:text-4xl">
+            Siddharth Jain
+          </h3>
+
+          <p className="mt-4 text-base leading-relaxed text-ink-soft">
+            NIS and BAI certified, with over 10 years of coaching experience.
+          </p>
+
+          <p className="mt-4 text-base leading-relaxed text-ink-soft">
+            Siddharth has contributed to training more than 1,000 children
+            alongside the coaching team, helping young players progress
+            towards state and inter-state competition.
+          </p>
+        </div>
+      </Reveal>
+    </div>
+
+    {/* Founder Note */}
+    {founder && (
+      <Reveal className="mt-8 max-w-[60ch] border-l-2 border-mat pl-6">
+        <p className="text-lg leading-relaxed">{founder.note}</p>
+
+        <p className="eyebrow mt-3 text-ink-soft">
+          {founder.name} · {founder.title}
+        </p>
+      </Reveal>
+    )}
+
+    {/* Additional Coaches */}
+    {coaches.length > 0 ? (
+      <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {coaches.map((c) => (
+          <li
+            key={c.name}
+            className="group rounded-[22px] border border-ink/10 bg-chalk p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+          >
+            {c.photo && (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={c.photo}
+                alt={`${c.name}, ${c.role}`}
+                width={800}
+                height={1000}
+                loading="lazy"
+                className="aspect-[4/5] w-full rounded-[18px] object-cover"
+              />
+            )}
+
+            <p className="display mt-4 text-[1.8rem] transition-colors duration-200 group-hover:text-mat">
+              {c.name}
             </p>
 
-            <h2
-              id="coaches-title"
-              className="display mt-4 text-[clamp(2.6rem,5vw,4.4rem)] leading-tight"
+            <p className="mt-1 text-ink-soft">{c.role}</p>
+
+            <p className="eyebrow mt-3 text-mat">{c.credentials}</p>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <Reveal
+        className="mt-10 grid gap-8 rounded-[28px] bg-court-950 p-8 text-chalk sm:p-10 lg:grid-cols-12 lg:items-center"
+        delay={0.06}
+      >
+        <p className="display text-[clamp(2rem,3.6vw,3rem)] leading-tight lg:col-span-7">
+          The best introduction is on court. Book a free trial and train
+          with the coaching team before you decide.
+        </p>
+
+        <div className="flex w-full flex-col items-end gap-2 lg:col-span-5">
+          <TextLink
+            href="/pathway/"
+            className="flex !w-full max-w-[205px] items-center justify-center rounded-full border border-chalk/30 px-5 py-3 text-center text-chalk"
+          >
+            See the pathway
+          </TextLink>
+
+          {a.contact.whatsappUrl && (
+            <ExternalButton
+              href={a.contact.whatsappUrl}
+              note="opens WhatsApp"
+              className="!flex !w-full !max-w-[200px] !justify-center"
             >
-              Meet the coaches
-            </h2>
-          </Reveal>
-
-          {/* Co-Founder Profiles */}
-          <div className="mt-10 grid gap-6 lg:grid-cols-2">
-
-            <Reveal
-              className="grid gap-6 overflow-hidden rounded-[24px] border border-ink/10 bg-chalk p-5 shadow-sm transition-shadow duration-300 hover:shadow-lg sm:p-7 md:grid-cols-[1fr_0.8fr] md:items-center"
-              delay={0.08}
-            >
-              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[18px]">
-                <Image
-                  src="/images/Siddharth.jpeg" // 👈 put your coach image path here
-                  alt="Siddharth Jain, co-founder and head trainer"
-                  fill
-                  sizes="(min-width:1024px) 320px, (min-width:768px) 30vw, 100vw"
-                  className="object-cover object-top"
-                />
-              </div>
-              <div>
-                <p className="eyebrow text-mat">
-                  CO-FOUNDER · HEAD TRAINER
-                </p>
-
-                <h3 className="display mt-4 text-3xl leading-tight sm:text-4xl">
-                  Siddharth Jain
-                </h3>
-
-                <p className="mt-4 text-base leading-relaxed text-ink-soft">
-                  NIS and BAI certified, with over 10 years of coaching
-                  experience.
-                </p>
-
-                <p className="mt-4 text-base leading-relaxed text-ink-soft">
-                  Siddharth has contributed to training more than 1,000
-                  children alongside the coaching team, helping young
-                  players progress towards state and inter-state competition.
-                </p>
-              </div>
-
-              {/* Siddharth photo */}
-              
-            </Reveal>
-            <Reveal className="grid gap-6 overflow-hidden rounded-[24px] border border-ink/10 bg-chalk p-5 shadow-sm transition-shadow duration-300 hover:shadow-lg sm:p-7 md:grid-cols-[1fr_0.8fr] md:items-center">
-               {/* Utkarsh photo */}
-              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[18px]">
-                <Image
-                  src="/images/coach.jpeg" // 👈 put your image path here
-                  alt="Utkarsh Chaudhary, co-founder and head coach"
-                  fill
-                  sizes="(min-width:1024px) 320px, (min-width:768px) 30vw, 100vw"
-                  className="object-cover object-top"
-                />
-              </div>
-              
-              <div>
-                <p className="eyebrow text-mat">
-                  CO-FOUNDER · HEAD COACH
-                </p>
-
-                <h3 className="display mt-4 text-3xl leading-tight sm:text-4xl">
-                  Utkarsh Chaudhary
-                </h3>
-
-                <p className="mt-4 text-base leading-relaxed text-ink-soft">
-                  NIS and BAI certified, BWF Shuttle Time trained, and a
-                  former international-level player.
-                </p>
-
-                <p className="mt-4 text-base leading-relaxed text-ink-soft">
-                  With over 10 years of coaching experience, Utkarsh has
-                  helped train more than 1,000 children, many of whom now
-                  compete at state and inter-state levels.
-                </p>
-              </div>
-
-             
-            </Reveal>
-
-            
-          </div>
-
-          {/* Founder Note */}
-          {founder && (
-            <Reveal className="mt-8 max-w-[60ch] border-l-2 border-mat pl-6">
-              <p className="text-lg leading-relaxed">
-                {founder.note}
-              </p>
-
-              <p className="eyebrow mt-3 text-ink-soft">
-                {founder.name} · {founder.title}
-              </p>
-            </Reveal>
-          )}
-
-          {/* Additional Coaches */}
-          {coaches.length > 0 ? (
-            <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {coaches.map((c) => (
-                <li
-                  key={c.name}
-                  className="group rounded-[22px] border border-ink/10 bg-chalk p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-                >
-                  {c.photo && (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={c.photo}
-                      alt={`${c.name}, ${c.role}`}
-                      width={800}
-                      height={1000}
-                      loading="lazy"
-                      className="aspect-[4/5] w-full rounded-[18px] object-cover"
-                    />
-                  )}
-
-                  <p className="display mt-4 text-[1.8rem] transition-colors duration-200 group-hover:text-mat">
-                    {c.name}
-                  </p>
-
-                  <p className="mt-1 text-ink-soft">{c.role}</p>
-
-                  <p className="eyebrow mt-3 text-mat">
-                    {c.credentials}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <Reveal
-              className="mt-10 grid gap-8 rounded-[28px] bg-court-950 p-8 text-chalk sm:p-10 lg:grid-cols-12 lg:items-center"
-              delay={0.06}
-            >
-              <p className="display text-[clamp(2rem,3.6vw,3rem)] leading-tight lg:col-span-7">
-                The best introduction is on court. Book a free trial and
-                train with the coaching team before you decide.
-              </p>
-
-              <div className="flex w-full flex-col items-end gap-2 lg:col-span-5">
-                <TextLink
-                  href="/pathway/"
-                  className="flex !w-full max-w-[205px] items-center justify-center rounded-full border border-chalk/30 px-5 py-3 text-center text-chalk"
-                >
-                  See the pathway
-                </TextLink>
-
-                {a.contact.whatsappUrl && (
-                  <ExternalButton
-                    href={a.contact.whatsappUrl}
-                    note="opens WhatsApp"
-                    className="!flex !w-full !max-w-[200px] !justify-center"
-                  >
-                    Book a free trial
-                  </ExternalButton>
-                )}
-              </div>
-            </Reveal>
+              Book a free trial
+            </ExternalButton>
           )}
         </div>
-        {/* <InstagramLive /> */}
-      </section>
+      </Reveal>
+    )}
+  </div>
+  {/* <InstagramLive /> */}
+</section>
     </>
   );
 }
