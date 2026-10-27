@@ -38,7 +38,7 @@ export function CorporateTournaments() {
                         id="corporate-title"
                         className="display mt-3 text-[clamp(2.1rem,4.5vw,4rem)] leading-[1.05] tracking-tight"
                     >
-                        Bringing teams together through sport.
+                      Badminton coaching for beginners and competitive players
                     </h2>
 
                     <p className="mt-4 max-w-[680px] text-base leading-relaxed text-ink-soft sm:text-lg">

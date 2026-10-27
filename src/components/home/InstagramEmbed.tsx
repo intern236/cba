@@ -59,7 +59,7 @@ export function InstagramFeed({
               rel="noopener noreferrer"
               className="btn btn-ink"
             >
-              Follow us on Instagram
+Follow the academy on Instagram
               <span className="btn-icon" aria-hidden="true">
                 <svg
                   width="14"

@@ -250,17 +250,16 @@ export function Hero() {
           {/* Copy */}
           <div className="order-2 lg:order-1">
             <p className="eyebrow rise-in text-mat-soft pb-5" style={{ animationDelay: "60ms" }}>
-              Badminton academy · Sector 104, Noida
-            </p>
+Start right. Keep getting better.            </p>
             <h1 id="hero-title" className="display mt-5 text-[clamp(3.3rem,6.15vw,5.9rem)]">
               <span className="sr-only">
                 Celestial&rsquo;s Badminton Academy &mdash; Premier Badminton Coaching &amp; Indoor Courts in Sector 104, Noida
               </span>
               <span className="block overflow-hidden pb-[0.04em]">
-                <span className="rise-line block" style={{ animationDelay: "120ms" }}>Start right.</span>
+                <span className="rise-line block" style={{ animationDelay: "120ms" }}>Badminton Academy in Noida</span>
               </span>
               <span className="block overflow-hidden pb-[0.04em]">
-                <span className="rise-line block text-chalk/55" style={{ animationDelay: "240ms" }}>Keep getting better.</span>
+                <span className="rise-line block text-chalk/55" style={{ animationDelay: "240ms" }}>for Kids, Teens and Adults</span>
               </span>
             </h1>
 

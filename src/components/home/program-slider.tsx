@@ -173,7 +173,7 @@ export function ProgramsSlider() {
                             id="programs-title"
                             className="display mt-3 text-[clamp(2.5rem,5vw,4.5rem)] leading-[1.02] tracking-tight"
                         >
-                            Training for every level.
+                            Badminton programmes for every level
                         </h2>
 
                         <p className="mt-4 max-w-[650px] text-base leading-relaxed text-ink-soft sm:text-lg">

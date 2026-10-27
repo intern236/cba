@@ -7,17 +7,25 @@ import { GalleryGrid } from "@/components/gallery-grid";
 import { ExternalButton } from "@/components/buttons";
 
 export const metadata: Metadata = {
-  title: "Gallery",
-  description: "Photos of the courts, gym and community at Celestial's Badminton Academy, Sector 104, Noida.",
+  title: "Photos: Badminton Courts, Gym & Players | Celestial's Noida",
+  description:
+    "Real photos from Celestial's Badminton Academy, Sector 104, Noida: 7 indoor courts, the strength gym, junior batches and tournament days.",
   alternates: { canonical: "/gallery/" },
-};
 
+  twitter: {
+    card: "summary_large_image",
+    title: "Photos: Badminton Courts, Gym & Players | Celestial's Noida",
+    description:
+      "Explore real photos of Celestial's Badminton Academy in Sector 104, Noida, featuring indoor courts, the strength gym, junior players and tournaments.",
+    images: ["/images/gallery-og.jpg"],
+  },
+};
 const order = [images.rally, images.panorama, images.group, images.wooden, images.mural, images.courtsRow, images.gymFloor, images.empty, images.gymStrength];
 
 export default function GalleryPage() {
   return (
     <>
-      <PageHeader eyebrow="Gallery" title="Inside the hall" intro="Courts, gym and the people who use them. No stock photos — every image here is from Celestial’s.">
+      <PageHeader eyebrow="Gallery" title="Inside Celestial's Badminton Academy, Noida" intro="Courts, gym and the people who use them. No stock photos — every image here is from Celestial’s.">
         <ExternalButton href={academy.contact.instagram.url} variant="ghost-dark" note="opens Instagram">
           More on Instagram
         </ExternalButton>

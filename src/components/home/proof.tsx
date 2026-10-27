@@ -15,7 +15,7 @@ export function Proof() {
     <section aria-labelledby="proof-title" className="on-light bg-chalk-2 py-24 sm:py-28">
       <div className="mx-auto grid max-w-[1320px] gap-12 px-5 sm:px-8 lg:grid-cols-12 lg:items-center">
         <Reveal className="lg:col-span-5">
-          <h2 id="proof-title" className="sr-only">What players say</h2>
+          <h2 id="proof-title" className="sr-only">What 270+ Google reviewers say</h2>
           <p className="display flex items-start text-[clamp(7rem,16vw,12rem)] leading-[0.8] text-ink">
             {r.value}
             <Star size={44} weight="fill" className="ml-2 mt-3 text-mat" aria-hidden="true" />

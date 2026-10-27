@@ -18,9 +18,7 @@ export function Results({ id = "results-title" }: { id?: string }) {
   <span className="h-[2px] w-10 bg-ink/20" aria-hidden="true" />
  PROGRESS THAT COUNTS</p>
             <h2 id={id} className="display mt-4 max-w-[950px] text-[clamp(2.6rem,5vw,4.8rem)] leading-[1.02] tracking-tight">
-              Hard work.
-              <br />
-              Results on court.
+             Player results and rankings
             </h2>
             <p className="mt-5 max-w-[640px] text-[1.05rem] leading-relaxed text-ink-soft sm:text-lg">
               National rankings for our juniors, state and national titles for our adults and masters. Every one of them trains at Celestial&rsquo;s.

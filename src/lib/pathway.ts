@@ -53,7 +53,7 @@ export const levels: Level[] = [
     n: "03",
     name: "Professional",
     tagline: "Train to compete",
-    forWho: "State and national competitors training around a tournament calendar.",
+    forWho: "State and national competitors.",
     ages: "State & national",
     work: [
       "High-intensity training",

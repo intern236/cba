@@ -7,7 +7,7 @@ export function PageHeader({
   intro,
   children,
 }: {
-  eyebrow: string;
+  eyebrow: React.ReactNode;
   title: React.ReactNode;
   intro?: React.ReactNode;
   children?: React.ReactNode;

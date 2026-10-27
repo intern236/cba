@@ -63,7 +63,7 @@ export function Community() {
             // index="01"
             label="On court"
             id="community-title"
-            title="Early mornings, late rallies"
+            title="Early mornings, late rallies: life at the academy"
             intro="Morning and evening batches, juniors and adults, pay-and-play regulars and academy players — all in one hall. Every photo here was taken at Celestial’s."
           />
           <div className="lg:col-span-4 lg:pb-2 lg:text-right">

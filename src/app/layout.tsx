@@ -28,11 +28,11 @@ const siteUrl =
     export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Celestial's Badminton Academy — Sector 104, Noida",
+    default: "Badminton Academy in Noida | Celestial's, Sector 104",
     template: "%s · Celestial's Badminton Academy",
   },
   description:
-    "Top-rated badminton academy in Sector 104, Noida. 7 indoor AC PVC courts, certified BWF coaching for kids, teens & adults. Free first trial session. Pay-and-play court booking.",
+    "Badminton coaching for kids, teens and adults in Sector 104, Noida. 7 AC indoor courts, NIS-certified coaches, gym and physio. First session free.",
   keywords: [
     "badminton academy in noida",
     "badminton coaching sector 104 noida",
@@ -52,7 +52,7 @@ const siteUrl =
   },
   twitter: {
     card: "summary_large_image",
-    title: "Celestial's Badminton Academy — Sector 104, Noida",
+    title: "Badminton Academy in Noida | Celestial's, Sector 104",
     description: "7 indoor AC courts, professional coaching & free trial.",
     images: ["/images/play-rally-1600.webp"],
   },

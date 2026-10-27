@@ -14,7 +14,7 @@ export function BookCourt() {
       <Reveal className="mx-auto grid max-w-[1320px] gap-8 px-5 sm:px-8 lg:grid-cols-12 lg:items-center">
         <div className="lg:col-span-7">
           <p className="eyebrow text-ink">Pay &amp; play</p>
-          <h2 id="court-title" className="display mt-3 text-[clamp(2.3rem,4.4vw,3.6rem)]">Just want a game? Book a court.</h2>
+          <h2 id="court-title" className="display mt-3 text-[clamp(2.3rem,4.4vw,3.6rem)]">Book an indoor badminton court in Noida from ₹450</h2>
           <p className="mt-4 max-w-[60ch] text-[1.05rem] leading-relaxed text-ink">
             {a.courts.count} air-conditioned indoor courts, {a.hoursSummary.replace("Daily ", "daily ")}. From {a.booking.priceFrom} a slot, up to 4
             players per court, non-marking shoes required. Rates vary by slot; the booking page shows the live price.

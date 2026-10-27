@@ -256,7 +256,7 @@ export function LevelFinder({ id: anchor = "find-your-level", wide = false }: { 
                 <p className="mt-2 text-sm text-chalk/55">The coach confirms the right batch in your free first session.</p>
                 <div className="mt-6 flex flex-wrap items-center justify-end gap-x-6 gap-y-3">
                   <Link href="/programs/#timings" className="inline-flex items-center gap-1.5 font-semibold text-chalk/85 hover:text-chalk">
-                    <span className="link-underline">Batch timings &amp; fees</span>
+                    <span className="link-underline">Batch timings and monthly fees</span>
                     <ArrowRight size={14} weight="bold" aria-hidden="true" />
                   </Link>
                   <a href={trialLink(details)} target="_blank" rel="noopener noreferrer" className="btn btn-primary">

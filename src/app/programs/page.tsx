@@ -11,12 +11,12 @@ import { Faq } from "@/components/faq";
 import { LevelFinder } from "@/components/level-finder";
 
 export const metadata: Metadata = {
-  title: { absolute: "Badminton Coaching in Noida: Batches & Fees | Celestial's" },
-  description: `Badminton coaching classes in Noida for every age: kids, teens & adults. Weekday & weekend batches from ${feesFrom}/month. Book a free trial.`,
+  title: { absolute: "Badminton Coaching Fees & Batches in Noida | Celestial's" },
+  description: `Monthly badminton coaching in Noida from ₹3,500. Morning, evening and weekend batches for kids and adults, group or one-to-one. Free first session.`,
   alternates: { canonical: "/programs/" },
   openGraph: {
-    title: "Badminton Coaching in Noida: Batches & Fees | Celestial's",
-    description: `Coaching batches for kids, teens, and adults. Morning, evening and weekend batches from ${feesFrom}/month. Free trial available.`,
+    title: "Badminton Coaching Fees & Batches in Noida | Celestial's",
+    description: `Monthly badminton coaching in Noida from ₹3,500. Morning, evening and weekend batches for kids and adults, group or one-to-one.Free trial available.`,
     url: "/programs/",
   },
 };
@@ -28,6 +28,7 @@ const siteUrl =
   (process.env.VERCEL_PROJECT_PRODUCTION_URL
     ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
     : "http://localhost:3000");
+    
 const groups = [
   ...levels.map((l) => ({
     t: l.name,
@@ -133,7 +134,7 @@ export default function ProgramsPage() {
 
       {/* SEO: new H1 with primary keyword; old creative line kept in the intro */}
       <PageHeader
-        eyebrow="Coaching programs"
+        eyebrow="Coaching programmes"
         title="Badminton Coaching Classes in Noida for Every Age"
         intro="Start right, keep getting better. Badminton coaching in Sector 104, Noida for kids, teens and adults, from complete beginners to tournament players. Group batches or one-to-one, in the morning, the evening or at weekends."
       >
@@ -156,7 +157,7 @@ export default function ProgramsPage() {
       <section id="ages" aria-labelledby="ages-title" className="on-light scroll-mt-24 bg-chalk py-24">
         <div className="mx-auto max-w-[1320px] px-5 sm:px-8">
           <Reveal>
-            <p className="eyebrow text-ink-soft">01 · Who we coach</p>
+            <p className="eyebrow text-ink-soft">01 · Who we coach: kids, teens and adults</p>
             {/* SEO: keyword in H2. If you prefer the old heading, use:
                 {levelCountWord} programmes, plus adult batches */}
             <h2 id="ages-title" className="display mt-4 max-w-[18ch] text-[clamp(2.6rem,5vw,4.4rem)]">Badminton classes for kids, teens &amp; adults</h2>
@@ -189,7 +190,7 @@ export default function ProgramsPage() {
         <div className="mx-auto max-w-[1320px] px-5 sm:px-8">
           <Reveal>
             <p className="eyebrow text-mat-soft">02 · Formats</p>
-            <h2 id="formats-title" className="display mt-4 max-w-[18ch] text-[clamp(2.6rem,5vw,4.4rem)]">How you train</h2>
+            <h2 id="formats-title" className="display mt-4 max-w-[18ch] text-[clamp(2.6rem,5vw,4.4rem)]">Group batches or one-to-one coaching</h2>
           </Reveal>
           <div className="mt-12 grid gap-5 lg:grid-cols-12">
             <Reveal className="rounded-[24px] bg-mat p-7 text-ink lg:col-span-5">
@@ -201,7 +202,7 @@ export default function ProgramsPage() {
               </ul>
             </Reveal>
             <Reveal className="rounded-[24px] bg-court-900 p-7 ring-1 ring-white/10 lg:col-span-7" delay={0.08}>
-              <h3 className="display text-[2.2rem]">What sits behind the coaching</h3>
+              <h2 className="display text-[2.2rem]">What's included beyond the court</h2>
               <ul className="mt-4 grid gap-x-8 gap-y-3 text-chalk/80 sm:grid-cols-2">
                 {[...a.coaching.methods, "Physiotherapist & medical room", `Exchange with ${a.coaching.exchange.partner} (${a.coaching.exchange.country})`].map((m) => (
                   <li key={m} className="flex gap-2"><Check size={18} weight="bold" className="mt-0.5 shrink-0 text-accent" aria-hidden="true" />{m}</li>

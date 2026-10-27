@@ -7,15 +7,47 @@ import { ExternalButton, TextLink } from "@/components/buttons";
 import { Faq } from "@/components/faq";
 import { LevelFinder } from "@/components/level-finder";
 
+
 export const metadata: Metadata = {
-  title: { absolute: "Book a Free Badminton Trial Class in Noida | Celestial's" },
+  title: {
+    absolute: "Free Badminton Trial Class in Noida | Celestial's Sector 104",
+  },
   description:
-    "Book a free trial badminton session at Celestial's in Sector 104, Noida. Skill assessment with certified coaches for beginners, kids & adults. No fee or pressure.",
-  alternates: { canonical: "/first-session/" },
+    "Book a free badminton trial in Sector 104, Noida. A certified coach checks your level. Kids, adults and complete beginners welcome. No fee, no pressure.",
+
+  alternates: {
+    canonical: "/first-session/",
+  },
+
   openGraph: {
-    title: "Book a Free Badminton Trial Class in Noida | Celestial's",
-    description: "Book your free first session. Beginners, kids and adults welcome. Sector 104 Noida.",
+    title: "Free Badminton Trial Class in Noida | Celestial's Sector 104",
+    description:
+      "Book a free badminton trial in Sector 104, Noida. A certified coach checks your level. Kids, adults and complete beginners welcome. No fee, no pressure.",
     url: "/first-session/",
+    siteName: "Celestial's Badminton Academy",
+    locale: "en_IN",
+    type: "website",
+    images: [
+      {
+        url: "/images/trial-class-og.jpg",
+        alt: "Badminton trial class at Celestial's Badminton Academy in Noida",
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Free Badminton Trial Class in Noida | Celestial's Sector 104",
+    description:
+      "Book a free badminton trial in Sector 104, Noida. A certified coach checks your level. Kids, adults and complete beginners welcome. No fee, no pressure.",
+    images: [
+      {
+        url: "/images/trial-class-og.jpg",
+        alt: "Badminton trial class at Celestial's Badminton Academy in Noida",
+      },
+    ],
   },
 };
 
@@ -43,7 +75,7 @@ const faqs = [
   { q: "Do I need my own racket?", a: "Bring one if you have it. If you don’t, mention it when you book the trial." },
   { q: "Will I be with much better players?", a: "The coach watches you play first, then places you at the level that fits." },
   { q: "What does it cost?", a: <>The first session is free. Ask for current batch timings and fees on WhatsApp or by phone on {a.contact.phoneDisplay}.</> },
-  { q: "Where is it?", a: <>{a.address.line1}, {a.address.locality}: {a.address.nearestMetro.distance} from {a.address.nearestMetro.name} metro, with parking on site. Look for the badminton mural by the glass entrance.</> },
+  { q: "How to reach us in Sector 104?", a: <>{a.address.line1}, {a.address.locality}: {a.address.nearestMetro.distance} from {a.address.nearestMetro.name} metro, with parking on site. Look for the badminton mural by the glass entrance.</> },
 ];
 
 export default function FirstSessionPage() {
@@ -51,7 +83,7 @@ export default function FirstSessionPage() {
     <>
       <PageHeader
         eyebrow="Your first session"
-        title="Book Your Free Badminton Trial Session in Noida"
+        title="Book a Free Badminton Trial Class in Noida"
         intro="Free. No pressure. Just play. What to expect on day one at Celestial's, Sector 104: how to book, what to bring, and how our coaches find your level."
       >
 
@@ -75,8 +107,8 @@ export default function FirstSessionPage() {
       <section aria-labelledby="steps-title" className="on-light bg-chalk py-24">
         <div className="mx-auto grid max-w-[1320px] gap-12 px-5 sm:px-8 lg:grid-cols-12">
           <Reveal className="lg:col-span-4">
-            <p className="eyebrow text-ink-soft">01 · How it runs</p>
-            <h2 id="steps-title" className="display mt-4 text-[clamp(2.6rem,5vw,4.4rem)]">Six steps, no surprises</h2>
+            <p className="eyebrow text-ink-soft">01 · Six steps, no surprises</p>
+            <h2 id="steps-title" className="display mt-4 text-[clamp(2.6rem,5vw,4.4rem)]">How your free trial works, step by step</h2>
             <p className="mt-5 max-w-[40ch] text-ink-soft">From the first message to the chat afterwards.</p>
           </Reveal>
           <ol className="relative lg:col-span-7 lg:col-start-6">
@@ -99,8 +131,8 @@ export default function FirstSessionPage() {
       <section aria-labelledby="bring-title" className="bg-court-950 py-24 text-chalk">
         <div className="mx-auto grid max-w-[1320px] gap-12 px-5 sm:px-8 lg:grid-cols-12">
           <Reveal className="lg:col-span-4">
-            <p className="eyebrow text-mat-soft">02 · What to bring</p>
-            <h2 id="bring-title" className="display mt-4 text-[clamp(2.6rem,5vw,4.4rem)]">Four things</h2>
+            <p className="eyebrow text-mat-soft">02 · Four things</p>
+            <h2 id="bring-title" className="display mt-4 text-[clamp(2.6rem,5vw,4.4rem)]">What to bring to your first badminton session</h2>
           </Reveal>
           <ul className="grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:col-span-7 lg:col-start-6">
             {[
@@ -125,7 +157,7 @@ export default function FirstSessionPage() {
         <div className="mx-auto grid max-w-[1320px] gap-12 px-5 sm:px-8 lg:grid-cols-12">
           <Reveal className="lg:col-span-5">
             <p className="eyebrow text-ink-soft">03 · Before you come</p>
-            <h2 id="worries-title" className="display mt-4 text-[clamp(2.6rem,5vw,4.4rem)]">The questions beginners ask</h2>
+            <h2 id="worries-title" className="display mt-4 text-[clamp(2.6rem,5vw,4.4rem)]">First-timer questions about learning badminton</h2>
             <div className="mt-8">
               <Faq items={faqs} />
             </div>

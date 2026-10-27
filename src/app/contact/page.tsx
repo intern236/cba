@@ -6,10 +6,17 @@ import { Reveal } from "@/components/reveal";
 import { EnquiryForm, ENQUIRY_ENDPOINT } from "@/components/enquiry-form";
 
 export const metadata: Metadata = {
-  title: "Contact & directions",
+  title: "Contact & Directions | Badminton Academy Sector 104 Noida",
   description:
-    "Find Celestial's Badminton Academy in Sector 104, Noida — 2.5 km from Noida Sector 81 metro. Call, WhatsApp or book a court online. Open 5 AM – 11 PM.",
+    "Celestial's Badminton Academy, Maharishi Nagar, Sector 104, Noida. Call or WhatsApp +91 8826268236. Open daily 5 AM–11 PM, Tuesdays till 8 PM.",
   alternates: { canonical: "/contact/" },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact & Directions | Badminton Academy Sector 104 Noida",
+    description:
+      "Celestial's Badminton Academy, Maharishi Nagar, Sector 104, Noida. Call or WhatsApp +91 8826268236. Open daily 5 AM–11 PM, Tuesdays till 8 PM.",
+  },
 };
 
 const a = academy;
@@ -30,7 +37,7 @@ export default function ContactPage() {
         <div className={`mx-auto grid max-w-[1320px] gap-12 px-5 sm:px-8 ${ENQUIRY_ENDPOINT ? "lg:grid-cols-2" : ""}`}>
           <Reveal>
             <p className="eyebrow text-ink-soft">Quickest ways to reach us</p>
-            <h2 id="reach-title" className="display mt-4 text-[clamp(2.6rem,5vw,4.4rem)]">Pick a channel</h2>
+            <h2 id="reach-title" className="display mt-4 text-[clamp(2.6rem,5vw,4.4rem)]">Fastest way to reach us</h2>
             <ul className={`mt-10 grid gap-x-10 border-b-2 border-ink/10 ${ENQUIRY_ENDPOINT ? "" : "lg:grid-cols-2"}`}>
               {routes.map(({ I, t, d, href, ext, cta }) => (
                 <li key={t} className="border-t-2 border-ink/10">

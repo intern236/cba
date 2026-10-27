@@ -10,13 +10,13 @@ import { TrainingRally } from "@/components/home/training-rally";
 import { Faq } from "@/components/faq";
 
 export const metadata: Metadata = {
-  title: { absolute: "Badminton Training Pathway & Levels in Noida | Celestial's" },
+  title: { absolute: "Badminton Training Pathway, Beginner to Pro | Noida" },
   description:
-    "3-level badminton coaching pathway in Sector 104, Noida: Beginner, Intermediate and Professional. Structured progression for kids, teens & adults.",
+    "Three badminton levels at Celestial's, Noida: Beginner, Intermediate and Professional. What each one works on, who it suits and when you move up.",
   alternates: { canonical: "/pathway/" },
   openGraph: {
-    title: "Badminton Training Pathway & Levels in Noida | Celestial's",
-    description: "From beginner basics to tournament play: explore our 3-level coaching pathway.",
+    title: "Badminton Training Pathway, Beginner to Pro | Noida",
+    description: "Three badminton levels at Celestial's, Noida: Beginner, Intermediate and Professional. What each one works on, who it suits and when you move up.",
     url: "/pathway/",
   },
 };
@@ -33,7 +33,7 @@ export default function PathwayPage() {
     <>
       <PageHeader
         eyebrow="The training pathway"
-        title="Three levels. One direction."
+        title="Badminton Training Pathway: Beginner to Professional."
         intro="From a first lesson to a tournament plan. Each level says who it’s for, what you’ll work on and what it takes to move up, so you always know where you are."
       >
         <nav aria-label="Levels" className="flex flex-wrap gap-2 lg:justify-end">
@@ -125,7 +125,7 @@ export default function PathwayPage() {
         <div className="mx-auto grid max-w-[1320px] gap-10 px-5 sm:px-8 lg:grid-cols-12">
           <Reveal className="lg:col-span-4">
             <p className="eyebrow text-ink-soft">Not sure where you fit?</p>
-            <h2 id="finder-title" className="display mt-4 text-[clamp(2.6rem,5vw,4.4rem)]">Find your starting level</h2>
+            <h2 id="finder-title" className="display mt-4 text-[clamp(2.6rem,5vw,4.4rem)]">Pathway questions</h2>
             <div className="mt-10">
               <h3 className="eyebrow text-ink-soft">Questions</h3>
               <div className="mt-2">

@@ -26,7 +26,7 @@ export function CourtSheet() {
       <div className="mx-auto max-w-[1320px] px-5 py-20 sm:px-8 sm:py-24">
         <Reveal className="flex flex-wrap items-end justify-between gap-4">
           <h2 id="sheet-title" className="display text-[clamp(2.2rem,4vw,3.4rem)]">
-            The score sheet
+           Why players choose Celestial's in Sector 104
           </h2>
           <p className="eyebrow text-chalk/55">Celestial&rsquo;s · Sector 104 · Noida</p>
         </Reveal>

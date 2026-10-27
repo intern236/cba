@@ -1,4 +1,3 @@
-
 import type { Metadata } from "next";
 import { Check } from "@phosphor-icons/react/ssr";
 import { academy } from "@/lib/academy";
@@ -10,19 +9,26 @@ import { HoursTable } from "@/components/hours-table";
 import { OpenStatus } from "@/components/open-status";
 import { ExternalButton } from "@/components/buttons";
 import { FacilityIcon } from "@/components/facility-icon";
+import { Faq } from "@/components/faq";
 
 export const metadata: Metadata = {
-  title: { absolute: "7 Indoor AC Badminton Courts & Facilities in Noida | Celestial's" },
+  title: { absolute: "Indoor AC Badminton Courts & Facilities | Noida Sector 104" },
   description:
-    "7 air-conditioned indoor PVC badminton courts, strength gym, physio room, and cafeteria in Sector 104, Noida. Open daily 5 AM–11 PM. Pay & play bookings available.",
+    "7 air-conditioned indoor badminton courts in Sector 104, Noida, plus gym, physio, steam bath, hostel and pro shop. Open 5 AM–11 PM. Book from ₹450.",
   alternates: { canonical: "/facilities/" },
   openGraph: {
-    title: "7 Indoor AC Badminton Courts & Facilities in Noida | Celestial's",
-    description: "7 air-conditioned courts, gym, cafeteria and pay-and-play booking in Sector 104 Noida.",
+    title: "Indoor AC Badminton Courts & Facilities | Noida Sector 104",
+    description:
+      "7 air-conditioned indoor badminton courts in Sector 104, Noida, plus gym, physio, steam bath, hostel and pro shop. Open 5 AM–11 PM. Book from ₹450.",
     url: "/facilities/",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Indoor AC Badminton Courts & Facilities | Noida Sector 104",
+    description:
+      "7 air-conditioned indoor badminton courts in Sector 104, Noida, plus gym, physio, steam bath, hostel and pro shop. Open 5 AM–11 PM. Book from ₹450.",
+  },
 };
-
 
 const a = academy;
 
@@ -56,14 +62,40 @@ const zigzag = [
   },
 ];
 
+const faqs = [
+  {
+    q: "How much does it cost to book a badminton court?",
+    a: "Court bookings start from ₹450 per hour. The exact price for your slot is shown on Hudle or Playo when you book.",
+  },
+  {
+    q: "How do I book a court?",
+    a: "Book online on Hudle or Playo. Pick a date and time, check which courts are free for that slot, and pay online.",
+  },
+  {
+    q: "What are the court timings?",
+    a: "The courts are open every day from 5 AM to 11 PM, and close at 8 PM on Tuesdays. The hours table on this page shows whether we are open right now.",
+  },
+
+  {
+    q: "What do I need to bring?",
+    a: "Bring your own racket and non-marking shoes. Non-marking shoes are compulsory on the PVC court mats.",
+  },
+
+  {
+    q: "Can I buy shuttles, strings or other gear at the academy?",
+    a: "Yes. The badminton pro shop on site stocks shuttles, strings and gear, so you can pick things up before or after a session.",
+  },
+
+];
+
 export default function FacilitiesPage() {
   return (
     <>
-      <PageHeader
-        eyebrow="Facilities & timings"
-        title="7 Indoor AC Badminton Courts & World-Class Facilities"
-        intro="Courts to train on, a gym to get stronger, a physio when something hurts, and somewhere to sit down afterwards. The courts are also open for pay-and-play."
-      >
+     <PageHeader
+     eyebrow={<h1>Everything under one roof</h1>}
+     title="7 Indoor AC Badminton Courts & World-Class Facilities"
+     intro="Courts to train on, a gym to get stronger, a physio when something hurts, and somewhere to sit down afterwards. The courts are also open for pay-and-play."
+>
 
         <div className="flex justify-end">
           <div className="inline-block w-fit rounded-[12px] bg-court-900 px-3 py-4 ring-1 ring-white/10 text-right">
@@ -88,7 +120,7 @@ export default function FacilitiesPage() {
               id="spec-title"
               className="display mt-4 text-[clamp(2.3rem,5vw,4.4rem)]"
             >
-              The numbers
+              Court specifications
             </h2>
 
             <p className="mt-5 max-w-[44ch] leading-relaxed text-ink-soft">
@@ -133,7 +165,7 @@ export default function FacilitiesPage() {
               id="book-title"
               className="display mt-4 text-[clamp(2.3rem,5vw,4.4rem)]"
             >
-              Book a court
+Pay and play: book a badminton court from ₹450
             </h2>
 
             <p className="mt-5 max-w-[52ch] text-base leading-relaxed text-ink-soft sm:text-lg">
@@ -207,7 +239,7 @@ export default function FacilitiesPage() {
         className="on-light mt-8 bg-chalk pb-14 pt-6 sm:mt-10 sm:pb-20 sm:pt-8 lg:mt-12 lg:pb-24 lg:pt-10"
       >
         <h2 id="spaces-title" className="sr-only">
-          Spaces
+          Inside the hall: courts, gym and entrance
         </h2>
 
         <div className="mx-auto grid max-w-[1320px] gap-12 px-4 sm:gap-16 sm:px-8 lg:gap-20">
@@ -272,7 +304,7 @@ export default function FacilitiesPage() {
               id="onsite-title"
               className="display mt-4 text-[clamp(2.3rem,5vw,4.4rem)]"
             >
-              What&rsquo;s here
+              Training and recovery facilities on site
             </h2>
 
             <ul className="mt-8 grid gap-x-8 sm:grid-cols-2">
@@ -321,9 +353,9 @@ export default function FacilitiesPage() {
             delay={0.08}
           >
             <div className="rounded-2xl bg-court-900 p-4 ring-1 ring-white/10 sm:rounded-[28px] sm:p-7">
-              <h3 className="display text-[1.8rem] sm:text-[2rem]">
-                Timings
-              </h3>
+              <h2 className="display text-[1.8rem] sm:text-[2rem]">
+                Badminton court timings: 5 AM to 11 PM
+              </h2>
 
               <div className="mt-4 min-w-0 overflow-x-auto">
                 <HoursTable />
@@ -348,6 +380,29 @@ export default function FacilitiesPage() {
                 </ExternalButton>
               </div>
             </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section
+        aria-labelledby="faq-title"
+        className="on-light bg-chalk-2 py-14 sm:py-20 lg:py-24"
+      >
+        <div className="mx-auto grid max-w-[1320px] gap-8 px-4 sm:gap-12 sm:px-8 lg:grid-cols-12">
+          <Reveal className="min-w-0 lg:col-span-5">
+            <p className="eyebrow text-ink-soft">Questions about the courts</p>
+
+            <h2
+              id="faq-title"
+              className="display mt-4 text-[clamp(2.3rem,5vw,4.4rem)]"
+            >
+              Facilities questions
+            </h2>
+          </Reveal>
+
+          <Reveal className="min-w-0 lg:col-span-7" delay={0.08}>
+            <Faq items={faqs} />
           </Reveal>
         </div>
       </section>
