@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { CheckCircle, WarningCircle } from "@phosphor-icons/react";
-export const ENQUIRY_ENDPOINT = process.env.NEXT_PUBLIC_ENQUIRY_ENDPOINT ?? "";
+export const ENQUIRY_ENDPOINT = "";
 
 type Errors = Partial<Record<"name" | "phone" | "interest", string>>;
 

@@ -26,7 +26,7 @@ export const academy = {
     type: "website",
     twitterCard: "summary_large_image",
     // Add your actual public website URL in .env.local
-    siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "",
+    siteUrl: "",
     // OG image is set per-page in each page's metadata (and in layout.tsx for the default).
   },
 

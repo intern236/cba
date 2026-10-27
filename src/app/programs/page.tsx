@@ -23,12 +23,9 @@ export const metadata: Metadata = {
 
 
 const a = academy;
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL
-    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-    : "http://localhost:3000");
-    
+const siteUrl = "";
+
+
 const groups = [
   ...levels.map((l) => ({
     t: l.name,
@@ -37,7 +34,7 @@ const groups = [
     start: `Programme ${l.n}`,
     href: `/pathway/#${l.id}`,
   })),
- 
+
 ];
 
 /* SEO: `text` is the plain-text answer used in FAQPage JSON-LD.
