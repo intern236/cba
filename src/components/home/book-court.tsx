@@ -16,27 +16,27 @@ export function BookCourt() {
           <p className="eyebrow text-ink">Pay &amp; play</p>
           <h2 id="court-title" className="display mt-3 text-[clamp(2.3rem,4.4vw,3.6rem)]">Book an indoor badminton court in Noida from ₹450</h2>
           <p className="mt-4 max-w-[60ch] text-[1.05rem] leading-relaxed text-ink">
-            {a.courts.count} air-conditioned indoor courts, {a.hoursSummary.replace("Daily ", "daily ")}. From {a.booking.priceFrom} a slot, up to 4
+            {a.courts.count} air-conditioned indoor courts, {a.hoursSummary.replace("Daily ", "daily ")}. Up to 4
             players per court, non-marking shoes required. Rates vary by slot; the booking page shows the live price.
           </p>
         </div>
-<div className="flex flex-wrap justify-end gap-3 lg:col-span-5 lg:justify-start">
-<ExternalButton
-  href={a.booking.secondary.url}
-  variant="ghost-light"
-  note="opens Playo"
-  className=" !text-black hover:!text-black !transition-none"
->
-  Book on Playo
-</ExternalButton>
-  <ExternalButton
-    href={a.booking.primary.url}
-    variant="ink"
-    note="opens Hudle"
-  >
-    Book on Hudle
-  </ExternalButton>
-</div>
+        <div className="flex flex-wrap justify-end gap-3 lg:col-span-5 lg:justify-start">
+          <ExternalButton
+            href={a.booking.secondary.url}
+            variant="ghost-light"
+            note="opens Playo"
+            className=" !text-black hover:!text-black !transition-none"
+          >
+            Book on Playo
+          </ExternalButton>
+          <ExternalButton
+            href={a.booking.primary.url}
+            variant="ink"
+            note="opens Hudle"
+          >
+            Book on Hudle
+          </ExternalButton>
+        </div>
       </Reveal>
     </section>
   );

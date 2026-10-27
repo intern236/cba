@@ -64,6 +64,7 @@ export const academy = {
       provider: "Playo",
       url: "https://playo.co/venues/sector--104-ncr/celestials-badminton-academy-sector-4-ncr",
     },
+    priceFrom: "₹450",
     // Court prices are deliberately not shown anywhere on the site (client instruction,
     // 22 Oct 2026). Hudle and Playo show the live rate at booking.
   },
