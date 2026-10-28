@@ -11,7 +11,12 @@ export const metadata: Metadata = {
   description:
     "Real photos from Celestial's Badminton Academy, Sector 104, Noida: 7 indoor courts, the strength gym, junior batches and tournament days.",
   alternates: { canonical: "/gallery/" },
-
+  openGraph: {
+    title: "Photos: Badminton Courts, Gym & Players | Celestial's Noida",
+    description:
+      "Real photos from Celestial's Badminton Academy, Sector 104, Noida: 7 indoor courts, the strength gym, junior batches and tournament days.",
+    images: "/images/gallery-og.jpg",
+  },
   twitter: {
     card: "summary_large_image",
     title: "Photos: Badminton Courts, Gym & Players | Celestial's Noida",
