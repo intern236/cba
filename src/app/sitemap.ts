@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 export const dynamic = "force-static";
 
-const base = process.env.NEXT_PUBLIC_SITE_URL ?? "";
+const base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://celestial.in";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [

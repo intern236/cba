@@ -7,7 +7,9 @@ import { GalleryGrid } from "@/components/gallery-grid";
 import { ExternalButton } from "@/components/buttons";
 
 export const metadata: Metadata = {
-  title: "Photos: Badminton Courts, Gym & Players | Celestial's Noida",
+  title: {
+    absolute: "Photos & Courts | Celestial's Badminton Academy Noida",
+  },
   description:
     "Real photos from Celestial's Badminton Academy, Sector 104, Noida: 7 indoor courts, the strength gym, junior batches and tournament days.",
   alternates: { canonical: "/gallery/" },

@@ -12,8 +12,9 @@ import { Reveal } from "@/components/reveal";
 import { EnquiryForm, ENQUIRY_ENDPOINT } from "@/components/enquiry-form";
 
 export const metadata: Metadata = {
-  title: "Contact & Directions | Badminton Academy Sector 104 Noida",
-  description:
+  title: {
+    absolute: "Contact & Directions | Celestial's Badminton Noida",
+  }, description:
     "Celestial's Badminton Academy, Maharishi Nagar, Sector 104, Noida. Call or WhatsApp +91 8826268236. Open daily 5 AM–11 PM, Tuesdays till 8 PM.",
   alternates: { canonical: "/contact/" },
   twitter: {
@@ -178,9 +179,8 @@ export default function ContactPage() {
         className="on-light bg-chalk py-24"
       >
         <div
-          className={`mx-auto grid max-w-[1320px] gap-12 px-5 sm:px-8 ${
-            ENQUIRY_ENDPOINT ? "lg:grid-cols-2" : ""
-          }`}
+          className={`mx-auto grid max-w-[1320px] gap-12 px-5 sm:px-8 ${ENQUIRY_ENDPOINT ? "lg:grid-cols-2" : ""
+            }`}
         >
           <Reveal>
             <p className="eyebrow text-ink-soft">
@@ -195,9 +195,8 @@ export default function ContactPage() {
             </h2>
 
             <ul
-              className={`mt-10 grid gap-x-10 border-b-2 border-ink/10 ${
-                ENQUIRY_ENDPOINT ? "" : "lg:grid-cols-2"
-              }`}
+              className={`mt-10 grid gap-x-10 border-b-2 border-ink/10 ${ENQUIRY_ENDPOINT ? "" : "lg:grid-cols-2"
+                }`}
             >
               {routes.map(({ I, t, d, href, ext, cta }) => (
                 <li key={t} className="border-t-2 border-ink/10">
@@ -205,9 +204,9 @@ export default function ContactPage() {
                     href={href}
                     {...(ext
                       ? {
-                          target: "_blank",
-                          rel: "noopener noreferrer",
-                        }
+                        target: "_blank",
+                        rel: "noopener noreferrer",
+                      }
                       : {})}
                     className="group flex items-center gap-5 py-6"
                   >
