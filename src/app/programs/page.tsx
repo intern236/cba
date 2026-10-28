@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Check } from "@phosphor-icons/react/ssr";
 import { academy, trialLink } from "@/lib/academy";
-import { fees, weekdayTimings, weekendTimings, feesFrom } from "@/lib/batches";
+import { weekdayTimings, weekendTimings } from "@/lib/batches";
 import { levels, levelCountWord } from "@/lib/pathway";
 import { PageHeader } from "@/components/page-header";
 import { Reveal } from "@/components/reveal";
@@ -10,14 +10,25 @@ import { ExternalButton, TextLink } from "@/components/buttons";
 import { Faq } from "@/components/faq";
 import { LevelFinder } from "@/components/level-finder";
 
+
 export const metadata: Metadata = {
-  title: { absolute: "Badminton Coaching Fees & Batches in Noida | Celestial's" },
-  description: `Monthly badminton coaching in Noida from ₹3,500. Morning, evening and weekend batches for kids and adults, group or one-to-one. Free first session.`,
+  title: {
+    absolute: "Badminton Batch Timings in Noida | Celestial's",
+  },
+  description:
+    "Explore badminton classes in Noida at Celestial's, Sector 104. Find badminton coaching for kids and adults, one-to-one badminton coaching, weekend badminton classes and evening badminton batches.",
   alternates: { canonical: "/programs/" },
   openGraph: {
-    title: "Badminton Coaching Fees & Batches in Noida | Celestial's",
-    description: `Monthly badminton coaching in Noida from ₹3,500. Morning, evening and weekend batches for kids and adults, group or one-to-one.Free trial available.`,
+    title: "Badminton Batch Timings in Noida | Celestial's",
+    description:
+      "Discover badminton classes in Noida for kids and adults, including one-to-one badminton coaching, weekend classes and evening batches at Celestial's, Sector 104.",
     url: "/programs/",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Badminton Batch Timings in Noida | Celestial's",
+    description:
+      "Find badminton coaching for kids and adults in Noida, with one-to-one coaching, weekend badminton classes and evening batches at Celestial's, Sector 104.",
   },
 };
 
@@ -31,7 +42,6 @@ const siteUrl =
       ? `https://${process.env.VERCEL_URL}`
       : "http://localhost:3000");
 
-
 const groups = [
   ...levels.map((l) => ({
     t: l.name,
@@ -40,7 +50,15 @@ const groups = [
     start: `Programme ${l.n}`,
     href: `/pathway/#${l.id}`,
   })),
+];
 
+/* Monthly fees (as of Oct 2026) */
+const fees = [
+  { plan: "3 days a week", price: "₹4,000" },
+  { plan: "4 days a week", price: "₹5,000" },
+  { plan: "5 days a week", price: "₹6,000" },
+  { plan: "6 days a week", price: "₹7,000" },
+  { plan: "Weekends only", price: "₹3,500" },
 ];
 
 /* SEO: `text` is the plain-text answer used in FAQPage JSON-LD.
@@ -75,15 +93,15 @@ const faqs = [
     a: "Periodic assessments set a baseline and measure progress against it, and individual reviews turn that into the next block of work.",
   },
   {
-    q: "What are the badminton batch timings and monthly fees in Noida?",
-    text: `Monthly coaching fees start at ${feesFrom}, depending on the plan and how many days a week the player trains. Weekday and weekend batches run through the morning and evening. The first session is free. The full timetable and fee table are on this page.`,
+    q: "What are the badminton batch timings in Noida?",
+    text: "Weekday and weekend badminton coaching batches are available in the morning and evening. Check the full timetable on this page. The first session is free.",
     a: (
       <>
-        Monthly coaching fees start at {feesFrom}, depending on the plan and
-        how many days a week the player trains. Weekday and weekend batches
-        run through the morning and evening. The first session is free.{" "}
+        Weekday and weekend badminton coaching batches are available in the
+        morning and evening. Check the full timetable on this page. The first
+        session is free.{" "}
         <a href="#timings" className="link-underline font-semibold text-ink">
-          View the full batch timetable and monthly fees
+          View batch timings
         </a>
         .
       </>
@@ -145,7 +163,7 @@ export default function ProgramsPage() {
           {[
             ["#ages", "Ages"],
             ["#formats", "Formats"],
-            ["#timings", "Timings & fees"],
+            ["#timings", "Batch timings"],
             ["#find-your-level", "Find your level"],
             ["#faq", "FAQ"],
           ].map(([h, l]) => (
@@ -205,7 +223,7 @@ export default function ProgramsPage() {
               </ul>
             </Reveal>
             <Reveal className="rounded-[24px] bg-court-900 p-7 ring-1 ring-white/10 lg:col-span-7" delay={0.08}>
-              <h2 className="display text-[2.2rem]">What's included beyond the court</h2>
+              <h3 className="display text-[2.2rem]">What&apos;s included beyond the court</h3>
               <ul className="mt-4 grid gap-x-8 gap-y-3 text-chalk/80 sm:grid-cols-2">
                 {[...a.coaching.methods, "Physiotherapist & medical room", `Exchange with ${a.coaching.exchange.partner} (${a.coaching.exchange.country})`].map((m) => (
                   <li key={m} className="flex gap-2"><Check size={18} weight="bold" className="mt-0.5 shrink-0 text-accent" aria-hidden="true" />{m}</li>
@@ -216,69 +234,128 @@ export default function ProgramsPage() {
         </div>
       </section>
 
-      {/* TIMINGS & FEES */}
-      <section id="timings" aria-labelledby="timings-title" className="on-light scroll-mt-24 bg-chalk py-24">
-        <div className="mx-auto grid max-w-[1320px] gap-10 px-5 sm:px-8 lg:grid-cols-12">
-          <Reveal className="lg:col-span-4">
-            <p className="eyebrow text-ink-soft">03 · Timings &amp; fees</p>
-            {/* SEO: keyword in H2 */}
-            <h2 id="timings-title" className="display mt-4 text-[clamp(2.6rem,5vw,4.4rem)]">Badminton batch timings &amp; monthly fees</h2>
+      {/* BATCH TIMINGS & FEES */}
+      <section
+        id="timings"
+        aria-labelledby="timings-title"
+        className="on-light scroll-mt-24 bg-chalk py-24"
+      >
+        <div className="mx-auto grid max-w-[1320px] items-start gap-10 px-5 sm:px-8 lg:grid-cols-12">
+          {/* Left: heading + fees */}
+          <Reveal className="lg:col-span-5">
+            <p className="eyebrow text-ink-soft">03 · Batch schedule &amp; fees</p>
+            <h2
+              id="timings-title"
+              className="display mt-4 text-[clamp(2.4rem,4.2vw,4rem)]"
+            >
+              Batch Timings &amp; Monthly Fees
+            </h2>
+            <p className="mt-4 max-w-[42ch] leading-relaxed text-ink-soft">
+              Weekday and weekend coaching schedules for kids, teens and adults
+              at Celestial&apos;s Badminton Academy. Pick the number of days that
+              suits you.
+            </p>
+
+            <div className="mt-8 max-w-[460px] rounded-[20px] bg-chalk-2 p-6 ring-1 ring-ink/10">
+              <div className="flex items-center justify-between gap-3 border-b border-ink/10 pb-3">
+                <p className="eyebrow font-semibold text-mat-deep">Monthly fees</p>
+                <span className="text-xs text-ink/60">per player</span>
+              </div>
+
+              <ul className="mt-1">
+                {fees.map((f) => (
+                  <li
+                    key={f.plan}
+                    className="flex items-baseline justify-between gap-4 border-b border-ink/10 py-3 last:border-b-0"
+                  >
+                    <span className="text-ink">{f.plan}</span>
+                    <span className="text-lg font-semibold tabular-nums text-ink">
+                      {f.price}
+                      <span className="ml-0.5 text-sm font-normal text-ink-soft">
+                        /month
+                      </span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+
+              <p className="mt-3 text-xs leading-relaxed text-ink/60">
+                First session free. Fees as of Oct 2026; confirm on WhatsApp
+                before joining.
+              </p>
+            </div>
           </Reveal>
-          <Reveal className="lg:col-span-8" delay={0.08}>
-            <div className="grid gap-5 md:grid-cols-2">
-              <div className="rounded-[24px] bg-court-950 p-7 text-chalk">
-                <h3 className="display text-[2rem]">Batch timings</h3>
-                <h4 className="eyebrow mt-5 text-mat-soft">Weekdays</h4>
-                <ul className="mt-2 tabular-nums">
-                  {weekdayTimings.map((t) => (
-                    <li key={t} className="border-b border-chalk/10 py-2.5">{t}</li>
-                  ))}
-                </ul>
-                <h4 className="eyebrow mt-6 text-mat-soft">Weekends</h4>
-                <ul className="mt-2 tabular-nums">
-                  {weekendTimings.map((t) => (
-                    <li key={t} className="border-b border-chalk/10 py-2.5 last:border-b-0">{t}</li>
-                  ))}
-                </ul>
+
+          {/* Right: timings card */}
+          <Reveal className="lg:col-span-7 lg:flex lg:justify-end" delay={0.08}>
+            <div className="w-full max-w-[520px] rounded-[20px] bg-court-950 p-6 text-chalk shadow-lg ring-1 ring-white/10 sm:p-7">
+              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-chalk/10 pb-4">
+                <h3 className="display text-[1.6rem] leading-none">
+                  Coaching Schedule
+                </h3>
+                <span className="rounded-full bg-mat px-3 py-1 text-xs font-semibold text-ink">
+                  First session free
+                </span>
               </div>
-              <div className="rounded-[24px] bg-chalk-2 p-7">
-                <h3 className="display text-[2rem]">Monthly fees</h3>
-                <table className="mt-4 w-full text-left tabular-nums">
-                  <caption className="sr-only">Monthly coaching fees by number of days per week</caption>
-                  <thead>
-                    <tr className="eyebrow text-ink-soft">
-                      <th scope="col" className="py-2 font-normal">Plan</th>
-                      <th scope="col" className="py-2 text-right font-normal">Per month</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {fees.map((f) => (
-                      <tr key={f.plan} className="border-t border-ink/10">
-                        <th scope="row" className="py-2.5 font-normal">{f.plan}</th>
-                        <td className="py-2.5 text-right font-semibold">{f.price}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+
+              <h4 className="eyebrow mt-5 text-mat-soft">Weekdays</h4>
+              <ul className="mt-2 text-[0.95rem] tabular-nums">
+                {weekdayTimings.map((t) => (
+                  <li
+                    key={t}
+                    className="flex items-center gap-3 border-b border-chalk/10 py-2.5"
+                  >
+                    <span
+                      aria-hidden="true"
+                      className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
+                    />
+                    <span>{t}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <h4 className="eyebrow mt-6 text-mat-soft">Weekends</h4>
+              <ul className="mt-2 text-[0.95rem] tabular-nums">
+                {weekendTimings.map((t) => (
+                  <li
+                    key={t}
+                    className="flex items-center gap-3 border-b border-chalk/10 py-2.5 last:border-b-0"
+                  >
+                    <span
+                      aria-hidden="true"
+                      className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
+                    />
+                    <span>{t}</span>
+                  </li>
+                ))}
+              </ul>
+
+            <div className="mt-6 flex flex-col gap-3 border-t border-chalk/10 pt-5 sm:flex-row sm:items-center sm:justify-between">
+  {/* Mobile: full-width outlined button */}
+  <a
+    href={a.contact.phoneHref}
+    className="inline-flex min-h-[44px] w-full items-center justify-center rounded-full px-5 text-sm font-semibold ring-1 ring-chalk/25 transition-colors hover:ring-chalk/70 sm:hidden"
+  >
+    Call {a.contact.phoneDisplay}
+  </a>
+  {/* Desktop: original underlined link */}
+  <a
+    href={a.contact.phoneHref}
+    className="link-underline hidden min-h-[44px] items-center text-sm font-semibold sm:inline-flex"
+  >
+    Call {a.contact.phoneDisplay}
+  </a>
+  <div className="w-full max-sm:[&>*]:w-full max-sm:[&>*]:justify-center sm:w-auto">
+    <ExternalButton
+      href={trialLink("Which batch would suit the player?")}
+      variant="ink"
+      note="opens WhatsApp"
+    >
+      Ask which batch fits
+    </ExternalButton>
+  </div>
+</div>
             </div>
-            <div className="mt-6 flex flex-col items-end gap-4 sm:flex-row sm:items-center sm:justify-end">
-              <a
-                href={a.contact.phoneHref}
-                className="font-semibold link-underline inline-flex min-h-[44px] items-center lg:min-h-0"
-              >
-                Call {a.contact.phoneDisplay}
-              </a>
-              <ExternalButton
-                href={trialLink("Which batch would suit the player?")}
-                variant="ink"
-                note="opens WhatsApp"
-              >
-                Ask which batch fits
-              </ExternalButton>
-            </div>
-            {/* SEO: no longer implies fees are "on request" */}
-            <p className="mt-4 text-sm text-ink-soft">The first session is free. Fees shown are monthly. Timings are confirmed when you book.</p>
           </Reveal>
         </div>
       </section>

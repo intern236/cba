@@ -25,7 +25,7 @@ const order = [images.rally, images.panorama, images.group, images.wooden, image
 export default function GalleryPage() {
   return (
     <>
-      <PageHeader eyebrow="Gallery" title="Inside Celestial's Badminton Academy, Noida" intro="Courts, gym and the people who use them. No stock photos — every image here is from Celestial’s.">
+      <PageHeader eyebrow="Gallery" title="Inside Celestial's Badminton Academy, Noida" intro="Our seven indoor courts, the strength gym and the people who use them, all in Sector 104, Noida. No stock photos — every image here was taken at Celestial's.">
         <ExternalButton href={academy.contact.instagram.url} variant="ghost-dark" note="opens Instagram">
           More on Instagram
         </ExternalButton>

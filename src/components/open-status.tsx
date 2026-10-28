@@ -15,6 +15,17 @@ function fmt(t: string) {
   return m ? `${hh}:${String(m).padStart(2, "0")} ${ap}` : `${hh} ${ap}`;
 }
 
+function getSlots(dayConfig: (typeof academy.hours)[number] | undefined) {
+  if (!dayConfig) return [];
+  if ("slots" in dayConfig && dayConfig.slots) {
+    return [...dayConfig.slots];
+  }
+  if ("open" in dayConfig && "close" in dayConfig) {
+    return [{ open: dayConfig.open, close: dayConfig.close }];
+  }
+  return [];
+}
+
 /** Computes open/closed in the venue's own time zone (Asia/Kolkata), not the visitor's. */
 export function computeStatus(now = new Date()): { open: boolean; label: string } {
   const parts = new Intl.DateTimeFormat("en-GB", {
@@ -29,14 +40,28 @@ export function computeStatus(now = new Date()): { open: boolean; label: string 
   const mins = Number(get("hour")) * 60 + Number(get("minute"));
   const idx = academy.hours.findIndex((h) => h.day === day);
   const today = academy.hours[idx];
-  if (today && mins >= toMinutes(today.open) && mins < toMinutes(today.close)) {
-    return { open: true, label: `Open now · until ${fmt(today.close)}` };
+  const todaySlots = getSlots(today);
+
+  const currentSlot = todaySlots.find(
+    (s) => mins >= toMinutes(s.open) && mins < toMinutes(s.close)
+  );
+  if (currentSlot) {
+    return { open: true, label: `Open now · until ${fmt(currentSlot.close)}` };
   }
-  if (today && mins < toMinutes(today.open)) {
-    return { open: false, label: `Opens today at ${fmt(today.open)}` };
+
+  const upcomingSlot = todaySlots.find((s) => mins < toMinutes(s.open));
+  if (upcomingSlot) {
+    return { open: false, label: `Opens today at ${fmt(upcomingSlot.open)}` };
   }
+
   const next = academy.hours[(idx + 1) % 7];
-  return { open: false, label: `Closed · opens ${fmt(next.open)} tomorrow` };
+  const nextSlots = getSlots(next);
+  const firstNextSlot = nextSlots[0];
+  if (firstNextSlot) {
+    return { open: false, label: `Closed · opens ${fmt(firstNextSlot.open)} tomorrow` };
+  }
+
+  return { open: false, label: "Closed" };
 }
 
 /** Re-render once a minute; the snapshot is a string so React can compare it cheaply. */

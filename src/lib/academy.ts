@@ -28,15 +28,29 @@ export const academy = {
     { day: "Wednesday", short: "Wed", open: "05:00", close: "23:00" },
     { day: "Thursday", short: "Thu", open: "05:00", close: "23:00" },
     { day: "Friday", short: "Fri", open: "05:00", close: "23:00" },
-    { day: "Saturday", short: "Sat", open: "05:00", close: "23:00" },
-    { day: "Sunday", short: "Sun", open: "05:00", close: "23:00" },
+    {
+      day: "Saturday",
+      short: "Sat",
+      slots: [
+        { open: "11:00", close: "13:00" },
+        { open: "19:15", close: "21:15" },
+      ],
+    },
+    {
+      day: "Sunday",
+      short: "Sun",
+      slots: [
+        { open: "11:00", close: "13:00" },
+        { open: "19:15", close: "21:15" },
+      ],
+    },
   ],
   hoursSummary: "Daily 5 AM – 11 PM",
 
   contact: {
     // Confirmed by the user, 21 Oct 2026: +91 88262 68236 for calls AND WhatsApp.
     // (Replaces 95604 78732 from the Instagram bio — update the bio too.)
-    phoneDisplay: "+91 88262 68236",
+    phoneDisplay: "+91 8826268236",
     phoneHref: "tel:+918826268236",
     // Not shown: the domain has no MX records as of 16 Oct 2026, so the
     // published address cbainfo@celestialsacademy.com cannot receive mail.
@@ -103,7 +117,7 @@ export const academy = {
     { key: "lockers", label: "Lockers & changing rooms", detail: "Separate changing areas and lockers." },
     { key: "cafe", label: "Cafeteria", detail: "Food and drinks between sessions." },
     { key: "shop", label: "Badminton pro shop", detail: "Shuttles, strings and gear on site." },
-    { key: "hostel", label: "Hostel", detail: "Residential option for training players." },
+    { key: "hostel", label: "Hostel", detail: "rooms on campus for outstation players training full-time. [Beds/rooms, age group, contact for availability]" },
   ],
 
   // [PS][HUD][GBP]

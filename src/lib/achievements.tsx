@@ -13,50 +13,73 @@ export type Player = {
 };
 
 export const players: Player[] = [
-  {
-    name: "Parth Aggarwal",
-    tag: "Deaf Nationals",
-    photo: "parth-aggarwal",
-    results: [
-      { title: "National silver medal", event: "Mixed Doubles · Deaf Nationals", date: "May 2026" },
-      { title: "UP State Champion", event: "Singles and Doubles", date: "Mar 2026" },
-    ],
-  },
+{
+  name: "Parth Aggarwal",
+  tag: "Deaf Nationals",
+  photo: "parth-aggarwal",
+  results: [
+    {
+      title: "Silver Medal",
+      event: "Mixed Doubles · National Championship for the Deaf, Chandigarh",
+      date: "May 2026",
+    },
+    {
+      title: "State Champion",
+      event: "Men's Singles and Doubles · UP State Championship for the Deaf, Agra",
+      date: "March 2026",
+    },
+  ],
+},
   {
     name: "Sneha Maurya",
     tag: "U-17",
     photo: "sneha-maurya",
     results: [{ title: "India Top 15", event: "U-17 Girls Doubles ranking", date: "Dec 2025" }],
   },
-  {
-    name: "Siddhant Thakur",
-    tag: "U-15",
-    photo: "siddhant-thakur",
-    widths: [480],
-    results: [{ title: "India Top 10", event: "U-15 Boys Doubles ranking", date: "Jul 2025" }],
-  },
-  {
-    name: "Dr. Ketan",
-    tag: "Adult · 35+",
-    photo: "dr-ketan",
-    results: [
-      { title: "Men's Singles champion", event: "National Doctors Championship", date: "Mar 2026" },
-      { title: "Runner-up", event: "UP State Ranking · 35+", date: "Oct 2026" },
-    ],
-  },
+{
+  name: "Siddhant Thakur",
+  tag: "U-15",
+  photo: "siddhant-thakur",
+  widths: [480],
+  results: [
+    {
+      title: "Ranked in India's Top 10",
+      event: "BAI · U-15 Boys Doubles",
+      date: "July 2025",
+    },
+  ],
+},
+{
+  name: "Dr. Ketan",
+  tag: "Adult · 35+",
+  photo: "dr-ketan",
+  results: [
+    {
+      title: "Men's Singles Champion",
+      event: "National Doctors Championship, Goa",
+      date: "March 2026",
+    },
+  ],
+},
   {
     name: "Mamta Yadav",
     tag: "Masters",
     photo: "mamta-yadav",
     results: [{ title: "National medallist", event: "Masters National Championship" }],
   },
-  {
-    name: "Vatsal Vedansh",
-    tag: "U-15",
-    photo: "vatsal-vedansh",
-    widths: [480],
-    results: [{ title: "Main draw", event: "All India Sub-Junior Ranking · U-15", date: "Feb 2026" }],
-  },
+{
+  name: "Vatsal Vedansh",
+  tag: "U-15",
+  photo: "vatsal-vedansh",
+  widths: [480],
+  results: [
+    {
+      title: "Main draw (Top 64)",
+      event: "First All-India event · Yonex-Sunrise All India Sub-Junior Ranking, U-15 Boys Singles, Jaipur",
+      date: "February 2026",
+    },
+  ],
+},
   {
     name: "Richa Tomar",
     tag: "Masters · 40+",

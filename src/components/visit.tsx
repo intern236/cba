@@ -233,7 +233,7 @@ export function Visit({
           <Reveal className="lg:col-span-5" delay={0.1}>
             <div className="rounded-[28px] bg-court-900 p-7 ring-1 ring-white/10 sm:p-8">
               <div className="flex items-center justify-between gap-4">
-                <p className="display text-[2rem]">Hours</p>
+                <p className="display text-[2rem]">Opening Hours</p>
                 <OpenStatus className="text-sm text-chalk/80" />
               </div>
 

@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { academy } from "@/lib/academy";
 import { MotionProvider } from "@/components/motion-provider";
+import { WhatsAppFloat } from "@/components/whatsapp-float";
 
 const archivo = Archivo({
   variable: "--font-archivo",
@@ -99,12 +100,28 @@ const jsonLd = {
     bestRating: "5",
     worstRating: "1",
   },
-  openingHoursSpecification: academy.hours.map((h) => ({
-    "@type": "OpeningHoursSpecification",
-    dayOfWeek: h.day,
-    opens: h.open,
-    closes: h.close,
-  })),
+  openingHoursSpecification: academy.hours.flatMap(
+    (h): { "@type": string; dayOfWeek: string; opens: string; closes: string }[] => {
+      if ("slots" in h && h.slots) {
+        return h.slots.map((slot) => ({
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: h.day,
+          opens: slot.open,
+          closes: slot.close,
+        }));
+      }
+      if ("open" in h && "close" in h) {
+        return [
+          {
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: h.day,
+            opens: h.open,
+            closes: h.close,
+          },
+        ];
+      }
+      return [];
+    }),
   logo: `${siteUrl}/images/LOGO.png`,
   sameAs: [
     academy.contact.instagram.url,
@@ -132,6 +149,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </main>
           <SiteFooter />
         </MotionProvider>
+        <WhatsAppFloat />
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

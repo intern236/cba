@@ -32,7 +32,16 @@ export function HoursTable({ tone = "dark" }: { tone?: "dark" | "light" }) {
                 {isToday && <span className="eyebrow ml-2 text-[0.65rem]">Today</span>}
               </th>
               <td className={`py-2.5 text-right tabular-nums ${isToday ? "font-semibold" : ""} ${dark ? "text-chalk" : "text-ink"}`}>
-                {fmt(h.open)} – {fmt(h.close)}
+                {"slots" in h && h.slots
+                  ? h.slots.map((slot, index) => (
+                    <span key={slot.open}>
+                      {index > 0 && " / "}
+                      {fmt(slot.open)} – {fmt(slot.close)}
+                    </span>
+                  ))
+                  : "open" in h && "close" in h
+                    ? `${fmt(h.open)} – ${fmt(h.close)}`
+                    : null}
               </td>
             </tr>
           );

@@ -74,7 +74,7 @@ const faqs = [
   { q: "Am I too old, or not fit enough?", a: "No. The academy coaches adults as well as juniors, and fitness is something the training builds. Tell the coach about any injuries and they’ll adapt the session." },
   { q: "Do I need my own racket?", a: "Bring one if you have it. If you don’t, mention it when you book the trial." },
   { q: "Will I be with much better players?", a: "The coach watches you play first, then places you at the level that fits." },
-  { q: "What does it cost?", a: <>The first session is free. Ask for current batch timings and fees on WhatsApp or by phone on {a.contact.phoneDisplay}.</> },
+  { q: "What does it cost?", a: <>The first session is free. After that, monthly coaching runs from ₹3,500 to ₹7,000 depending on days per week. Ask on WhatsApp for current batch timings..</> },
   { q: "How to reach us in Sector 104?", a: <>{a.address.line1}, {a.address.locality}: {a.address.nearestMetro.distance} from {a.address.nearestMetro.name} metro, with parking on site. Look for the badminton mural by the glass entrance.</> },
 ];
 

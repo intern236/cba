@@ -22,9 +22,9 @@ export const metadata: Metadata = {
 };
 
 const faqs = [
-  { q: "Where will I start?", a: "Wherever your game is now. The coach watches you play in the free first session and confirms the level. Experienced players don’t start at Foundation." },
+  { q: "Where will I start?", a: "Wherever your game is now. The coach watches you play in the free first session and confirms the level. Experienced players don't start at Beginner." },
   { q: "How long does each level take?", a: "It depends on how often you train and how much you practise. Periodic assessments show when you’re ready, so you move up on evidence, not on a calendar." },
-  { q: "Can adults go all the way?", a: "Yes. Adults train at every level, including Competitive." },
+  { q: "Can adults go all the way?", a: "Yes. Adults train at every level, including Professional." },
   { q: "Do I have to aim for tournaments?", a: "No. Plenty of players stay at the level they enjoy. The pathway shows what’s next if you want it." },
 ];
 
@@ -34,7 +34,7 @@ export default function PathwayPage() {
       <PageHeader
         eyebrow="The training pathway"
         title="Badminton Training Pathway: Beginner to Professional."
-        intro="From a first lesson to a tournament plan. Each level says who it’s for, what you’ll work on and what it takes to move up, so you always know where you are."
+        intro="Three levels take you from a first lesson to a tournament plan. Each one says who it's for, what you'll work on and what it takes to move up, so you always know where you stand."
       >
         <nav aria-label="Levels" className="flex flex-wrap gap-2 lg:justify-end">
           {levels.map((l) => (

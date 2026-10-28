@@ -88,26 +88,57 @@ export default function AboutPage() {
   return (
     <>
       {/* Page Header */}
-      <section className="relative overflow-hidden bg-court-950 py-20 text-chalk sm:py-24 lg:py-32">
-        <div className="mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12 xl:px-16">
-          <Reveal>
-            <h1 className="display mt-10 max-w-none text-[clamp(2.5rem,6vw,5rem)] leading-[0.98] tracking-tight">
-              About Celestial's Badminton Academy, Noida
-            </h1>
+ <section className="relative overflow-hidden bg-court-950 py-20 text-chalk sm:py-24 lg:py-32">
+  <div className="mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12 xl:px-16">
+    <Reveal>
+      <h1 className="display mt-10 max-w-none text-[clamp(2.5rem,6vw,5rem)] leading-[0.98] tracking-tight">
+        About Celestial's Badminton Academy, Noida
+      </h1>
 
-            <p className="eyebrow mb-4 mt-6 text-mat normal-case">
-              Where everything is possible
-            </p>
+      <p className="eyebrow mb-4 mt-6 text-mat normal-case">
+        Where everything is possible
+      </p>
 
-            <p className="mt-8 max-w-[780px] text-base leading-relaxed text-chalk/75 sm:text-lg lg:text-xl">
-              Founded in 2022 in Sector 104, Noida, we help juniors, adults
-              and aspiring athletes learn, improve and compete.
-              <br />
-              Our sister academy: Noida Badminton Academy, Sector 26
+      <p className="mt-8 max-w-[780px] text-base leading-relaxed text-chalk/75 sm:text-lg lg:text-xl">
+        Founded in 2022 in Sector 104, Noida, we help juniors, adults and
+        aspiring athletes learn, improve and compete.
+      </p>
+
+      {/* Founders */}
+      <div className="mt-10 max-w-[780px]">
+        <h2 className="text-sm font-semibold text-mat-soft">
+          Meet the founders
+        </h2>
+
+        <ul className="mt-4 grid gap-4 sm:grid-cols-2">
+          <li className="rounded-2xl bg-court-900 p-5 ring-1 ring-white/10 sm:p-6">
+            <h3 className="text-xl font-semibold text-chalk">
+              Utkarsh Chaudhary
+            </h3>
+            <p className="mt-1 text-sm text-mat-soft">
+              Co-founder &amp; Head Coach
             </p>
-          </Reveal>
-        </div>
-      </section>
+          </li>
+
+          <li className="rounded-2xl bg-court-900 p-5 ring-1 ring-white/10 sm:p-6">
+            <h3 className="text-xl font-semibold text-chalk">
+              Siddharth Jain
+            </h3>
+            <p className="mt-1 text-sm text-mat-soft">
+              Co-founder &amp; Head Trainer
+            </p>
+          </li>
+        </ul>
+      </div>
+
+      <p className="mt-10 max-w-[780px] text-base leading-relaxed text-chalk/75 sm:text-lg lg:text-xl">
+        Noida Badminton Academy in Sector 26 is our sister academy. Both are
+        led by head coach Utkarsh Chaudhary, so players at either centre follow
+        the same coaching method and often train and compete together.
+      </p>
+    </Reveal>
+  </div>
+</section>
 
       {/* Coaching Team */}
       <section

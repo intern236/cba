@@ -34,7 +34,7 @@ const a = academy;
 
 const spec = [
   ["Courts", `${a.courts.count} indoor courts`],
-  ["Surface", "PVC court mats"],
+  ["Surface", "6 synthetic (PVC) courts + 1 wooden court"],
   ["Climate", "Fully air-conditioned hall"],
   ["Booking", "Online on Hudle or Playo"],
   ["Per court", "Up to 4 players per booking"],
@@ -63,29 +63,26 @@ const zigzag = [
 ];
 
 const faqs = [
-  {
-    q: "How much does it cost to book a badminton court?",
-    a: "Court bookings start from ₹450 per hour. The exact price for your slot is shown on Hudle or Playo when you book.",
-  },
-  {
-    q: "How do I book a court?",
-    a: "Book online on Hudle or Playo. Pick a date and time, check which courts are free for that slot, and pay online.",
-  },
-  {
-    q: "What are the court timings?",
-    a: "The courts are open every day from 5 AM to 11 PM, and close at 8 PM on Tuesdays. The hours table on this page shows whether we are open right now.",
-  },
-
-  {
-    q: "What do I need to bring?",
-    a: "Bring your own racket and non-marking shoes. Non-marking shoes are compulsory on the PVC court mats.",
-  },
-
-  {
-    q: "Can I buy shuttles, strings or other gear at the academy?",
-    a: "Yes. The badminton pro shop on site stocks shuttles, strings and gear, so you can pick things up before or after a session.",
-  },
-
+{
+  q: "Are the badminton courts air-conditioned?",
+  a: "Yes. All seven courts are in one fully air-conditioned hall.",
+},
+{
+  q: "How much does a court cost?",
+  a: "Court bookings start from ₹450 per slot for up to four players. Rates vary by time; Hudle and Playo show the live price.",
+},
+{
+  q: "What are the court timings?",
+  a: "The courts are open every day from 5 AM to 11 PM, except Tuesdays when we close at 8 PM.",
+},
+{
+  q: "Do I need non-marking shoes?",
+  a: "Yes. Non-marking shoes are compulsory on court. Most outdoor shoes leave marks on the surface.",
+},
+{
+  q: "Is there parking?",
+  a: "Yes, there's parking available on site.",
+},
 ];
 
 export default function FacilitiesPage() {
@@ -94,7 +91,7 @@ export default function FacilitiesPage() {
      <PageHeader
      eyebrow={<h1>Everything under one roof</h1>}
      title="7 Indoor AC Badminton Courts & World-Class Facilities"
-     intro="Courts to train on, a gym to get stronger, a physio when something hurts, and somewhere to sit down afterwards. The courts are also open for pay-and-play."
+     intro="Seven air-conditioned indoor badminton courts in Sector 104, Noida, with a gym to get stronger, a physio when something hurts, and somewhere to sit down afterwards. The courts are open for pay-and-play too.."
 >
 
         <div className="flex justify-end">
