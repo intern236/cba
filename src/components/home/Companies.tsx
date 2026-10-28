@@ -32,20 +32,9 @@ export function CorporateTournaments() {
                 {/* Section heading */}
                 <div className="max-w-[820px]">
                     <p className="eyebrow text-mat flex items-center gap-4">
-  <span className="h-[2px] w-10 bg-ink/20" aria-hidden="true" />
- BEYOND THE COURT</p>
-                    <h2
-                        id="corporate-title"
-                        className="display mt-3 text-[clamp(2.1rem,4.5vw,4rem)] leading-[1.05] tracking-tight"
-                    >
-                      Badminton coaching for beginners and competitive players
-                    </h2>
+                        <span className="h-[2px] w-10 bg-ink/20" aria-hidden="true" />
+                        BEYOND THE COURT</p>
 
-                    <p className="mt-4 max-w-[680px] text-base leading-relaxed text-ink-soft sm:text-lg">
-                        We host corporate badminton tournaments that bring colleagues
-                        and communities together through competition, teamwork and a
-                        shared love of the game.
-                    </p>
                 </div>
 
                 {/* Company logos */}

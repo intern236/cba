@@ -8,13 +8,13 @@ import { PathwaySteps } from "@/components/home/pathway-steps";
 // import { TrainingRally } from "@/components/home/training-rally";
 // import { Problems } from "@/components/home/problems";
 // import { Parents } from "@/components/home/parents";
-import { CourtSheet } from "@/components/home/court-sheet";
+// import { CourtSheet } from "@/components/home/court-sheet";
 // import { Arena } from "@/components/home/arena";
-import { Proof } from "@/components/home/proof";
+// import { Proof } from "@/components/home/proof";
 import { BookCourt } from "@/components/home/book-court";
 // import { Visit } from "@/components/visit";
 import { CorporateTournaments } from "@/components/home/Companies";
-import { ProgramsSlider } from "@/components/home/program-slider";
+// import { ProgramsSlider } from "@/components/home/program-slider";
 import { Results } from "@/components/home/results";
 import { FindUs } from "@/components/home/find-us";
 import InstagramEmbed from "@/components/home/InstagramEmbed";
@@ -55,10 +55,10 @@ export default function Home() {
       <QuickFacts />
       <StartingPoints />
       <PathwaySteps />
-      <ProgramsSlider />
+      {/* <ProgramsSlider /> */}
       <Results id="achievements-title" />
-      <CourtSheet />
-      <Proof />
+      {/* <CourtSheet /> */}
+      {/* <Proof /> */}
       <InstagramEmbed />
       <BookCourt />
       <FindUs />

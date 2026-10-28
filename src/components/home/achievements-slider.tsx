@@ -154,7 +154,7 @@ export function AchievementsSlider({
                 onPointerUp={endDrag}
                 onPointerLeave={endDrag}
                 onPointerCancel={endDrag}
-                className={`-mx-5 mt-8 grid grid-flow-col auto-cols-[78%] gap-4 overflow-x-auto overscroll-x-contain px-5 pb-2 scroll-px-5 scrollbar-none sm:mx-0 sm:auto-cols-[300px] sm:px-0 sm:scroll-px-0 lg:auto-cols-[calc((100%_-_3rem)/4)] ${dragging
+                className={`-mx-5 mt-8 grid grid-flow-col auto-cols-[350px] gap-4 overflow-x-auto overscroll-x-contain px-5 pb-2 scroll-px-5 scrollbar-none sm:mx-0 sm:px-0 sm:scroll-px-0 ${dragging
                     ? "cursor-grabbing select-none snap-none"
                     : "snap-x snap-mandatory lg:cursor-grab"
                     }`}
@@ -162,51 +162,57 @@ export function AchievementsSlider({
             >
                 {(players ?? []).map((p) => {
                     const img = photoSrc(p);
+                    // Players with 2+ results get smaller text so their strip matches the other cards
+                    const compact = p.results.length > 1;
                     return (
                         <article
                             key={p.name}
                             data-card
-                            className="flex snap-start flex-col overflow-hidden rounded-[24px] bg-chalk text-ink ring-1 ring-ink/10"
+                            // Whole card is the photo: fixed ratio = same width and height for every card
+                            className="relative aspect-[2/3] snap-start lg:aspect-[3/4] overflow-hidden rounded-[24px] bg-court-950 text-chalk ring-1 ring-ink/10"
                         >
-                            <div className="relative aspect-[4/5] overflow-hidden bg-court-950">
-                                {img ? (
-                                    // eslint-disable-next-line @next/next/no-img-element
-                                    <img
-                                        src={img.src}
-                                        srcSet={img.srcSet}
-                                        sizes="(min-width: 1024px) 300px, 78vw"
-                                        width={480}
-                                        height={600}
-                                        alt={`${p.name}${p.results[0] ? ` with the ${p.results[0].event} award` : ""}`}
-                                        loading="lazy"
-                                        decoding="async"
-                                        draggable={false}
-                                        className="h-full w-full object-cover"
-                                    />
-                                ) : (
-                                    <svg aria-hidden="true" viewBox="0 0 400 500" className="h-full w-full" preserveAspectRatio="xMidYMid slice">
-                                        {/* No photo yet: a court seen from above, in the brand's court-line style */}
-                                        <g fill="none" stroke="#ffffff" strokeOpacity="0.16" strokeWidth="3">
-                                            <rect x="60" y="40" width="280" height="420" />
-                                            <path d="M80 40V460M320 40V460M60 250H340M60 190H340M60 310H340M60 64H340M60 436H340M200 40V190M200 310V460" />
-                                        </g>
-                                    </svg>
-                                )}
-                                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-court-950/90 via-court-950/40 to-transparent" aria-hidden="true" />
-                                <span className="eyebrow absolute left-3 top-3 rounded-full bg-court-950/75 px-2.5 py-1.5 text-[0.65rem] text-chalk backdrop-blur">
-                                    {p.tag}
-                                </span>
-                                <h3 className="display absolute inset-x-4 bottom-4 text-[1.9rem] leading-[0.95] text-chalk">{p.name}</h3>
+                            {img ? (
+                                // eslint-disable-next-line @next/next/no-img-element
+                                <img
+                                    src={img.src}
+                                    srcSet={img.srcSet}
+                                    sizes="350px"
+                                    width={480}
+                                    height={640}
+                                    alt={`${p.name}${p.results[0] ? ` with the ${p.results[0].event} award` : ""}`}
+                                    loading="lazy"
+                                    decoding="async"
+                                    draggable={false}
+                                    className="absolute inset-0 h-full w-full object-cover object-top"
+                                />
+                            ) : (
+                                <svg aria-hidden="true" viewBox="0 0 400 500" className="absolute inset-0 h-full w-full" preserveAspectRatio="xMidYMid slice">
+                                    {/* No photo yet: a court seen from above, in the brand's court-line style */}
+                                    <g fill="none" stroke="#ffffff" strokeOpacity="0.16" strokeWidth="3">
+                                        <rect x="60" y="40" width="280" height="420" />
+                                        <path d="M80 40V460M320 40V460M60 250H340M60 190H340M60 310H340M60 64H340M60 436H340M200 40V190M200 310V460" />
+                                    </g>
+                                </svg>
+                            )}
+
+                            <span className="eyebrow absolute left-3 top-3 rounded-full bg-court-950/75 px-2.5 py-1.5 text-[0.65rem] text-chalk backdrop-blur">
+                                {p.tag}
+                            </span>
+
+                            {/* Name + results sit on the photo. Strip is only as tall as its text,
+                                so cards with one result show more photo, no empty white area. */}
+                            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-court-950/95 via-court-950/80 to-transparent px-4 pb-4 pt-16 sm:px-5 sm:pb-5">
+                                <h3 className={`display leading-[0.95] text-chalk ${compact ? "text-[1.5rem]" : "text-[1.9rem]"}`}>{p.name}</h3>
+                                <ul className={`flex flex-col ${compact ? "mt-2 gap-2" : "mt-3 gap-3"}`}>
+                                    {p.results.map((r) => (
+                                        <li key={r.title + r.event}>
+                                            <p className={`font-semibold leading-snug text-chalk ${compact ? "text-sm" : ""}`}>{r.title}</p>
+                                            <p className={`mt-0.5 leading-snug text-chalk/80 ${compact ? "text-xs" : "text-sm"}`}>{r.event}</p>
+                                            {r.date && <p className={`eyebrow text-mat ${compact ? "mt-1 text-[0.6rem]" : "mt-1.5 text-[0.65rem]"}`}>{r.date}</p>}
+                                        </li>
+                                    ))}
+                                </ul>
                             </div>
-                            <ul className="flex flex-1 flex-col gap-4 p-4 sm:p-5">
-                                {p.results.map((r) => (
-                                    <li key={r.title + r.event}>
-                                        <p className="font-semibold leading-snug">{r.title}</p>
-                                        <p className="mt-0.5 text-sm leading-snug text-ink-soft">{r.event}</p>
-                                        {r.date && <p className="eyebrow mt-1.5 text-[0.65rem] text-mat-deep">{r.date}</p>}
-                                    </li>
-                                ))}
-                            </ul>
                         </article>
                     );
                 })}

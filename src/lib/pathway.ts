@@ -18,8 +18,8 @@ export const levels: Level[] = [
     n: "01",
     name: "Beginner",
     tagline: "Start with the fundamentals",
-    forWho: "New players, roughly 5 to 10 years old, starting from the basics.",
-    ages: "Approx. 5–10 yrs",
+    forWho: "New players, roughly 4 to 10 years old, starting from the basics.",
+    ages: "Approx. 4–10 yrs",
     work: [
       "Badminton basics",
       "Footwork and coordination",
