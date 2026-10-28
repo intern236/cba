@@ -54,7 +54,7 @@ export function QuickFacts() {
       iconWeight: "bold",
       label: "Rates & Pricing",
       value: "Coaching & Bookings",
-      detail: "Coaching: from ₹3,500/month · Courts: from ₹450/slot",
+      detail: "Coaching: from ₹3,500/month ",
       link: {
         href: academy.booking.primary.url,
         text: "Check slot availability",

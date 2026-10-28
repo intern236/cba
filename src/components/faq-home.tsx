@@ -12,10 +12,7 @@ export const homeFaqs = [
     q: "How much does badminton coaching cost in Noida?",
     a: "At Celestial's, monthly coaching costs ₹3,500 to ₹7,000, depending on how many days a week you train. Weekend-only batches are ₹3,500. Confirm current fees on WhatsApp before you join.",
   },
-  {
-    q: "How much does it cost to book a badminton court?",
-    a: "Courts start at ₹450 a slot for up to four players. Book on Hudle or Playo; the live price shows before you pay.",
-  },
+
   {
     q: "What age can my child start badminton?",
     a: "Most kids start between five and seven. Our Beginner batches are built around games, footwork and keeping a rally going, so young children enjoy it from day one.",

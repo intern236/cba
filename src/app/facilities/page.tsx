@@ -69,7 +69,7 @@ const faqs = [
   },
   {
     q: "How much does a court cost?",
-    a: "Court bookings start from ₹450 per slot for up to four players. Rates vary by time; Hudle and Playo show the live price.",
+    a: "Court rates depend on the time slot and the number of players. Call or WhatsApp us on +91 88262 68236 for current rates and availability.",
   },
   {
     q: "What are the court timings?",
@@ -162,7 +162,7 @@ export default function FacilitiesPage() {
               id="book-title"
               className="display mt-4 text-[clamp(2.3rem,5vw,4.4rem)]"
             >
-              Pay and play: book a badminton court from ₹450
+              Pay and play: book a badminton court
             </h2>
 
             <p className="mt-5 max-w-[52ch] text-base leading-relaxed text-ink-soft sm:text-lg">
