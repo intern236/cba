@@ -51,7 +51,7 @@ export const academy = {
     // Confirmed by the user, 21 Oct 2026: +91 88262 68236 for calls AND WhatsApp.
     // (Replaces 95604 78732 from the Instagram bio — update the bio too.)
     phoneDisplay: "+91 8826268236",
-    phoneHref: "tel:+918826268236",
+    phoneHref: "tel:+916202303022",
     // Not shown: the domain has no MX records as of 16 Oct 2026, so the
     // published address cbainfo@celestialsacademy.com cannot receive mail.
     email: null as string | null,

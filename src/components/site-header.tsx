@@ -134,17 +134,15 @@ export function SiteHeader() {
             ))}
           </ul>
           {/* Free trial button */}
+          {/* Free trial button (calls academy directly) */}
           <a
-            href={trialLink()}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={academy.contact.phoneHref}
             className="btn btn-primary ml-1 !min-h-[44px] shrink-0 !px-4 sm:!px-5"
           >
             <span>
               Free trial
-              <span className="sr-only"> (opens WhatsApp in a new tab)</span>
+              <span className="sr-only"> (calls +91 88262 68236)</span>
             </span>
-
             <ArrowUpRight
               size={16}
               weight="bold"
@@ -249,16 +247,13 @@ export function SiteHeader() {
             {/* Mobile action buttons: same teal buttons as the desktop navbar */}
             <div className="mt-auto grid gap-3 pt-8">
               <a
-                href={trialLink()}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={academy.contact.phoneHref}
                 className="btn btn-primary justify-center"
               >
                 <span>
                   Free trial
-                  <span className="sr-only"> (opens WhatsApp in a new tab)</span>
+                  <span className="sr-only"> (calls +91 88262 68236)</span>
                 </span>
-
                 <ArrowUpRight size={16} weight="bold" aria-hidden="true" />
               </a>
 
