@@ -69,7 +69,8 @@
   --color-ink-soft: #545454;
   --color-accent: #03989e;
   --color-accent-deep: #03757a;
-  --color-cork: #9aa3a3; /* neutral grey ("closed" status) */
+  --color-cork: #9aa3a3;
+  /* neutral grey ("closed" status) */
 
   --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
@@ -230,7 +231,7 @@
   /* .btn:hover .btn-icon {
     transform: translateX(2px) rotate(-45deg);
   } */
-/* 
+  /* 
   .btn-ink .btn-icon {
     background: var(--color-accent);
     color: var(--color-ink);
@@ -383,12 +384,14 @@
     transform: none;
   }
 }
+
 /* ---------- Pathway dots on phones: hollow until the scroll-linked shuttle lands on them ---------- */
 @media (max-width: 1023.98px) {
   .path-dot:not([data-lit]) {
     background: var(--color-chalk-2);
     box-shadow: inset 0 0 0 2px rgb(11 18 19 / 0.28);
   }
+
   .path-dot[data-lit]::after {
     content: "";
     position: absolute;
@@ -398,47 +401,125 @@
     animation: dot-hit 520ms var(--ease-flight) forwards;
   }
 }
+
 @keyframes dot-hit {
-  from { transform: scale(1); opacity: 0.9; }
-  to { transform: scale(3.2); opacity: 0; }
+  from {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+
+  to {
+    transform: scale(3.2);
+    opacity: 0;
+  }
 }
+
 @media (prefers-reduced-motion: reduce) {
-  .path-dot[data-lit]::after { animation: none; opacity: 0; }
+  .path-dot[data-lit]::after {
+    animation: none;
+    opacity: 0;
+  }
 }
+
 /* Location map: label centred over the pin; pin drops in once when the map scrolls into view
    (data-armed is set by JS, so without JS the pin is simply shown). */
-.loc-map .map-pin { transform: translateX(-50%); }
-.loc-map .map-label { transform: translateX(-50%); }
-.loc-map .map-ping { opacity: 0; }
+.loc-map .map-pin {
+  transform: translateX(-50%);
+}
+
+.loc-map .map-label {
+  transform: translateX(-50%);
+}
+
+.loc-map .map-ping {
+  opacity: 0;
+}
+
 .loc-map[data-armed] .map-pin,
-.loc-map[data-armed] .map-label { opacity: 0; }
-.loc-map[data-seen] .map-pin { animation: pin-drop 760ms var(--ease-flight) forwards; }
-.loc-map[data-seen] .map-label { animation: label-in 420ms ease-out 620ms forwards; }
-.loc-map[data-seen] .map-ping { animation: map-ping 2s ease-out 700ms infinite; }
+.loc-map[data-armed] .map-label {
+  opacity: 0;
+}
+
+.loc-map[data-seen] .map-pin {
+  animation: pin-drop 760ms var(--ease-flight) forwards;
+}
+
+.loc-map[data-seen] .map-label {
+  animation: label-in 420ms ease-out 620ms forwards;
+}
+
+.loc-map[data-seen] .map-ping {
+  animation: map-ping 2s ease-out 700ms infinite;
+}
+
 @keyframes pin-drop {
-  0% { opacity: 0; transform: translate(-50%, -70px); }
-  55% { opacity: 1; transform: translate(-50%, 0); }
-  72% { transform: translate(-50%, -10px); }
-  86% { transform: translate(-50%, 0); }
-  93% { transform: translate(-50%, -3px); }
-  100% { opacity: 1; transform: translate(-50%, 0); }
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -70px);
+  }
+
+  55% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+
+  72% {
+    transform: translate(-50%, -10px);
+  }
+
+  86% {
+    transform: translate(-50%, 0);
+  }
+
+  93% {
+    transform: translate(-50%, -3px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
 }
+
 @keyframes label-in {
-  from { opacity: 0; transform: translate(-50%, 6px); }
-  to { opacity: 1; transform: translate(-50%, 0); }
+  from {
+    opacity: 0;
+    transform: translate(-50%, 6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
 }
+
 @keyframes map-ping {
-  0% { transform: scale(0.3); opacity: 0.9; }
-  100% { transform: scale(1.7); opacity: 0; }
+  0% {
+    transform: scale(0.3);
+    opacity: 0.9;
+  }
+
+  100% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
 }
+
 @media (prefers-reduced-motion: reduce) {
-  .loc-map .map-ping { animation: none; opacity: 0.5; }
+  .loc-map .map-ping {
+    animation: none;
+    opacity: 0.5;
+  }
 }
+
 /* Dark sections (coaching loop): hollow dots read against the dark teal, impact ring in the accent. */
 @media (max-width: 1023.98px) {
   .path-dot-dark:not([data-lit]) {
     background: var(--color-court-900);
     box-shadow: inset 0 0 0 2px rgb(255 255 255 / 0.35);
   }
-  .path-dot-dark[data-lit]::after { border-color: var(--color-accent); }
+
+  .path-dot-dark[data-lit]::after {
+    border-color: var(--color-accent);
+  }
 }

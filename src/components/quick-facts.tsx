@@ -6,7 +6,6 @@ import {
   Certificate,
   Star,
   ArrowUpRight,
-  Sparkle,
 } from "@phosphor-icons/react/ssr";
 import { academy } from "@/lib/academy";
 import { Reveal } from "./reveal";
@@ -88,18 +87,14 @@ export function QuickFacts() {
     >
       <div className="relative mx-auto max-w-[1320px] px-5 sm:px-8">
         <Reveal className="mx-auto mb-12 flex max-w-2xl flex-col items-center text-center">
-          <span className="eyebrow inline-flex items-center gap-1.5 rounded-full border border-mat-deep/25 bg-mat/15 px-3.5 py-1 text-[0.72rem] font-semibold text-mat-deep">
-            <Sparkle size={13} weight="fill" className="text-mat-deep" aria-hidden="true" />
-            At a Glance
-          </span>
           <h2
             id="quick-facts-title"
-            className="display mt-3 text-[clamp(2.4rem,4.5vw,3.6rem)] text-ink"
+            className="display text-[clamp(2.4rem,4.5vw,3.6rem)] text-ink"
           >
-            Quick Facts
+            Visit Celestial&apos;s in Sector 104, Noida
           </h2>
           <p className="mt-3 text-[1rem] leading-relaxed text-ink-soft sm:text-base">
-            Everything you need to know about Celestial’s Badminton Academy at a glance.
+            Location, opening hours, courts, fees and coaches in one place.
           </p>
         </Reveal>
 
