@@ -169,7 +169,7 @@ export function AchievementsSlider({
                             key={p.name}
                             data-card
                             // Whole card is the photo: fixed ratio = same width and height for every card
-                            className="relative aspect-[2/3] snap-start lg:aspect-[3/4] overflow-hidden rounded-[24px] bg-court-950 text-chalk ring-1 ring-ink/10"
+                            className="relative aspect-[3/4] snap-start lg:aspect-[3/4] overflow-hidden rounded-[24px] bg-court-950 text-chalk ring-1 ring-ink/10"
                         >
                             {img ? (
                                 // eslint-disable-next-line @next/next/no-img-element
