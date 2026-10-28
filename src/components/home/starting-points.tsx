@@ -1,5 +1,5 @@
 import { Check } from "@phosphor-icons/react/ssr";
-import { trialLink } from "@/lib/academy";
+import { academy, trialLink } from "@/lib/academy";
 import { images } from "@/lib/images";
 import { Photo } from "../photo";
 import { SectionHead } from "../section-head";
@@ -50,21 +50,21 @@ export function StartingPoints() {
                     <li key={t} className="flex gap-2.5"><Check size={18} weight="bold" className="mt-0.5 shrink-0" aria-hidden="true" />{t}</li>
                   ))}
                 </ul>
-<div className="mt-auto flex flex-wrap items-center justify-end gap-x-6 gap-y-3 pt-8">
-  <ExternalButton
-    href={trialLink("I'm a beginner.")}
-    variant="ink"
-    note="opens WhatsApp"
-  >
-    Book a free trial
-  </ExternalButton>
+                <div className="mt-auto flex flex-wrap items-center justify-end gap-x-6 gap-y-3 pt-8">
+                  <ExternalButton
+                    href={academy.contact.phoneHref}
+                    variant="ink"
+                    note="calls the academy"
+                  >
+                    Book a free trial
+                  </ExternalButton>
 
-  <div className="lg:mr-auto lg:order-first">
-    <TextLink href="/first-session/">
-      What happens on day one
-    </TextLink>
-  </div>
-</div>
+                  <div className="lg:mr-auto lg:order-first">
+                    <TextLink href="/first-session/">
+                      What happens on day one
+                    </TextLink>
+                  </div>
+                </div>
               </div>
             </article>
           </Reveal>
@@ -83,20 +83,20 @@ export function StartingPoints() {
                   ))}
                 </ul>
                 <div className="mt-auto flex flex-wrap items-center justify-end gap-x-6 gap-y-3 pt-8">
-  <ExternalButton
-    href={trialLink("I already play and want to improve.")}
-    note="opens WhatsApp"
-  >
-    Book a free trial
-  </ExternalButton>
+                  <ExternalButton
+                    href={academy.contact.phoneHref}
+                    note="calls the academy"
+                  >
+                    Book a free trial
+                  </ExternalButton>
 
-  <div className="lg:order-first lg:mr-auto">
-    {/* Was "#problems" — that section is no longer on the homepage. */}
-    <TextLink href="/pathway/" className="text-chalk/85">
-      See how you&rsquo;ll progress
-    </TextLink>
-  </div>
-</div>
+                  <div className="lg:order-first lg:mr-auto">
+                    {/* Was "#problems" — that section is no longer on the homepage. */}
+                    <TextLink href="/pathway/" className="text-chalk/85">
+                      See how you&rsquo;ll progress
+                    </TextLink>
+                  </div>
+                </div>
               </div>
             </article>
           </Reveal>

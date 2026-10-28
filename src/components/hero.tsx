@@ -307,15 +307,13 @@ export function Hero() {
                 Find your level
               </a>
               <a
-                href={trialLink()}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={a.contact.phoneHref}
                 className="btn btn-primary justify-between lg:mr-40"
               >
                 <span>
                   Book a free trial
                   <span className="sr-only">
-                    {" "}(opens WhatsApp in a new tab)
+                    {" "}(calls the academy)
                   </span>
                 </span>
                 <span className="btn-icon" aria-hidden="true">

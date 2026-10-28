@@ -247,8 +247,8 @@ export function Visit({
                 {/* Book a free trial button aligned to the right */}
                 <div className="mt-4 flex justify-end">
                   <ExternalButton
-                    href={trialLink()}
-                    note="opens WhatsApp"
+                    href={a.contact.phoneHref}
+                    note="calls the academy"
                     className="justify-between"
                   >
                     Book a free trial

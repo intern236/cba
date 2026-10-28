@@ -93,7 +93,7 @@ export default function FirstSessionPage() {
           </p>
 
           <div className="mt-4 flex justify-end">
-            <ExternalButton href={trialLink()} note="opens WhatsApp">
+            <ExternalButton href={a.contact.phoneHref} note="calls the academy">
               Book a free trial
             </ExternalButton>
           </div>
