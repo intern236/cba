@@ -398,14 +398,14 @@ export function TrainingRally({
       />
 
       <div className="relative mx-auto max-w-[1320px] px-5 sm:px-8">
-    <SectionHead
-  tone="dark"
-  index={index}
-  label="Every session is a rally, not a drill"
-  id="train-method-title"
-  title="How we track progress: assess, condition, analyse, review"
-  intro="Coaching at Celestial’s runs as a loop: find out where a player is, build the body to play, show them what happened, and decide what comes next."
-/>
+        <SectionHead
+          tone="dark"
+          index={index}
+          label="Every session is a rally, not a drill"
+          id="train-method-title"
+          title="How we track progress: assess, condition, analyse, review"
+          intro="Coaching at Celestial’s runs as a loop: find out where a player is, build the body to play, show them what happened, and decide what comes next."
+        />
         <div className="mt-4 hidden justify-end lg:flex">
           {phase === "landed" && !reduce && (
             <button
@@ -536,7 +536,7 @@ export function TrainingRally({
         <div className="mt-16 grid gap-8 rounded-[28px] bg-court-950/70 p-7 ring-1 ring-white/10 sm:p-9 lg:grid-cols-[1fr_auto] lg:items-center">
           <div>
             <h2>
-Training exposure with BATTS Athletics Academy, Canada            </h2>
+              Training exposure with BATTS Athletics Academy, Canada            </h2>
             <p className="mt-3 max-w-[60ch] text-[1.1rem] leading-relaxed text-chalk/85">
               An {ex.label.toLowerCase()} with{" "}
               <strong className="font-semibold text-chalk">{ex.partner}</strong> in {ex.country}{" "}
@@ -544,9 +544,11 @@ Training exposure with BATTS Athletics Academy, Canada            </h2>
             </p>
           </div>
 
-          <InternalButton href={cta.href} variant="ghost-dark">
-            {cta.label}
-          </InternalButton>
+          <div className="flex w-full justify-end lg:w-auto lg:justify-start">
+            <InternalButton href={cta.href} variant="ghost-dark">
+              {cta.label}
+            </InternalButton>
+          </div>
         </div>
       </div>
     </section>

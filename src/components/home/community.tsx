@@ -144,8 +144,8 @@ export function Community() {
             aria-label="Photos from the academy"
           >
             {strip.map((img) => (
-              <li key={img.name} className="w-[78%] shrink-0 snap-start">
-                <div className="aspect-[4/5] overflow-hidden rounded-[22px] bg-court-900">
+              <li key={img.name} className="w-[88%] shrink-0 snap-start">
+<div className="aspect-[5/6] overflow-hidden rounded-[22px] bg-court-900 sm:aspect-[5/6]">
                   <Photo img={img} sizes="80vw" />
                 </div>
                 <p className="eyebrow mt-3 text-ink-soft">{img.caption}</p>
