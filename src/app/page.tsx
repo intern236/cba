@@ -16,7 +16,7 @@ import { BookCourt } from "@/components/home/book-court";
 import { CorporateTournaments } from "@/components/home/Companies";
 // import { ProgramsSlider } from "@/components/home/program-slider";
 import { Results } from "@/components/home/results";
-import { FindUs } from "@/components/home/find-us";
+// import { FindUs } from "@/components/home/find-us";
 import InstagramEmbed from "@/components/home/InstagramEmbed";
 import { FaqHome } from "@/components/faq-home";
 
@@ -61,7 +61,7 @@ export default function Home() {
       {/* <Proof /> */}
       <InstagramEmbed />
       <BookCourt />
-      <FindUs />
+      {/* <FindUs /> */}
       <CorporateTournaments />
       <FaqHome />
     </>
