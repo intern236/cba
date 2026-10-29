@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     "indoor badminton courts noida",
     "badminton training for kids noida",
     "pay and play badminton courts noida",
-    "celestials badminton academy",
+    "celestial's badminton academy",
   ],
   openGraph: {
     type: "website",

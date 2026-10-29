@@ -29,8 +29,8 @@ export function QuickFacts() {
       icon: Clock,
       iconWeight: "bold",
       label: "Open Hours",
-      value: "Daily 5 AM – 11 PM",
-      detail: "Open daily 5 AM–11 PM (Tuesdays till 8 PM)",
+      value: "Weekdays: 5 AM – 11 PM",
+      detail: "Tuesday: 5 AM–8 PM\nSat–Sun: 11 AM–9:15 PM",
     },
     {
       icon: Wind,
@@ -130,7 +130,7 @@ export function QuickFacts() {
                       {item.value}
                     </h3>
 
-                    <p className="mt-2 text-sm leading-relaxed text-ink-soft">
+                    <p className="mt-2 whitespace-pre-line text-sm leading-relaxed text-ink-soft">
                       {item.detail}
                     </p>
                   </div>
