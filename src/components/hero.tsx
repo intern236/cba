@@ -296,7 +296,7 @@ export function Hero() {
               </span>
             </h1>
             <p className="rise-in mt-6 max-w-[52ch] text-pretty text-[1.06rem] leading-relaxed text-chalk/75" style={{ animationDelay: "380ms" }}>
-              Celestial's is a badminton academy in Sector 104, Noida, with seven air-conditioned courts, a strength gym and a physio under one roof. Kids can start at five. Adults can start whenever they like. Your first session is free.
+              Celestial's is a badminton academy in Sector 104, Noida, with seven air-conditioned courts, a strength gym and a physio under one roof. Kids can start at four. Adults can start whenever they like. Your first session is free.
             </p>
             {/* Buttons sit together (proximity). On narrow phones they share the row, or stack full-width when it's too tight. */}
             <div className="mt-8 flex w-full flex-row items-center  gap-3">
