@@ -17,12 +17,12 @@ import { feesFrom } from "@/lib/batches";
  */
 
 type Who = "me" | "child";
-type Age = "5to7" | "8to10" | "11to16" | "17plus";
+type Age = "4to7" | "8to10" | "11to16" | "17plus";
 type Now = "never" | "casual" | "coached" | "tournaments";
 type Goal = "game" | "fun" | "good" | "compete";
 
 const AGE: { value: Age; label: string }[] = [
-  { value: "5to7", label: "5–7" },
+  { value: "4to7", label: "4–7" },
   { value: "8to10", label: "8–10" },
   { value: "11to16", label: "11–16" },
   { value: "17plus", label: "17+" },
@@ -73,7 +73,7 @@ function place(who: Who, age: Age | null, now: Now, goal: Goal): Placement {
   }
   // Child
   if (now === "tournaments" && goal !== "fun") return { kind: "level", level: levelById.professional };
-  if (age === "5to7" || now === "never") return { kind: "level", level: levelById.beginner };
+  if (age === "4to7" || now === "never") return { kind: "level", level: levelById.beginner };
   if (age === "17plus" && !compete) return { kind: "adult", oneToOne: goal === "good" };
   if (now === "casual" && age === "8to10") return { kind: "level", level: levelById.beginner };
   return { kind: "level", level: levelById.intermediate };
