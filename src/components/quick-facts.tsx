@@ -24,17 +24,7 @@ interface FactItem {
 
 export function QuickFacts() {
   const facts: FactItem[] = [
-    {
-      icon: MapPin,
-      iconWeight: "bold",
-      label: "Address",
-      value: "Sector 104, Noida",
-      detail: "Maharishi Ved Vigyan No. 1–2, Maharishi Nagar, Sector 104, Noida 201304",
-      link: {
-        href: academy.address.mapsUrl,
-        text: "View on Google Maps",
-      },
-    },
+
     {
       icon: Clock,
       iconWeight: "bold",
@@ -49,6 +39,14 @@ export function QuickFacts() {
       value: "7 Indoor Courts",
       detail: "7 indoor, air-conditioned courts with shock-absorbing PVC court mats",
     },
+
+    {
+      icon: Certificate,
+      iconWeight: "bold",
+      label: "Coaches",
+      value: "NIS & BAI-Certified",
+      detail: "NIS and BAI-certified head coaches for beginner, intermediate & elite training",
+    },
     {
       icon: CurrencyInr,
       iconWeight: "bold",
@@ -61,11 +59,15 @@ export function QuickFacts() {
       },
     },
     {
-      icon: Certificate,
+      icon: MapPin,
       iconWeight: "bold",
-      label: "Coaches",
-      value: "NIS & BAI-Certified",
-      detail: "NIS and BAI-certified head coaches for beginner, intermediate & elite training",
+      label: "Address",
+      value: "Sector 104, Noida",
+      detail: "Maharishi Ved Vigyan No. 1–2, Maharishi Nagar, Sector 104, Noida 201304",
+      link: {
+        href: academy.address.mapsUrl,
+        text: "View on Google Maps",
+      },
     },
     {
       icon: Star,
