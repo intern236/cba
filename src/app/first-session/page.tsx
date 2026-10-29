@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/images/trial-class-og.jpg",
+        url: "/images/courts-panorama-1600.webp",
         alt: "Badminton trial class at Celestial's Badminton Academy in Noida",
         width: 1200,
         height: 630,

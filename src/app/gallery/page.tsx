@@ -17,14 +17,14 @@ export const metadata: Metadata = {
     title: "Photos: Badminton Courts, Gym & Players | Celestial's Noida",
     description:
       "Real photos from Celestial's Badminton Academy, Sector 104, Noida: 7 indoor courts, the strength gym, junior batches and tournament days.",
-    images: "/images/gallery-og.jpg",
+    images: "/images/play-rally-1600.webp",
   },
   twitter: {
     card: "summary_large_image",
     title: "Photos: Badminton Courts, Gym & Players | Celestial's Noida",
     description:
       "Explore real photos of Celestial's Badminton Academy in Sector 104, Noida, featuring indoor courts, the strength gym, junior players and tournaments.",
-    images: ["/images/gallery-og.jpg"],
+    images: ["/images/play-rally-1600.webp"],
   },
 };
 const order = [images.rally, images.panorama, images.group, images.wooden, images.mural, images.courtsRow, images.gymFloor, images.empty, images.gymStrength];
