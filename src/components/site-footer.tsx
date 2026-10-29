@@ -72,7 +72,7 @@ export function SiteFooter() {
 
   const bookingBlock = (
     <>
-      <p className="eyebrow mt-10 text-chalk/50 md:mt-12">Book a court</p>
+      <p className="eyebrow text-chalk/50">Book a court</p>
       <ul className="mt-3 space-y-1 text-chalk/85 md:mt-4 md:space-y-1.5">
         {[a.booking.primary, a.booking.secondary].map((b) => (
           <li key={b.provider}>
@@ -93,9 +93,9 @@ export function SiteFooter() {
   return (
     <footer className="bg-court-950 text-chalk">
       <div className="mx-auto max-w-[1320px] px-5 pb-6 pt-10 sm:px-8 sm:pb-10 sm:pt-20">
-        <div className="grid grid-cols-2 gap-x-6 gap-y-8 text-sm md:grid-cols-[1.4fr_1fr_1fr_1fr] md:gap-12 md:text-base">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-0 text-sm md:grid-cols-[1.4fr_1fr_1fr_1fr] md:gap-12 md:text-base">
           {/* Brand */}
-          <div className="col-span-2 md:col-span-1">
+          <div className="col-span-2 mb-8 md:order-1 md:mb-0 md:col-span-1">
             <Link
               href="/"
               aria-label="Celestial's Badminton Academy home"
@@ -125,75 +125,80 @@ export function SiteFooter() {
             </p>
           </div>
 
-          {/* Visit */}
-          <div>
-            <p className="eyebrow text-chalk/50">Visit</p>
-            <address className="mt-3 not-italic leading-relaxed text-chalk/85 md:mt-4">
-              {a.address.line1}
-              <br />
-              {a.address.line2}
-              <br />
-              {a.address.locality}, {a.address.region}
-            </address>
-            <a
-              href={a.address.directionsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="link-underline mt-2 inline-block font-semibold md:mt-3"
-            >
-              Get directions
-              <span className="sr-only"> (opens Google Maps)</span>
-            </a>
-          </div>
+          {/* Mobile: two independent columns. Desktop: wrappers vanish (md:contents) */}
+          <div className="flex flex-col gap-6 md:contents">
+            {/* Visit */}
+            <div className="md:order-2">
+              <p className="eyebrow text-chalk/50">Visit</p>
+              <address className="mt-3 not-italic leading-relaxed text-chalk/85 md:mt-4">
+                {a.address.line1}
+                <br />
+                {a.address.line2}
+                <br />
+                {a.address.locality}, {a.address.region}
+              </address>
+              <a
+                href={a.address.directionsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link-underline mt-2 inline-block font-semibold md:mt-3"
+              >
+                Get directions
+                <span className="sr-only"> (opens Google Maps)</span>
+              </a>
+            </div>
 
-          {/* Contact */}
-          <div>
-            <p className="eyebrow text-chalk/50">Talk to us</p>
-
-            <a
-              href={a.contact.phoneHref}
-              className="link-underline mt-3 inline-flex items-center gap-2 text-chalk/85 md:mt-4"
-            >
-              <PhoneIcon className="h-4 w-4 shrink-0" />
-              {a.contact.phoneDisplay}
-            </a>
-
-            <ul className="mt-3 flex flex-wrap items-center gap-2 md:gap-3">
-              {socials.map(({ label, href, Icon }) => (
-                <li key={label}>
-                  <a
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={label}
-                    className={socialLinkClass}
-                  >
-                    <Icon className="h-4 w-4" />
-                    <span className="sr-only">{label} (opens in a new tab)</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-
-            {/* Mobile only */}
+            {/* Mobile: Book a court sits under Visit */}
             <div className="md:hidden">{bookingBlock}</div>
           </div>
 
-          {/* Explore */}
-          <div className="col-span-2 md:col-span-1">
-            <p className="eyebrow text-chalk/50">Explore</p>
-            <ul className="mt-3 columns-2 gap-x-6 space-y-1 text-chalk/85 md:mt-4 md:columns-1 md:space-y-1.5">
-              {[...navLinks, ...moreLinks].map((l) => (
-                <li key={l.href} className="break-inside-avoid">
-                  <Link href={l.href} className="link-underline">
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          <div className="flex flex-col gap-6 md:contents">
+            {/* Contact */}
+            <div className="md:order-3">
+              <p className="eyebrow text-chalk/50">Talk to us</p>
 
-            {/* Desktop only */}
-            <div className="hidden md:block">{bookingBlock}</div>
+              <a
+                href={a.contact.phoneHref}
+                className="link-underline mt-3 inline-flex items-center gap-2 text-chalk/85 md:mt-4"
+              >
+                <PhoneIcon className="h-4 w-4 shrink-0" />
+                {a.contact.phoneDisplay}
+              </a>
+
+              <ul className="mt-3 flex flex-wrap items-center gap-2 md:gap-3">
+                {socials.map(({ label, href, Icon }) => (
+                  <li key={label}>
+                    <a
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={label}
+                      className={socialLinkClass}
+                    >
+                      <Icon className="h-4 w-4" />
+                      <span className="sr-only">{label} (opens in a new tab)</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Desktop: Book a court sits under "Talk to us" */}
+              <div className="hidden md:mt-12 md:block">{bookingBlock}</div>
+            </div>
+
+            {/* Explore */}
+            <div className="md:order-4">
+              <p className="eyebrow text-chalk/50">Explore</p>
+              <ul className="mt-3 space-y-1 text-chalk/85 md:mt-4 md:space-y-1.5">
+                {[...navLinks, ...moreLinks].map((l) => (
+                  <li key={l.href} className="break-inside-avoid">
+                    <Link href={l.href} className="link-underline">
+                      {l.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
 
