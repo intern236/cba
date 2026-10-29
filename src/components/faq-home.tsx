@@ -6,7 +6,7 @@ import { ExternalButton } from "@/components/buttons";
 export const homeFaqs = [
   {
     q: "Which is the best badminton academy in Noida?",
-    a: "It depends on where you live and what you want from the game. If you're near Sector 104, Celestial's is worth a look: seven AC courts, NIS and BAI-certified head coaches, an on-site gym and physio, and 4.4★ from 270+ Google reviews. Come for a free session and judge for yourself.",
+    a: "It depends on where you live and what you want from the game. If you're near Sector 104, Celestial's is worth a look: seven AC courts, NIS and BAI-certified head coaches, an on-site gym and physio, and 4.4★ from 326+ Google reviews. Come for a free session and judge for yourself.",
   },
   {
     q: "How much does badminton coaching cost in Noida?",

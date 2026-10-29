@@ -74,10 +74,10 @@ export function QuickFacts() {
       iconWeight: "fill",
       label: "Google Rating",
       value: "4.4★ Google Rating",
-      detail: "4.4★ from 270+ reviews on Google Maps",
+      detail: "4.4★ from 326+ reviews on Google Maps",
       link: {
         href: academy.rating.url,
-        text: "Read 270+ reviews",
+        text: "Read 326+ reviews",
       },
     },
   ];
