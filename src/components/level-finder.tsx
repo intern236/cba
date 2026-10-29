@@ -4,7 +4,7 @@ import { useId, useState } from "react";
 import { AnimatePresence, m, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, ArrowRight } from "@phosphor-icons/react";
 import Link from "next/link";
-import { academy, trialLink } from "@/lib/academy";
+import { academy } from "@/lib/academy";
 import { levels, levelById, type Level } from "@/lib/pathway";
 import { feesFrom } from "@/lib/batches";
 
@@ -160,13 +160,13 @@ export function LevelFinder({ id: anchor = "find-your-level", wide = false }: { 
 
   const details = done
     ? [
-        `Player: ${who === "me" ? "me (adult)" : `my child, ${label(AGE, age)}`}`,
-        `Experience: ${label(NOW[who!], now)}`,
-        `Goal: ${label(GOAL[who!], goal)}`,
-        lvl ? `Suggested programme on your site: ${lvl.name}` : placement?.kind === "adult" ? "Suggested on your site: adult batch" : "",
-      ]
-        .filter(Boolean)
-        .join("\n")
+      `Player: ${who === "me" ? "me (adult)" : `my child, ${label(AGE, age)}`}`,
+      `Experience: ${label(NOW[who!], now)}`,
+      `Goal: ${label(GOAL[who!], goal)}`,
+      lvl ? `Suggested programme on your site: ${lvl.name}` : placement?.kind === "adult" ? "Suggested on your site: adult batch" : "",
+    ]
+      .filter(Boolean)
+      .join("\n")
     : undefined;
 
   const reset = (from: "who" | "age" | "now") => {
@@ -181,117 +181,117 @@ export function LevelFinder({ id: anchor = "find-your-level", wide = false }: { 
       <p className="mt-1 text-ink-soft">A few quick questions. We&rsquo;ll suggest where to start and send your answers with the trial request.</p>
 
       <div className={wide ? "mt-6 grid gap-8 lg:grid-cols-2 lg:items-start" : ""}>
-      <div className={`grid gap-6 ${wide ? "" : "mt-6"}`}>
-        <Choice
-          name={`${id}-who`}
-          legend="Who is playing?"
-          options={[
-            { value: "me", label: "Me" },
-            { value: "child", label: "My child" },
-          ]}
-          value={who}
-          onChange={(v) => {
-            setWho(v);
-            reset("who");
-          }}
-        />
-        <Step show={needAge} k="age">
-          <Choice name={`${id}-age`} legend="How old?" options={AGE} value={age} onChange={(v) => { setAge(v); reset("age"); }} />
-        </Step>
-        <Step show={!!askNow} k={`now-${who}`}>
-          {who && <Choice name={`${id}-now`} legend={who === "me" ? "Where are you now?" : "Where are they now?"} options={NOW[who]} value={now} onChange={(v) => { setNow(v); reset("now"); }} />}
-        </Step>
-        <Step show={!!(askNow && now)} k={`goal-${who}`}>
-          {who && <Choice name={`${id}-goal`} legend="What’s the goal?" options={GOAL[who]} value={goal} onChange={setGoal} />}
-        </Step>
-      </div>
+        <div className={`grid gap-6 ${wide ? "" : "mt-6"}`}>
+          <Choice
+            name={`${id}-who`}
+            legend="Who is playing?"
+            options={[
+              { value: "me", label: "Me" },
+              { value: "child", label: "My child" },
+            ]}
+            value={who}
+            onChange={(v) => {
+              setWho(v);
+              reset("who");
+            }}
+          />
+          <Step show={needAge} k="age">
+            <Choice name={`${id}-age`} legend="How old?" options={AGE} value={age} onChange={(v) => { setAge(v); reset("age"); }} />
+          </Step>
+          <Step show={!!askNow} k={`now-${who}`}>
+            {who && <Choice name={`${id}-now`} legend={who === "me" ? "Where are you now?" : "Where are they now?"} options={NOW[who]} value={now} onChange={(v) => { setNow(v); reset("now"); }} />}
+          </Step>
+          <Step show={!!(askNow && now)} k={`goal-${who}`}>
+            {who && <Choice name={`${id}-goal`} legend="What’s the goal?" options={GOAL[who]} value={goal} onChange={setGoal} />}
+          </Step>
+        </div>
 
-      <div aria-live="polite" className={wide ? "mt-1 lg:mt-0" : "mt-7"}>
-        {done ? (
-          <m.div
-            key={`${lvl?.id ?? placement?.kind}-${goal}`}
-            initial={reduce ? false : { opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ type: "spring", stiffness: 260, damping: 26 }}
-            className="rounded-[22px] bg-court-950 p-6 text-chalk sm:p-7"
-          >
-            {lvl ? (
-              <>
-                <p className="eyebrow text-mat-soft">Start in</p>
-                <p className="display mt-2 text-[clamp(2.4rem,4vw,3rem)]">
-                  {lvl.name} <span className="text-chalk/45">· {lvl.tagline}</span>
-                </p>
-                <PathStrip active={lvl.id} />
-                <p className="mt-5 max-w-[52ch] text-chalk/75">
-                  <strong className="font-semibold text-chalk">You&rsquo;ll work on:</strong> {lvl.work.slice(0, 3).join(", ").toLowerCase()}.{" "}
-                  <strong className="font-semibold text-chalk">Format:</strong> {lvl.format.toLowerCase()}.
-                </p>
-                <p className="mt-2 text-sm text-chalk/55">
-                  Fees from {feesFrom} a month. The coach confirms the programme in your free first session.
-                </p>
-                <div className="mt-6 flex flex-wrap items-center justify-end gap-x-6 gap-y-3">
-                  <Link href={`/pathway/#${lvl.id}`} className="inline-flex items-center gap-1.5 font-semibold text-chalk/85 hover:text-chalk">
-                    <span className="link-underline">About {lvl.name}</span>
-                    <ArrowRight size={14} weight="bold" aria-hidden="true" />
-                  </Link>
-                  <a href={trialLink(details)} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
-                    <span>
-                      Book a free trial
-                      <span className="sr-only"> (opens WhatsApp in a new tab, with your answers filled in)</span>
-                    </span>
-                    <span className="btn-icon" aria-hidden="true"><ArrowUpRight size={16} weight="bold" /></span>
-                  </a>
-                </div>
-              </>
-            ) : placement?.kind === "adult" ? (
-              <>
-                <p className="eyebrow text-mat-soft">Start in</p>
-                <p className="display mt-2 text-[clamp(2.4rem,4vw,3rem)]">
-                  An adult batch{placement.oneToOne && <span className="text-chalk/45"> + one-to-one</span>}
-                </p>
-                <p className="mt-3 max-w-[50ch] text-chalk/75">
-                  Group coaching for adults in the morning, evening or at weekends.
-                  {placement.oneToOne && " Add one-to-one sessions if you want faster, individual feedback."} Fees from {feesFrom} a month.
-                </p>
-                <p className="mt-2 text-sm text-chalk/55">The coach confirms the right batch in your free first session.</p>
-                <div className="mt-6 flex flex-wrap items-center justify-end gap-x-6 gap-y-3">
-                  <Link href="/programs/#timings" className="inline-flex items-center gap-1.5 font-semibold text-chalk/85 hover:text-chalk">
-                    <span className="link-underline">Batch timings and monthly fees</span>
-                    <ArrowRight size={14} weight="bold" aria-hidden="true" />
-                  </Link>
-                  <a href={trialLink(details)} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
-                    <span>
-                      Book a free trial
-                      <span className="sr-only"> (opens WhatsApp in a new tab, with your answers filled in)</span>
-                    </span>
-                    <span className="btn-icon" aria-hidden="true"><ArrowUpRight size={16} weight="bold" /></span>
-                  </a>
-                </div>
-              </>
-            ) : (
-              <>
-                <p className="eyebrow text-mat-soft">You want</p>
-                <p className="display mt-2 text-[clamp(2.4rem,4vw,3rem)]">A court, not a coach</p>
-                <p className="mt-3 max-w-[48ch] text-chalk/75">
-                  Book a court for an hour on Hudle. Up to 4 players per court; non-marking shoes required.
-                  If you ever want to get better, the first coaching session is free.
-                </p>
-                <div className="mt-6 flex flex-wrap items-center justify-end gap-x-6 gap-y-3">
-                  <a href={academy.booking.primary.url} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
-                    <span>
-                      Book a court on Hudle
-                      <span className="sr-only"> (opens Hudle in a new tab)</span>
-                    </span>
-                    <span className="btn-icon" aria-hidden="true"><ArrowUpRight size={16} weight="bold" /></span>
-                  </a>
-                </div>
-              </>
-            )}
-          </m.div>
-        ) : (
-          <p className="rounded-[20px] border-2 border-dashed border-ink/15 px-6 py-5 text-ink-soft">Your starting level will appear here.</p>
-        )}
-      </div>
+        <div aria-live="polite" className={wide ? "mt-1 lg:mt-0" : "mt-7"}>
+          {done ? (
+            <m.div
+              key={`${lvl?.id ?? placement?.kind}-${goal}`}
+              initial={reduce ? false : { opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ type: "spring", stiffness: 260, damping: 26 }}
+              className="rounded-[22px] bg-court-950 p-6 text-chalk sm:p-7"
+            >
+              {lvl ? (
+                <>
+                  <p className="eyebrow text-mat-soft">Start in</p>
+                  <p className="display mt-2 text-[clamp(2.4rem,4vw,3rem)]">
+                    {lvl.name} <span className="text-chalk/45">· {lvl.tagline}</span>
+                  </p>
+                  <PathStrip active={lvl.id} />
+                  <p className="mt-5 max-w-[52ch] text-chalk/75">
+                    <strong className="font-semibold text-chalk">You&rsquo;ll work on:</strong> {lvl.work.slice(0, 3).join(", ").toLowerCase()}.{" "}
+                    <strong className="font-semibold text-chalk">Format:</strong> {lvl.format.toLowerCase()}.
+                  </p>
+                  <p className="mt-2 text-sm text-chalk/55">
+                    Fees from {feesFrom} a month. The coach confirms the programme in your free first session.
+                  </p>
+                  <div className="mt-6 flex flex-wrap items-center justify-end gap-x-6 gap-y-3">
+                    <Link href={`/pathway/#${lvl.id}`} className="inline-flex items-center gap-1.5 font-semibold text-chalk/85 hover:text-chalk">
+                      <span className="link-underline">About {lvl.name}</span>
+                      <ArrowRight size={14} weight="bold" aria-hidden="true" />
+                    </Link>
+                    <a href={academy.contact.phoneHref} className="btn btn-primary">
+                      <span>
+                        Book a free trial
+                        <span className="sr-only"> (calls the academy)</span>
+                      </span>
+                      <span className="btn-icon" aria-hidden="true"><ArrowUpRight size={16} weight="bold" /></span>
+                    </a>
+                  </div>
+                </>
+              ) : placement?.kind === "adult" ? (
+                <>
+                  <p className="eyebrow text-mat-soft">Start in</p>
+                  <p className="display mt-2 text-[clamp(2.4rem,4vw,3rem)]">
+                    An adult batch{placement.oneToOne && <span className="text-chalk/45"> + one-to-one</span>}
+                  </p>
+                  <p className="mt-3 max-w-[50ch] text-chalk/75">
+                    Group coaching for adults in the morning, evening or at weekends.
+                    {placement.oneToOne && " Add one-to-one sessions if you want faster, individual feedback."} Fees from {feesFrom} a month.
+                  </p>
+                  <p className="mt-2 text-sm text-chalk/55">The coach confirms the right batch in your free first session.</p>
+                  <div className="mt-6 flex flex-wrap items-center justify-end gap-x-6 gap-y-3">
+                    <Link href="/programs/#timings" className="inline-flex items-center gap-1.5 font-semibold text-chalk/85 hover:text-chalk">
+                      <span className="link-underline">Batch timings and monthly fees</span>
+                      <ArrowRight size={14} weight="bold" aria-hidden="true" />
+                    </Link>
+                    <a href={academy.contact.phoneHref} className="btn btn-primary">
+                      <span>
+                        Book a free trial
+                        <span className="sr-only"> (calls the academy)</span>
+                      </span>
+                      <span className="btn-icon" aria-hidden="true"><ArrowUpRight size={16} weight="bold" /></span>
+                    </a>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <p className="eyebrow text-mat-soft">You want</p>
+                  <p className="display mt-2 text-[clamp(2.4rem,4vw,3rem)]">A court, not a coach</p>
+                  <p className="mt-3 max-w-[48ch] text-chalk/75">
+                    Book a court for an hour on Hudle. Up to 4 players per court; non-marking shoes required.
+                    If you ever want to get better, the first coaching session is free.
+                  </p>
+                  <div className="mt-6 flex flex-wrap items-center justify-end gap-x-6 gap-y-3">
+                    <a href={academy.booking.primary.url} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+                      <span>
+                        Book a court on Hudle
+                        <span className="sr-only"> (opens Hudle in a new tab)</span>
+                      </span>
+                      <span className="btn-icon" aria-hidden="true"><ArrowUpRight size={16} weight="bold" /></span>
+                    </a>
+                  </div>
+                </>
+              )}
+            </m.div>
+          ) : (
+            <p className="rounded-[20px] border-2 border-dashed border-ink/15 px-6 py-5 text-ink-soft">Your starting level will appear here.</p>
+          )}
+        </div>
       </div>
     </div>
   );
