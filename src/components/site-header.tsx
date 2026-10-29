@@ -248,7 +248,7 @@ export function SiteHeader() {
             <div className="mt-auto grid gap-3 pt-8">
               <a
                 href={academy.contact.phoneHref}
-                className="btn btn-primary justify-center"
+                className="btn btn-primary w-fit justify-center justify-self-center !px-5"
               >
                 <span>
                   Free trial
@@ -256,6 +256,7 @@ export function SiteHeader() {
                 </span>
                 <ArrowUpRight size={16} weight="bold" aria-hidden="true" />
               </a>
+
 
               <div className="grid grid-cols-2 gap-2 text-sm">
                 {academy.contact.whatsappUrl && (
