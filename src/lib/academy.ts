@@ -86,7 +86,11 @@ export const academy = {
   // [GBP] aggregate only. 324 reviews on Google on 22 Oct 2026, shown as "320+".
   rating: {
     value: "4.4",
+<<<<<<< HEAD
     countLabel: "326+",
+=======
+    countLabel: "326+", // Google showed 324 reviews on 22 Oct 2026
+>>>>>>> fad0c2af3a7d32376399b45b584ea4c11a6c2b17
     source: "Google",
     url: "https://www.google.com/maps/search/?api=1&query=Celestials+Badminton+Academy+Sector+104+Noida",
   },
