@@ -2,7 +2,10 @@ import type { MetadataRoute } from "next";
 
 export const dynamic = "force-static";
 
-const base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://celestial.in";
+const base = (
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  "https://celestialbadmintonacademy.com"
+).replace(/\/+$/, "");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
@@ -17,8 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   return routes.map((r) => ({
-    url: `${base}/${r.path}`,
-    lastModified: new Date(),
+    url: r.path ? `${base}/${r.path}` : `${base}/`,
     changeFrequency: r.changeFrequency,
     priority: r.priority,
   }));

@@ -117,7 +117,7 @@ export const academy = {
     { key: "lockers", label: "Lockers & changing rooms", detail: "Separate changing areas and lockers." },
     { key: "cafe", label: "Cafeteria", detail: "Food and drinks between sessions." },
     { key: "shop", label: "Badminton pro shop", detail: "Shuttles, strings and gear on site." },
-    { key: "hostel", label: "Hostel", detail: "rooms on campus for outstation players training full-time. [Beds/rooms, age group, contact for availability]" },
+    { key: "hostel", label: "Hostel", detail: "rooms on campus for outstation players training full-time." },
   ],
 
   // [PS][HUD][GBP]

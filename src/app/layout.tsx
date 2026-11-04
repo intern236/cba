@@ -5,7 +5,6 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { academy } from "@/lib/academy";
 import { MotionProvider } from "@/components/motion-provider";
-import { WhatsAppFloat } from "@/components/whatsapp-float";
 
 const archivo = Archivo({
   variable: "--font-archivo",
@@ -26,7 +25,7 @@ const siteUrl =
     ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
     : process.env.VERCEL_URL
       ? `https://${process.env.VERCEL_URL}`
-      : "https://celestial.in");
+      : "https://celestialbadmintonacademy.com/");
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -160,7 +159,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </main>
           <SiteFooter />
         </MotionProvider>
-        <WhatsAppFloat />
 
         <script
           type="application/ld+json"

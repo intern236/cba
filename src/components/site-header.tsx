@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from "next/image";
@@ -5,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, m, useReducedMotion } from "framer-motion";
+
 import {
   ArrowUpRight,
   List,
@@ -13,8 +15,9 @@ import {
   InstagramLogo,
 } from "@phosphor-icons/react";
 
-import { academy, trialLink } from "@/lib/academy";
+import { academy } from "@/lib/academy";
 import { navLinks, moreLinks } from "@/lib/nav";
+import { WhatsAppFloat } from "@/components/whatsapp-float";
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -27,7 +30,7 @@ export function SiteHeader() {
     setOpen(false);
   }, [pathname]);
 
-  // Handle Escape and prevent background scrolling while the menu is open.
+  // Handle Escape and prevent background scrolling while menu is open.
   useEffect(() => {
     if (!open) return;
 
@@ -54,7 +57,8 @@ export function SiteHeader() {
       .replace(/\.html$/, "")
       .replace(/^index$/, "");
 
-  const isActive = (href: string) => seg(pathname ?? "") === seg(href);
+  const isActive = (href: string) =>
+    seg(pathname ?? "") === seg(href);
 
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
@@ -62,6 +66,7 @@ export function SiteHeader() {
   ) => {
     if (isActive(href)) {
       e.preventDefault();
+
       window.scrollTo({
         top: 0,
         behavior: reduce ? "auto" : "smooth",
@@ -69,10 +74,9 @@ export function SiteHeader() {
     }
   };
 
-
   return (
     <>
-      {/* Fixed navbar: stays at the top on every page */}
+      {/* Fixed navbar */}
       <m.header
         className="fixed inset-x-0 top-0 z-40 px-3 pt-3 sm:px-5 sm:pt-4"
         initial={false}
@@ -82,14 +86,13 @@ export function SiteHeader() {
           aria-label="Main"
           className="mx-auto flex max-w-[1320px] items-center gap-2 rounded-full border border-white/10 bg-court-950/95 py-2 pl-4 pr-2 text-chalk shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_12px_30px_-18px_rgba(4,26,27,0.9)] backdrop-blur-md sm:pl-5 lg:bg-court-950/80"
         >
-          {/* Desktop Logo (line 72) */}
+          {/* Logo */}
           <Link
             href="/"
             onClick={(e) => handleNavClick(e, "/")}
             aria-label="Celestial's Badminton Academy home"
             className="mr-auto flex min-w-0 items-center gap-2.5 rounded-full"
           >
-
             <Image
               src="/images/LOGO.png"
               alt="Celestial's Badminton Academy, Noida"
@@ -120,7 +123,6 @@ export function SiteHeader() {
                   aria-current={isActive(l.href) ? "page" : undefined}
                   className="relative rounded-full px-4 py-2.5 text-[0.94rem] font-medium text-chalk/75 transition-colors hover:text-chalk aria-[current=page]:text-chalk"
                 >
-
                   {isActive(l.href) && (
                     <span
                       aria-hidden="true"
@@ -133,16 +135,19 @@ export function SiteHeader() {
               </li>
             ))}
           </ul>
+
           {/* Free trial button */}
-          {/* Free trial button (calls academy directly) */}
           <a
             href={academy.contact.phoneHref}
             className="btn btn-primary ml-1 !min-h-[44px] shrink-0 !px-4 sm:!px-5"
           >
             <span>
               Free trial
-              <span className="sr-only"> (calls +91 88262 68236)</span>
+              <span className="sr-only">
+                {" "} (calls +91 88262 68236)
+              </span>
             </span>
+
             <ArrowUpRight
               size={16}
               weight="bold"
@@ -166,7 +171,7 @@ export function SiteHeader() {
         </nav>
       </m.header>
 
-      {/* Mobile navigation overlay: same dark teal + teal accents as the desktop navbar */}
+      {/* Mobile navigation overlay */}
       <AnimatePresence>
         {open && (
           <m.div
@@ -178,10 +183,13 @@ export function SiteHeader() {
             initial={reduce ? { opacity: 0 } : { opacity: 0, y: -16 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+            transition={{
+              duration: 0.28,
+              ease: [0.16, 1, 0.3, 1],
+            }}
           >
+            {/* Sidebar header */}
             <div className="flex items-center justify-between">
-              {/* Logo before the name */}
               <Link
                 href="/"
                 onClick={() => setOpen(false)}
@@ -207,6 +215,7 @@ export function SiteHeader() {
                 </span>
               </Link>
 
+              {/* Close button */}
               <button
                 type="button"
                 autoFocus
@@ -221,6 +230,7 @@ export function SiteHeader() {
               </button>
             </div>
 
+            {/* Mobile navigation links */}
             <ul className="mt-6 flex min-h-0 flex-col overflow-y-auto">
               {[{ href: "/", label: "Home" }, ...navLinks, ...moreLinks].map(
                 (l, i) => (
@@ -244,7 +254,7 @@ export function SiteHeader() {
               )}
             </ul>
 
-            {/* Mobile action buttons: same teal buttons as the desktop navbar */}
+            {/* Mobile action buttons */}
             <div className="mt-auto grid gap-3 pt-8">
               <a
                 href={academy.contact.phoneHref}
@@ -252,11 +262,17 @@ export function SiteHeader() {
               >
                 <span>
                   Free trial
-                  <span className="sr-only"> (calls +91 88262 68236)</span>
+                  <span className="sr-only">
+                    {" "} (calls +91 88262 68236)
+                  </span>
                 </span>
-                <ArrowUpRight size={16} weight="bold" aria-hidden="true" />
-              </a>
 
+                <ArrowUpRight
+                  size={16}
+                  weight="bold"
+                  aria-hidden="true"
+                />
+              </a>
 
               <div className="grid grid-cols-2 gap-2 text-sm">
                 {academy.contact.whatsappUrl && (
@@ -266,7 +282,11 @@ export function SiteHeader() {
                     rel="noopener noreferrer"
                     className="btn btn-ghost-dark justify-center"
                   >
-                    <WhatsappLogo size={16} weight="bold" aria-hidden="true" />
+                    <WhatsappLogo
+                      size={16}
+                      weight="bold"
+                      aria-hidden="true"
+                    />
                     WhatsApp
                   </a>
                 )}
@@ -277,7 +297,11 @@ export function SiteHeader() {
                   rel="noopener noreferrer"
                   className="btn btn-ghost-dark justify-center"
                 >
-                  <InstagramLogo size={16} weight="bold" aria-hidden="true" />
+                  <InstagramLogo
+                    size={16}
+                    weight="bold"
+                    aria-hidden="true"
+                  />
                   Instagram
                 </a>
               </div>
@@ -285,6 +309,9 @@ export function SiteHeader() {
           </m.div>
         )}
       </AnimatePresence>
+
+      {/* WhatsApp floating button: hidden while mobile menu is open */}
+      {!open && <WhatsAppFloat />}
     </>
   );
 }
